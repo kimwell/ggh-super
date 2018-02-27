@@ -1,15 +1,39 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import * as api from './api'
+import iView from 'iview'
+import '../static/css/reset.css'
+import '../static/css/iview.css'
+import '../static/css/animate.css'
+import axios from './http'
+import store from './store/store'
+import * as filters from '@/utils/filters' //过滤器
+import tools from '@/utils/tools' //全局方法
+import _ from 'lodash'
+// import clickoutside from './directives/clickoutside'
 
+
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+})
+
+Vue.use(tools);
+
+Vue.use(iView)
+Vue.prototype.$clearData = (data) => {
+    return JSON.parse(JSON.stringify(data))
+}
+Vue.prototype.api = api; //所有接口列表挂载
+Vue.prototype.$http = axios;
 Vue.config.productionTip = false
+Vue.config.debug = false;
+// Vue.directive('clickoutside', clickoutside)
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
 })
