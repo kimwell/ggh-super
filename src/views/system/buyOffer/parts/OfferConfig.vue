@@ -15,7 +15,7 @@
           <Row>
             <Col class-name="col" span="5">{{item.name}}</Col>
             <Col class-name="col" span="5">{{item.time | formatDuring(params = 2)}}</Col>
-            <Col class-name="col" span="5">{{item.remark}}</Col>
+            <Col class-name="col" span="5">{{item.remark != ''? item.remark: "暂无备注"}}</Col>
             <Col class-name="col" span="3">{{item.updateUser}}</Col>
             <Col class-name="col" span="3">{{item.updateTime | dateformat}}</Col>
             <Col class-name="col" span="3">

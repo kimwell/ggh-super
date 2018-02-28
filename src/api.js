@@ -1,4 +1,3 @@
-
 export const uploadApi = 'http://192.168.0.251:8080/fileUpload/images';
 // export const uploadApi = '/fileUpload/images';
 // export const uploadExcelApi = 'http://192.168.0.251/sys/qualiticationmodel/uplodeQualiticationModel';
@@ -10,14 +9,14 @@ export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 // WebSocket链接
 export let ws = '';
 if (process.env.NODE_ENV == 'development') {
-    ws = 'ws://192.168.0.251/websocket'
-    // ws = 'ws://111.231.134.170:8080/websocket'
+  ws = 'ws://192.168.0.251/websocket'
+  // ws = 'ws://111.231.134.170:8080/websocket'
 } else {
-    ws = 'ws://192.168.0.251/websocket'
-    // ws = 'ws://120.55.63.70:8080/websocket';
-    // ws = 'ws://192.168.0.251/websocket'
-    // ws = 'ws://111.231.134.170:8080/websocket'
-    // ws = 'ws://192.168.0.251:8080/websocket'
+  ws = 'ws://192.168.0.251/websocket'
+  // ws = 'ws://120.55.63.70:8080/websocket';
+  // ws = 'ws://192.168.0.251/websocket'
+  // ws = 'ws://111.231.134.170:8080/websocket'
+  // ws = 'ws://192.168.0.251:8080/websocket'
 }
 /**
  * 登录
@@ -70,6 +69,17 @@ export const deleteDataDictionary = '/sys/dataDictionary/deleteDataDictionary'
  */
 
 export const saveUpdateDataDictionary = '/sys/dataDictionary/saveUpdateDataDictionary'
+
+
+
+//-----------------时间开关----------------------------------
+// 分页查询时间开关
+export const selectStoreTimePage = '/sys/storetime/selectStoreTimePage'
+
+export const updateStoreTime = '/sys/storetime/updateStoreTime'
+
+//  设为无限制                  
+export const updateStoreTimeParamById = '/sys/storetime/updateStoreTimeParamById'
 
 // *********************************权限管理*********************************
 /**
@@ -197,8 +207,591 @@ export const interfaceBlindGroup = '/sys/auth/interface/saveGroup'
 
 
 
-// *******************************************************************
+// ****************************系统配置***************************************
 
+/** 
+ * 求购报价参数配置
+ */
 export const findByPage = '/sys/ironTimeConfig/findByPage'
 
+/** 
+ * 保存有效时间参数
+ */
 export const saveConfigTime = '/sys/ironTimeConfig/saveTime'
+
+
+// *********************************应用管理*********************************
+/**
+ * 添加基础计量单位
+ * path: /sys/unit/saveUnit
+ * method: POST
+ * params: {
+ *      type:   
+ *      cName: 
+ *      eName:
+ * }
+ */
+export const addUnit = '/sys/unit/saveUnit'
+
+/**
+ * 更新计量单位，用于修改，删除
+ * path: /sys/unit/updateUnit
+ * method: POST
+ * params{
+ *      id:
+ *      type:   
+ *      cName: 
+ *      eName:
+ *      status:  
+ * }
+ */
+export const updateUnit = '/sys/unit/updateUnit'
+
+/**
+ * 查询基础计量单位列表
+ * path: /sys/unit/queryUnitPage
+ * method: POST
+ * params: {
+ *      currentPage,
+ *      pageSize
+ * }
+ */
+export const getAllUnits = '/sys/unit/queryUnitPage'
+
+export const G_getAllUnits = '/api/query/queryUnitList'
+
+/**
+ * 查询品类计量单位信息
+ * path: /sys/ironAndUnit/fingIronAndUnitPage
+ * method: POST
+ * params: {
+ *      currentPage,
+ *      pageSize   
+ * }
+ */
+export const getAllIronUnit = '/sys/ironAndUnit/findIronAndUnitPage'
+
+/**
+ * 更新计量单位品类信息
+ * path: /sys/ironAndUnit/updateIronAndUnit
+ * method: POST
+ * params: {
+ *      id: 
+ *      ironId: 
+ *      ironName:  
+ * }
+ */
+export const updateIronUnit = '/sys/ironAndUnit/updateIronAndUnit'
+
+// -----------------------------------品类---------------------------------
+
+/**
+ * 添加品类信息
+ * path: /sys/ironTypes/saveIronTypes
+ * method: POST
+ * params: {
+ *      name:
+ *      notice:
+ * }
+ */
+export const addType = '/sys/ironTypes/saveIronTypes'
+
+/**
+ * 更新品类信息
+ * path: /sys/ironTypes/updateIronTypes
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+export const updateType = '/sys/ironTypes/updateIronTypes'
+
+
+/**
+ * 查询品类信息
+ * path: /sys/ironTypes/findIronTypesPage
+ * method: POST
+ * params: {
+ *      currentPage
+ *      pageSize
+ * }
+ */
+export const getTypes = '/sys/ironTypes/findIronTypesPage'
+
+export const G_getTypes = '/api/query/findIronTypes'
+
+// -----------------------------------表面---------------------------------
+/**
+ * 添加表面信息
+ * path: /sys/surface/saveSurface
+ * method: POST
+ * params: {
+ *      name:
+ *      notice:
+ * }
+ */
+export const addSurface = '/sys/surface/saveSurface'
+
+/**
+ * 更新表面信息
+ * path: /sys/surface/updateSurFace
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+export const updateSurFace = '/sys/surface/updateSurFace'
+
+
+/**
+ * 查询表面信息
+ * path: /sys/surface/findSurfacePage
+ * method: POST
+ * params: {
+ *      currentPage
+ *      pageSize
+ * }
+ */
+export const getSurFaces = '/sys/surface/findSurfacePage'
+
+export const G_getSurFaces = '/api/query/findSurFace'
+
+// -----------------------------------材质---------------------------------
+/**
+ * 添加材质信息
+ * path: /sys/materials/saveMaterials
+ * method: POST
+ * params: {
+ *      name:
+ *      notice:
+ * }
+ */
+export const addMaterials = '/sys/materials/saveMaterials'
+
+/**
+ * 更新材质信息
+ * path: /sys/materials/updateMaterials
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+export const updateMaterials = '/sys/materials/updateMaterials'
+
+
+/**
+ * 查询材质信息
+ * path: /sys/materials//findMaterialsPage
+ * method: POST
+ * params: {
+ *      currentPage
+ *      pageSize
+ * }
+ */
+export const getMaterials = '/sys/materials//findMaterialsPage'
+
+// -----------------------------------产地---------------------------------
+/**
+ * 添加产地信息
+ * path: /sys/proPlaces/saveProPlaces
+ * method: POST
+ * params: {
+ *      name:
+ *      notice:
+ * }
+ */
+export const addProPlaces = '/sys/proPlaces/saveProPlaces'
+
+/**
+ * 更新产地信息
+ * path: /sys/proPlaces/updateProPlaces
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+export const updateProPlaces = '/sys/proPlaces/updateProPlaces'
+
+
+/**
+ * 查询产地信息
+ * path: /sys/proPlaces/findProPlacesPage
+ * method: POST
+ * params: {
+ *      currentPage
+ *      pageSize
+ * }
+ */
+export const getProPlaces = '/sys/proPlaces/findProPlacesPage'
+
+
+
+// -----------------------------------关联数据---------------------------------
+/**
+ * 保存关联分组（品类、表面）
+ * path: /sys/ironAndSurfaceAndSpecification/saveIronAndSurface
+ * method: POST
+ * params : {
+ *          ironTypeId,ironTypeName,surfaceId,surfaceName
+ * }
+ */
+export const saveIronAndSurface = '/sys/ironAndSurfaceAndSpecification/saveIronAndSurface'
+
+/**
+ * 删除分组
+ */
+export const delIronAndSurface = '/sys/ironAndSurfaceAndSpecification/deleteIronAndSurface'
+
+/**
+ * 关联数据分组查询
+ */
+export const getIronAndSurface = '/api/query/findIronAndSurface'
+
+
+/**
+ * 根据分组查询规格
+ * path: /sys/ironAndSurfaceAndSpecification/findIronAndSurface
+ * params : { surface,ironType }
+ */
+export const getGGlist = '/sys/ironAndSurfaceAndSpecification/findIronAndSurface'
+
+
+/**
+ * 保存表面品类规格信息
+ * path:/sys/ironAndSurfaceAndSpecification/saveIronAndSurfaceAndSpecification
+ * params{ironType,surface,height,width,length}
+ */
+export const addGG = '/sys/ironAndSurfaceAndSpecification/saveIronAndSurfaceAndSpecification'
+
+/**
+ * 删除0,修改1表面品类规格信息
+ */
+export const delGG = '/sys/ironAndSurfaceAndSpecification/updateIronAndSurfaceAndSpecification'
+
+// -----------------------------------仓库---------------------------------
+/**
+ * 添加产地信息
+ * path: /sys/storeHouse/saveStoreHouse
+ * method: POST
+ * params: {
+ *      name:
+ *      notice:
+ * }
+ */
+export const saveStoreHouse = '/sys/storeHouse/saveStoreHouse'
+
+/**
+ * 更新擦库信息
+ * path: /sys/storeHouse/updateStoreHouse
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+export const updateStoreHouse = '/sys/storeHouse/updateStoreHouse'
+
+/**
+ * 删除仓库信息
+ * path: /sys/storeHouse/updateStoreHouse
+ * method: POST
+ * params: {
+ *      id:
+ *      name:
+ *      notice:
+ *      status:
+ * }
+ */
+
+export const deleteStoreHouse = '/sys/storeHouse/deleteStoreHouse'
+
+
+/**
+ * 查询仓库信息
+ * path: /sys/storeHouse/findStoreHousePage
+ * method: POST
+ * params: {
+ *      currentPage
+ *      pageSize
+ * }
+ */
+export const getHouse = '/sys/storeHouse/findStoreHousePage'
+
+/**
+ * 查询所有仓库信息
+ * path: /api/query/findStoreHouse
+ * method: POST
+ */
+export const getStroeHouse = '/api/query/findStoreHouse'
+
+
+
+// -----------------------------------优惠信息---------------------------------
+export const findProInfoPage = '/sys/proInfoModel/findProInfoPage'
+export const saveProInfoModel = '/sys/proInfoModel/saveProInfoModel'
+export const updateProInfoModel = '/sys/proInfoModel/updateProInfoModel'
+export const deleteProInfoModel = '/sys/proInfoModel/deleteProInfoModel'
+
+
+// -----------------------------------资源类型管理---------------------------------
+//  新增
+export const saveQualiticationType = '/sys/qualiticationtype/saveQualiticationType'
+
+//  更新
+export const updateQualiticationType = '/sys/qualiticationtype/updateQualiticationType'
+
+//  查询
+export const queryQualiticationtypePage = '/sys/qualiticationtype/queryQualiticationtypePage'
+
+//  删除
+export const deleteQualiticationType = '/sys/qualiticationtype/deleteQualiticationType'
+
+// *********************************用户管理*********************************
+/**
+ * 添加、编辑用户
+ * path: /sys/auth/user/bindUserRole
+ * method: POST
+ * params: {
+ *      jsonObject: {
+ *          id: '',//编辑用
+ *          name
+ *          password
+ *          mobile
+ *          realName
+ *          roleList: [{
+ *              roleId
+ *              flag
+ *          }]
+ *      }//json字符串
+ * }
+ */
+export const createUser = '/sys/auth/user/bindUserRoles'
+
+/**
+ * 获取用户列表
+ * path: /sys/auth/user/findRoleList
+ * method: POST
+ * params: {
+ *      currentPage,
+ *      pageSize 
+ * }
+ */
+export const userList = '/sys/auth/user/findRoleList'
+
+/**
+ * 查询用户信息
+ * path: /sys/auth/user/findRole
+ * method: POST
+ * params: {
+ *      id: 不传为所有角色
+ * }
+ */
+export const getUserInfo = '/sys/auth/user/findRole'
+
+/**
+ * 获取角色列表
+ * path: /sys/auth/user/findRole
+ * method: POST
+ * params: {
+ *      id:  不传为所有角色
+ * }
+ */
+export const getRoleList = '/sys/auth/user/findRole'
+
+
+/*
+ * 专员管理查询
+ * path:/sys/saleman/findSalemanBind
+ */
+export const getSalemanBind = '/sys/saleman/findSalemanBind'
+
+/*
+ * 超管查询专员信息
+ * path:/sys/saleman/findSalemanBind
+ */
+export const findSalemanInfos = '/sys/saleman/findSalemanInfo'
+
+/*
+ * 超管查询绑定管理
+ * /sys/saleman/findCompangWithSaleman
+ */
+export const findCompangWithSaleman = '/sys/saleman/findCompangWithSaleman'
+
+/*
+ * 超管进行商户绑定
+ * /sys/saleman/findCompangWithSaleman
+ */
+export const updateSalemanInfo = '/sys/saleman/updateSalemanInfo'
+
+/**
+ * 获取商家用户列表
+ * path: /sys/buserInfo/findBuserInfoPage
+ * method: POST
+ * params:
+ */
+export const getBusiness = '/sys/buserInfo/findBuserInfoPage'
+
+/**
+ * 查询商家详情
+ * path: /sys/buserInfo/findBuserInfoById
+ * params: bUserId
+ */
+export const getBusinessInfo = '/sys/buserInfo/findBuserInfoById'
+
+/**
+ * 修改商家信息
+ * path: /sys/buserInfo/updateBuserInfo
+ */
+export const eidtBusiness = '/sys/buserInfo/updateBuserInfo'
+
+/**
+ * 超管查询用户经营范围
+ * path: /sys/ironBuy/queryBussinessScopeByUserId
+ */
+export const scopeByUserId = '/sys/ironBuy/queryBussinessScopeByUserId'
+
+/**
+ * 超管保存用户经营范围
+ * path: /sys/ironBuy/saveBussinessScopeByUserId
+ */
+export const saveScopeByUserId = '/sys/ironBuy/saveBussinessScopeByUserId'
+
+
+// *********************************广告位管理*********************************
+/**
+ * 查询所有广告
+ * path: /sys/ad/findAll
+ * method: POST
+ * params: 
+ */
+export const allAd = '/sys/ad/findAll';
+
+/**
+ * 添加广告位分组
+ * path: /sys/ad/saveAdGroup
+ * method: POST
+ * params: {
+ *      groupName: String 分组名
+ *      adNums: Number  初始广告位个数  
+ *      width: Number   初始广告位宽度
+ *      height: Number   初始广告位高度
+ *      previewImg:  String   效果图
+ *      defaultImg:  String   默认背景图    
+ * }
+ */
+export const addAdGroup = '/sys/ad/saveAdGroup';
+
+/**
+ * 删除广告分组
+ * path: /sys/ad/delAdGroup
+ * method: POST
+ * params: {
+ *      groupId: 分组ID
+ * }
+ */
+export const delAdGroup = '/sys/ad/delAdGroup';
+
+/**
+ * 获取单个广告分组信息
+ * path: /sys/ad/findAdByGroupId
+ * method: POST
+ * params: {
+ *      groupId: 分组ID
+ * }
+ */
+export const getAdGroup = '/sys/ad/findAdByGroupId';
+
+
+/**
+ * 更新广告位分组
+ * path: /sys/ad/updateAdGroup
+ * method: POST
+ * params: jsonObject String
+ */
+export const updateGroup = '/sys/ad/updateAdGroup';
+/**
+ * 编辑广告分组信息
+ * method: POST
+ * params: {
+ *      id:  groupId     分组id
+ *      groupName: String 分组名
+ *      adNums: Number  初始广告位个数  
+ *      width: Number   初始广告位宽度
+ *      height: Number   初始广告位高度
+ *      previewImg:  String   效果图
+ *      defaultImg:  String   默认背景图    
+ * }
+ */
+export const editGroup = '/sys/ad/editAdGroup';
+
+/**
+ * 单个广告位数据获取
+ * path:/sys/ad/findAdByGroupId
+ * method:POST
+ * params:groupId
+ */
+export const adList = '/sys/ad/findAdByGroupId';
+
+/**
+ * 删除单个广告位
+ * path: /sys/ad/delAdInfo
+ * method: POST
+ * params: {
+ *      id: 广告位id
+ *      groupId:  分组ID 
+ * }
+ */
+export const removeAd = '/sys/ad/delAdInfo';
+
+/**
+ * 添加单个广告位
+ * path: /sys/ad/saveAd
+ * method: POST
+ * params: {
+ *      groupId: 分组ID
+ * }
+ */
+export const addAd = '/sys/ad/saveAd';
+
+
+
+// -----------------------------------数据统计---------------------------------
+export const jd_totalData = '/sys/ironDataStatistic/totalStatisticByTime'
+
+export const jd_buyerRank = '/sys/ironDataStatistic/ironBuyTopTen'
+
+export const jd_sellerRank = '/sys/ironDataStatistic/ironSellTopTen'
+
+export const jd_ironsRank = '/sys/ironDataStatistic/ironBaseRank'
+
+export const jd_regionalRank = '/sys/ironDataStatistic/ironAreaTopFive'
+
+//订单统计数据
+export const totalOrderData = '/sys/orderData/totalOrderData'
+
+//  订单买家前十(买家大客户分析)
+export const orderBuyerTopTen = '/sys/orderData/orderBuyerTopTen'
+
+//  订单卖家前十(卖家大客户分析)
+export const orderSellerTopTen = '/sys/orderData/orderSellerTopTen'
+
+//  订单四维分析(货品数据分析)
+export const fourDAnalysis = '/sys/orderData/fourDAnalysis'
+
+//  订单地区前五(地区分析)
+export const orderAreaTopFive = '/sys/orderData/orderAreaTopFive'
+

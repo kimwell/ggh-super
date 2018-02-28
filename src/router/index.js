@@ -45,10 +45,6 @@ const router = new Router({
           name: 'dictionary',
           component: resolve => require(['@/views/system/dictionary/index'], resolve)
         }, {
-          path: 'parameter',
-          name: 'parameter',
-          component: resolve => require(['@/views/system/parameter/index'], resolve)
-        }, {
           path: 'buyOffer',
           name: 'buyOffer',
           component: resolve => require(['@/views/system/buyOffer/index'], resolve)
@@ -69,6 +65,108 @@ const router = new Router({
           path: 'nconfig',
           name: 'nconfig',
           component: resolve => require(['@/views/news/nconfig/index'], resolve)
+        }]
+      },{
+        path: 'application',
+        name: 'application',
+        component: resolve => require(['@/views/application/index'],resolve),
+        children:[{
+          path: 'appUnit',
+          name: 'appUnit',
+          component: resolve => require(['@/views/application/unit/index'], resolve)
+        },{
+          path: 'appData',
+          name: 'appData',
+          component: resolve => require(['@/views/application/data/index'], resolve)
+        },{
+          path: 'appRelation',
+          name: 'appRelation',
+          component: resolve => require(['@/views/application/relation/index'], resolve)
+        },{
+          path: 'appSellerInfo',
+          name: 'appSellerInfo',
+          component: resolve => require(['@/views/application/sellerInfo/index'], resolve)
+        }]
+      },{
+        path: 'user',
+        name: 'user',
+        component: resolve => require(['@/views/user/index'],resolve),
+        children: [{
+          name: 'role',
+          path: 'role',
+          component: resolve => require(['@/views/user/role/index'],resolve),
+        },{
+          name: 'grade',
+          path: 'grade',
+          component: resolve => require(['@/views/user/grade/index'],resolve),
+        },{
+          name: 'businessUser',
+          path: 'businessUser',
+          component: resolve => require(['@/views/user/business/index'],resolve),
+        },{
+          name: 'salesMan',
+          path: 'salesMan',
+          component: resolve => require(['@/views/user/salesMan/index'],resolve),
+        }]
+      },{
+        path: 'marketing',
+        name: 'marketing',
+        component: resolve => require(['@/views/marketing/index'],resolve),
+        children:[{
+          path: 'adManage',
+          name: 'adManage',
+          component: resolve => require(['@/views/marketing/ad/adManage'],resolve),
+        }]
+      },{
+        path: 'statistics',
+        name: 'statistics',
+        component: resolve => require(['@/views/statistics/index'],resolve),
+        children: [{
+          path: 'countTransaction',
+          name: 'countTransaction',
+          component: resolve => require(['@/views/statistics/transaction/index'],resolve),
+        },{
+          path: 'countBuyer',
+          name: 'countBuyer',
+          component: resolve => require(['@/views/statistics/buyer/index'],resolve),
+        },{
+          path: 'countSeller',
+          name: 'countSeller',
+          component: resolve => require(['@/views/statistics/seller/index'],resolve),
+        },{
+          path: 'countArea',
+          name: 'countArea',
+          component: resolve => require(['@/views/statistics/area/index'],resolve),
+        },{
+          path: 'countGoods',
+          name: 'countGoods',
+          component: resolve => require(['@/views/statistics/goods/index'],resolve),
+        },{
+          path: 'countOrder',
+          name: 'countOrder',
+          component: resolve => require(['@/views/statistics/order/index'],resolve),
+          redirect: 'countOrder/orderCount',
+          children: [{
+            path: 'orderCount',
+            name: 'orderCount',
+            component: resolve => require(['@/views/statistics/order/orderCount/index'],resolve)
+          },{
+            path: 'buyerCount',
+            name: 'buyerCount',
+            component: resolve => require(['@/views/statistics/order/buyerCount/index'],resolve)
+          },{
+            path: 'sellerCount',
+            name: 'sellerCount',
+            component: resolve => require(['@/views/statistics/order/sellerCount/index'],resolve)
+          },{
+            path: 'goodsCount',
+            name: 'goodsCount',
+            component: resolve => require(['@/views/statistics/order/goodsCount/index'],resolve)
+          },{
+            path: 'areaCount',
+            name: 'areaCount',
+            component: resolve => require(['@/views/statistics/order/areaCount/index'],resolve)
+          }]
         }]
       }]
     },

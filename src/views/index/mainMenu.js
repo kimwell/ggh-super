@@ -17,19 +17,6 @@ export default [{
             name: '订单管理',
             router: {name: 'order'}
         }]
-    },{
-        name: '物流管理',
-        icon: 'icon-wuliu',
-        children:[{
-            name: '物流需求管理',
-            router: {name: 'logGoods'}
-        },{
-            name: '物流数据配置',
-            router: {name: 'logData'}
-        },{
-            name: '物流货品维护',
-            router: {name: 'logDemand'}
-        }]
     },
     {
         name: '营销',
@@ -60,16 +47,16 @@ export default [{
         icon: 'icon-yonhu',
         children: [{
             name: '角色绑定',
-            router: { name: 'userManagement' }
+            router: { name: 'role' }
         },{
             name: '商家求购等级',
-            router: {name: 'businessGrade'}
+            router: {name: 'grade'}
         },{
             name: '商家用户管理',
-            router: { name: 'businessManagement' }
+            router: { name: 'businessUser' }
         },{
             name: '平台专员管理',
-            router: {name: 'commissioner'}
+            router: {name: 'salesMan'}
         }]
     },
     {
@@ -77,17 +64,17 @@ export default [{
         icon: 'icon-app',
         children: [{
                 name: '计量单位配置',
-                router: { name: 'unitManagement' }
+                router: { name: 'appUnit' }
             }, {
                 name: '分类数据配置',
-                router: { name: 'dataManagement' }
+                router: { name: 'appData' }
             }, {
                 name: '关联配置管理',
-                router: { name: 'relationManagement' }
+                router: { name: 'appRelation' }
             },
             {
                 name: '卖家基础信息管理',
-                router: { name: 'sellerBaseManagement' }
+                router: { name: 'appSellerInfo' }
             }
         ]
     },{
@@ -108,22 +95,22 @@ export default [{
         icon: 'icon-iconset0358',
         children: [{
             name: '交易数据汇总',
-            router: { name: 'dataAggregation' }
+            router: { name: 'countTransaction' }
         }, {
             name: '买方排行分析',
-            router: { name: 'buyerRank' }
+            router: { name: 'countBuyer' }
         }, {
             name: '卖方排行分析',
-            router: { name: 'sellerRank' }
+            router: { name: 'countSeller' }
         }, {
             name: '热门地区分析',
-            router: { name: 'regionalRank' }
+            router: { name: 'countArea' }
         }, {
             name: '货品数据分析',
-            router: { name: 'ironsRank' }
+            router: { name: 'countGoods' }
         },{
             name: '订单数据统计分析',
-            router: {name: 'orderCountManagement'}
+            router: {name: 'countOrder'}
         }]
     },
     {
@@ -132,9 +119,6 @@ export default [{
         children:[{
             name: '求购报价配置',
             router: {name: 'buyOffer'}
-        },{
-            name: '参数配置',
-            router: {name: 'parameter'}
         },{
             name: '数据字典',
             router: {name: 'dictionary'}

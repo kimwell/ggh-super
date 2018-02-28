@@ -1,5 +1,5 @@
 <template>
-<div>参数配置
+<div>商家等级
 </div>
 </template>
 <script>

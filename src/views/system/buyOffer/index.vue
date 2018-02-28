@@ -2,14 +2,17 @@
   <div>
     <div class="page-components"><OfferConfig title="买家求购" type="2"></OfferConfig></div>
     <div class="page-components"><OfferConfig title="卖家报价" type="1"></OfferConfig></div>
+    <openTimeConfig></openTimeConfig>
   </div>
 </template>
 
 <script>
 import OfferConfig from './parts/OfferConfig.vue'
+import openTimeConfig from './parts/openTimeConfig.vue'
   export default {
     components: {
-      OfferConfig
+      OfferConfig,
+      openTimeConfig
     },
     data() {
       return {}
