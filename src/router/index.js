@@ -33,6 +33,10 @@ const router = new Router({
         name: 'interface',
         component: resolve => require(['@/views/interface/index'],resolve)
       },{
+        path: 'jurisdiction',
+        name: 'jurisdiction',
+        component: resolve => require(['@/views/jurisdiction/index'],resolve)
+      },{
         path: 'system',
         name: 'system',
         component: resolve => require(['@/views/system/index'], resolve),
@@ -45,9 +49,9 @@ const router = new Router({
           name: 'parameter',
           component: resolve => require(['@/views/system/parameter/index'], resolve)
         }, {
-          path: 'grade',
-          name: 'grade',
-          component: resolve => require(['@/views/system/grade/index'], resolve)
+          path: 'buyOffer',
+          name: 'buyOffer',
+          component: resolve => require(['@/views/system/buyOffer/index'], resolve)
         }]
       }, {
         path: 'news',

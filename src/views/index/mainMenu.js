@@ -130,8 +130,8 @@ export default [{
         name: '系统配置',
         icon: 'icon-xitong',
         children:[{
-            name: '买家求购等级',
-            router: {name: 'grade'}
+            name: '求购报价配置',
+            router: {name: 'buyOffer'}
         },{
             name: '参数配置',
             router: {name: 'parameter'}

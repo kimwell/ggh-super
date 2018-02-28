@@ -246,6 +246,7 @@ export const addZero = (value) => {
 params 转为 时:分:秒
 */
 export const formatDuring = (mss, params) => {
+  
   let days = parseInt(mss / (1000 * 60 * 60 * 24));
   let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));

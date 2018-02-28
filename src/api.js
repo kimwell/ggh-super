@@ -194,3 +194,11 @@ export const delInterfaceGroup = '/sys/auth/group/delGroup'
  * }
  */
 export const interfaceBlindGroup = '/sys/auth/interface/saveGroup'
+
+
+
+// *******************************************************************
+
+export const findByPage = '/sys/ironTimeConfig/findByPage'
+
+export const saveConfigTime = '/sys/ironTimeConfig/saveTime'

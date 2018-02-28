@@ -93,7 +93,7 @@
                     this.poolList.splice(index, 1);
                     // 当前选中group
                     this.groupList[this.activeGroup].interfaceList.push(interfaceData);
-                }else{
+                } else {
                     this.$Message.warning('请先建立接口分组')
                 }
             },
@@ -242,7 +242,7 @@
                 padding: 10px;
                 font-size: 16px;
                 border-bottom: 1px solid #ddd;
-                button.add{
+                button.add {
                     position: absolute;
                     right: 10px;
                     top: 12px;
