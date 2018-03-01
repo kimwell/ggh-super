@@ -60,7 +60,26 @@ const router = new Router({
         }, {
           path: 'nlist',
           name: 'nlist',
-          component: resolve => require(['@/views/news/nlist/index'], resolve)
+          redirect: 'nlist/publish',
+          component: resolve => require(['@/views/news/nlist/index'], resolve),
+          meta: {
+            requireAuth: true
+          },
+          children:[{
+            path: 'publish',
+            name: 'publish',
+            component: resolve => require(['@/views/news/nlist/publish/index'], resolve),
+            meta: {
+              requireAuth: true
+            }
+          }, {
+            path: 'drafts',
+            name: 'drafts',
+            component: resolve => require(['@/views/news/nlist/drafts/index'], resolve),
+            meta: {
+              requireAuth: true
+            }
+          }]
         }, {
           path: 'nconfig',
           name: 'nconfig',
