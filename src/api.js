@@ -795,3 +795,56 @@ export const fourDAnalysis = '/sys/orderData/fourDAnalysis'
 //  订单地区前五(地区分析)
 export const orderAreaTopFive = '/sys/orderData/orderAreaTopFive'
 
+
+// -----------------------------------新闻管理---------------------------------
+/**
+ * 查询所有文章类型
+*/
+export const findAllArticleType = '/api/query/findAllArticleType'
+
+/**
+ * 分页查询文章类型
+*/
+export const findArticleTypePage = '/sys/articleType/findArticleTypePage'
+
+/**
+ * 删除文章类型
+*/
+export const removeArticleType = '/sys/articleType/removeArticleType'
+
+/**
+ * 保存更新文章类型
+*/
+export const saveAndUpadteArticleType = '/sys/articleType/saveAndUpadteArticleType'
+
+/**
+ * 新闻保存修改
+*/
+export const saveAndUpdateIndustryNew = '/sys/indutryNew/saveAndUpdateIndustryNew'
+
+/**
+ * 新闻超管查询列表
+*/
+export const findArticleList = '/sys/indutryNew/findArticleList'
+
+/**
+ * 新闻超管删除
+*/
+export const articleRemove = '/sys/indutryNew/articleRemove'
+
+/**
+ * 新闻超管查询详细信息
+*/
+export const findArticleInfo = '/sys/indutryNew/findArticleInfo'
+
+/**
+ * 新闻超管取消置顶
+*/
+export const articleZero = '/sys/indutryNew/articleZero'
+
+/**
+ * 新闻超管置顶
+*/
+export const articleRise = '/sys/indutryNew/articleRise'
+
+
