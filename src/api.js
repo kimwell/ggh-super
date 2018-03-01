@@ -45,7 +45,17 @@ export const findCity = '/api/query/findCity'
 
 export const findArea = '/api/query/findArea'
 
-// ---------------------------------数据字典-------------------------------
+// ****************************系统配置***************************************
+
+/** 
+ * 求购报价参数配置
+ */
+export const findByPage = '/sys/ironTimeConfig/findByPage'
+
+/** 
+ * 保存有效时间参数
+ */
+export const saveConfigTime = '/sys/ironTimeConfig/saveTime'
 
 /**
  * 分页查询数据字典
@@ -53,7 +63,6 @@ export const findArea = '/api/query/findArea'
  */
 
 export const findDataDictionaryPage = '/sys/dataDictionary/findDataDictionaryPage'
-
 
 /**
  * 分页查询数据字典
@@ -70,6 +79,25 @@ export const deleteDataDictionary = '/sys/dataDictionary/deleteDataDictionary'
 
 export const saveUpdateDataDictionary = '/sys/dataDictionary/saveUpdateDataDictionary'
 
+
+
+/**
+ * 新增更新保证金等级
+ * 
+ */
+export const saveAndUpdateMarginLevel = '/sys/marginLevel/saveAndUpdateMarginLevel'
+
+/**
+ * 移除单条保证金等级
+ * 
+ */
+export const removeMarginLevel = '/sys/marginLevel/removeMarginLevel'
+
+/**
+ * 分页查询所有保证金等级
+ * 
+ */
+export const findMarginLevelPage = '/sys/marginLevel/findMarginLevelPage'
 
 
 //-----------------时间开关----------------------------------
@@ -205,19 +233,6 @@ export const delInterfaceGroup = '/sys/auth/group/delGroup'
  */
 export const interfaceBlindGroup = '/sys/auth/interface/saveGroup'
 
-
-
-// ****************************系统配置***************************************
-
-/** 
- * 求购报价参数配置
- */
-export const findByPage = '/sys/ironTimeConfig/findByPage'
-
-/** 
- * 保存有效时间参数
- */
-export const saveConfigTime = '/sys/ironTimeConfig/saveTime'
 
 
 // *********************************应用管理*********************************

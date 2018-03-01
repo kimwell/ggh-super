@@ -48,6 +48,10 @@ const router = new Router({
           path: 'buyOffer',
           name: 'buyOffer',
           component: resolve => require(['@/views/system/buyOffer/index'], resolve)
+        },{
+          path: 'deposit',
+          name: 'deposit',
+          component: resolve => require(['@/views/system/deposit/index'], resolve)
         }]
       }, {
         path: 'news',

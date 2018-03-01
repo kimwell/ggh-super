@@ -31,7 +31,6 @@
                 接口池
                 <Button size="small" class="add" type="primary" @click.native="inerfaceShow.is = true;editInter = {}"><Icon type="plus-circled"></Icon>添加接口</Button>
                 <Button size="small" class="save" type="primary" @click.native="saveGroup"><Icon type="android-list"></Icon>保存</Button>
-    
             </div>
             <div class="pool">
                 <transition-group enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">

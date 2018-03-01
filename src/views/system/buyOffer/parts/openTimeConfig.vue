@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
       <Card :bordered="false" class="card">
-      <p slot="title">资源开放时间配置</p>
+      <p slot="title">求购开放时间配置</p>
       <div class="card-contnet">
         <div class="table-contnet">
           <Row class-name="head">
@@ -115,9 +115,6 @@ export default {
         id: '7',
       }],
     }
-  },
-  computed: {
-
   },
   methods: {
     //  获取列表

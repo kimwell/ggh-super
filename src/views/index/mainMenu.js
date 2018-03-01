@@ -122,6 +122,9 @@ export default [{
         },{
             name: '数据字典',
             router: {name: 'dictionary'}
+        },{
+            name:'商家保证金配置',
+            router: {name: 'deposit'}
         }]
     }
 ]
