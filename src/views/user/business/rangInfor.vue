@@ -236,7 +236,7 @@
             getUerScope(lists) {
                 let list = _.cloneDeep(lists);
                 this.$http.post(this.api.scopeByUserId,{
-                    userId: this.id
+                    buserId: this.id
                 }).then(res => {
                     if (res.code === 1000) {
                         // 用户没有设置过，默认所有都选择
@@ -300,7 +300,7 @@
                 _.forEach(params, (n, key) => {
                     params[key] = JSON.stringify(n);
                 })
-                params.userId = this.id;
+                params.buserId = this.id;
                 // this.$spinToggle(true);
                 this.$http.post(this.api.saveScopeByUserId, params).then(res => {
                     // this.$spinToggle(false);

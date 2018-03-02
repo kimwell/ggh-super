@@ -5,9 +5,9 @@
       <div class="card-contnet">
         <div class="table-contnet">
           <Row class-name="head">
-              <Col class-name="col" span="3">资源类型</Col>
-              <Col class-name="col" span="3">常规开市时间</Col>
-              <Col class-name="col" span="3">常规休市日</Col>
+              <!-- <Col class-name="col" span="3">资源类型</Col> -->
+              <Col class-name="col" span="4">常规开市时间</Col>
+              <Col class-name="col" span="5">常规休市日</Col>
               <Col class-name="col" span="3">自定义开闭市</Col>
               <Col class-name="col" span="3">当前状态</Col>
               <Col class-name="col" span="3">最近操作人</Col>
@@ -15,12 +15,12 @@
               <Col class-name="col" span="3">操作</Col>
           </Row>
           <Row v-for="item in list" :key="item.id">
-              <Col class-name="col" span="3">{{ item.StoreTypeName }}</Col>
-              <Col class-name="col" span="3">
+              <!-- <Col class-name="col" span="3">{{ item.StoreTypeName }}</Col> -->
+              <Col class-name="col" span="4">
                 <template v-if="item.beginTime != ''">{{item.beginTime | dataToTime }} - {{item.endTime | dataToTime}}</template>
                 <template v-else>无限制</template>
               </Col>
-              <Col class-name="col" span="3">{{item.restDay | dealRestDay}}</Col>
+              <Col class-name="col" span="5">{{item.restDay | dealRestDay}}</Col>
               <Col class-name="col" span="3">
                 <template v-if="item.status === 1 || item.status === 3 || item.status === 2">
                   <Button size="small" type="info" @click="changeTimeStatus(item)">开市</Button>
@@ -43,11 +43,11 @@
           </div>
         </div>
       </Card>
-      <Modal v-model="show" title="编辑平台资源开放时间" :closable="false" :mask-closable="false">
+      <Modal v-model="show" title="编辑求购开放时间" :closable="false" :mask-closable="false">
         <Form :label-width="100" :ref="ref" :model="itemApi">
-          <FormItem label="数据类型：">
+          <!-- <FormItem label="数据类型：">
             {{itemData.StoreTypeName}}
-          </FormItem>
+          </FormItem> -->
           <FormItem label="常规开市时间：">
             <TimePicker type="time" v-model="timeValue[0]" confirm placeholder="时分秒" size="small" style="width: 168px;display:inline-block"></TimePicker>至
             <TimePicker type="time" v-model="timeValue[1]" confirm placeholder="时分秒" size="small" style="width: 168px;display:inline-block"></TimePicker>

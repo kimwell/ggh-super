@@ -1,5 +1,6 @@
-export const uploadApi = 'http://192.168.0.251:8080/fileUpload/images';
+export const uploadApi = 'http://192.168.0.251:8088/fileUpload/images';
 // export const uploadApi = '/fileUpload/images';
+
 // export const uploadExcelApi = 'http://192.168.0.251/sys/qualiticationmodel/uplodeQualiticationModel';
 export const uploadExcelApi = '/sys/qualiticationmodel/uplodeQualiticationModel';
 
@@ -99,6 +100,23 @@ export const removeMarginLevel = '/sys/marginLevel/removeMarginLevel'
  */
 export const findMarginLevelPage = '/sys/marginLevel/findMarginLevelPage'
 
+/**
+ * 分页查询全部限购等级
+ * 
+ */
+export const findPurchaseLevelPage = '/sys/purchaseLevel/findPurchaseLevelPage'
+
+/**
+ * 保存更新限购等级名称
+ * 
+ */
+export const saveAndUpdatePurchaseLevel = '/sys/purchaseLevel/saveAndUpdatePurchaseLevel'
+
+/**
+ * 移除单条限购等级
+ * 
+ */
+export const removePurchaseLevel = '/sys/purchaseLevel/removePurchaseLevel'
 
 //-----------------时间开关----------------------------------
 // 分页查询时间开关
@@ -108,6 +126,10 @@ export const updateStoreTime = '/sys/storetime/updateStoreTime'
 
 //  设为无限制                  
 export const updateStoreTimeParamById = '/sys/storetime/updateStoreTimeParamById'
+
+
+/// 更改开关状态                
+export const updateStoreTimeStatusById = '/sys/storetime/updateStoreTimeStatusById'
 
 // *********************************权限管理*********************************
 /**
@@ -412,7 +434,7 @@ export const updateMaterials = '/sys/materials/updateMaterials'
  *      pageSize
  * }
  */
-export const getMaterials = '/sys/materials//findMaterialsPage'
+export const getMaterials = '/sys/materials/findMaterialsPage'
 
 // -----------------------------------产地---------------------------------
 /**
@@ -677,13 +699,13 @@ export const eidtBusiness = '/sys/buserInfo/updateBuserInfo'
  * 超管查询用户经营范围
  * path: /sys/ironBuy/queryBussinessScopeByUserId
  */
-export const scopeByUserId = '/sys/ironBuy/queryBussinessScopeByUserId'
+export const scopeByUserId = '/sys/businessScope/findBusinessScope'
 
 /**
  * 超管保存用户经营范围
  * path: /sys/ironBuy/saveBussinessScopeByUserId
  */
-export const saveScopeByUserId = '/sys/ironBuy/saveBussinessScopeByUserId'
+export const saveScopeByUserId = '/sys/businessScope/saveBusinessScope'
 
 
 // *********************************广告位管理*********************************
@@ -814,52 +836,60 @@ export const orderAreaTopFive = '/sys/orderData/orderAreaTopFive'
 // -----------------------------------新闻管理---------------------------------
 /**
  * 查询所有文章类型
-*/
+ */
 export const findAllArticleType = '/api/query/findAllArticleType'
 
 /**
  * 分页查询文章类型
-*/
+ */
 export const findArticleTypePage = '/sys/articleType/findArticleTypePage'
 
 /**
  * 删除文章类型
-*/
+ */
 export const removeArticleType = '/sys/articleType/removeArticleType'
 
 /**
  * 保存更新文章类型
-*/
+ */
 export const saveAndUpadteArticleType = '/sys/articleType/saveAndUpadteArticleType'
 
 /**
  * 新闻保存修改
-*/
+ */
 export const saveAndUpdateIndustryNew = '/sys/indutryNew/saveAndUpdateIndustryNew'
 
 /**
  * 新闻超管查询列表
-*/
+ */
 export const findArticleList = '/sys/indutryNew/findArticleList'
 
 /**
  * 新闻超管删除
-*/
+ */
 export const articleRemove = '/sys/indutryNew/articleRemove'
 
 /**
  * 新闻超管查询详细信息
-*/
+ */
 export const findArticleInfo = '/sys/indutryNew/findArticleInfo'
 
 /**
  * 新闻超管取消置顶
-*/
+ */
 export const articleZero = '/sys/indutryNew/articleZero'
 
 /**
  * 新闻超管置顶
-*/
+ */
 export const articleRise = '/sys/indutryNew/articleRise'
 
 
+// -----------------------------------品类，材质，表面，产地查询---------------------------------
+export const queryPlaces = '/api/query/findProPlaces'
+
+export const queryIronTypes = '/api/query/findIronTypes'
+
+export const queryMaterials = '/api/query/findMaterials'
+
+export const querySurFaces = '/api/query/findSurFace'

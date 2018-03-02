@@ -20,6 +20,9 @@
                         <Button size="small" type="error" @click="deleteItem(item)">删除</Button>
                         </Col>
                     </Row>
+                    <Row v-if="list.length == 0">
+                        <Col class-name="col" span="24">暂无数据</Col>
+                    </Row>
                 </div>
                 <Page class="page-count" size="small" :total="totalCount" :page-size="listApi.pageSize" @on-change="changePage"></Page>
             </div>
@@ -132,6 +135,7 @@
                         this.$http.post(this.api.updateUnit, params).then(res => {
                             if (res.code === 1000) {
                                 this.$Message.success('删除成功！');
+                                this.getUnits();
                             } else {
                                 this.$Message.error('删除失败！');
                             }

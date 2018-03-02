@@ -136,7 +136,7 @@
                     }
                 })
             },
-            beforeUpload() {
+            beforeUpload(res) {
                 this.showUpload = true;
             },
             //  文件上传处理
@@ -183,7 +183,7 @@
                                     this.$http.post(this.api.saveAndUpdateIndustryNew, params).then(res => {
                                         if (res.code === 1000) {
                                             this.$Message.success(status == "1" ? '发布成功' : '保存成功');
-                                            this.$router.push('../../newsList')
+                                            this.$router.push('../../nlist')
                                         }
                                     })
                                 }

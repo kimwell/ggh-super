@@ -148,8 +148,15 @@
                         }
                         this.$http.post(this.api.deleteStoreHouse, params).then(res => {
                             if (res.code === 1000) {
-                                this.getList();
                                 this.$Message.success('删除成功！');
+                                //  删除当前页最后一条数据时，返回上一分页
+                                if (this.list.length == 1) {
+                                    if (this.apiData.currentPage != 1)
+                                        this.apiData.currentPage = this.apiData.currentPage - 1
+                                    this.getList();
+                                } else {
+                                    this.getList();
+                                }
                             } else {
                                 this.$Message.error('删除失败！');
                             }

@@ -45,7 +45,7 @@
                 <FormItem label="商户名称：" class="magin0">
                     <Input type="text" :value="apiData.name" @input="asyncValue($event)" placeholder="输入商家名称"></Input>
                 </FormItem>
-                <FormItem label="诚信商户：" class="magin0">
+                <!-- <FormItem label="诚信商户：" class="magin0">
                     <i-switch v-model="apiData.isFU">
                         <span slot="open">是</span>
                         <span slot="close">否</span>
@@ -62,11 +62,11 @@
                         <span slot="open">是</span>
                         <span slot="close">否</span>
                     </i-switch>
-                </FormItem>
+                </FormItem> -->
                 <FormItem label="注册商户：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
                 </FormItem>
-                <FormItem label="成为诚信商户：" class="magin0">
+                <!-- <FormItem label="成为诚信商户：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bFUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
                 </FormItem>
                 <FormItem label="成为担保商户：" class="magin0">
@@ -74,7 +74,7 @@
                 </FormItem>
                 <FormItem label="开通店铺时间：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bHSTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
-                </FormItem>
+                </FormItem> -->
             </Form>
             <div style="margin-bottom:10px;text-align:right">
                 <Button type="warning" @click="reset">清空筛选</Button>
@@ -109,7 +109,7 @@
                 <FormItem label="商户名称">
                     {{ activeItem.companyName }}
                 </FormItem>
-                <FormItem label="诚信商家">
+                <!-- <FormItem label="诚信商家">
                     <i-switch size="large" v-model="editData.isFaithUser">
                         <span slot="open">是</span>
                         <span slot="close">否</span>
@@ -126,8 +126,8 @@
                         <span slot="open">是</span>
                         <span slot="close">否</span>
                     </i-switch>
-                </FormItem>
-                <FormItem label="成为诚信商家" v-if="activeItem.isFaithUser == 1">
+                </FormItem> -->
+                <!-- <FormItem label="成为诚信商家" v-if="activeItem.isFaithUser == 1">
                     {{ activeItem.beFaithUserTime | dateformat }}
                 </FormItem>
                 <FormItem label="开通店铺时间" v-if="activeItem.isHaveShop == 1">
@@ -135,7 +135,7 @@
                 </FormItem>
                 <FormItem label="成为担保商家" v-if="activeItem.isGuaranteeUser == 1">
                     {{ activeItem.beGuaranteeUserTime | dateformat }}
-                </FormItem>
+                </FormItem> -->
                 <FormItem label="QQ" >
                     <Input v-model="editData.qq" placeholder="请输入qq"></Input>
                 </FormItem>
