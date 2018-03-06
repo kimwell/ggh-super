@@ -202,6 +202,7 @@ export const nowStatus = (val) => {
 }
 // 常规休市日显示
 export const dealRestDay = (val) => {
+  console.log(val)
   let w = ['', '周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   const numberToWeek = (value) => {
     let str = value.toString();

@@ -17,11 +17,11 @@
             <Col class-name="col" span="6">{{item.name}}</Col>
             <Col class-name="col" span="4">{{item.orderIndex}}</Col>
             <Col class-name="col" span="4">{{item.remark != '' ? item.remark : '暂无备注'}}</Col>
-            <Col class-name="col" span="3">{{item.updateTime | dateformat}}</Col>
             <Col class-name="col" span="3">{{item.updateUser}}</Col>
+            <Col class-name="col" span="3">{{item.updateTime | dateformat}}</Col>
             <Col class-name="col" span="4">
-            <Button size="small" type="warning" @click="openModel(true,item)">编辑</Button>
-            <Button size="small" type="error" @click="deleteItem(item)">删除</Button>
+              <Button size="small" type="warning" @click="openModel(true,item)">编辑</Button>
+              <Button size="small" type="error" @click="deleteItem(item)">删除</Button>
             </Col>
           </Row>
           <Row v-if="list.length == 0">

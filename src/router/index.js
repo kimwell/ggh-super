@@ -25,6 +25,20 @@ const router = new Router({
       name: '/',
       component: resolve => require(['@/views/index/index'], resolve),
       children: [{
+        path: 'dispatch',
+        name: 'dispatch',
+        component: resolve => require(['@/views/business/dispatch/index'],resolve),
+        redirect: 'dispatch/treated',
+        children:[{
+          path: 'treated',
+          name: 'treated',
+          component: resolve => require(['@/views/business/dispatch/treated/index'],resolve),
+        },{
+          path: 'untreated',
+          name: 'untreated',
+          component: resolve => require(['@/views/business/dispatch/untreated/index'],resolve),
+        }]
+      },{
         path: 'order',
         name: 'order',
         component: resolve => require(['@/views/order/index'], resolve)
@@ -117,19 +131,23 @@ const router = new Router({
         children: [{
           name: 'role',
           path: 'role',
-          component: resolve => require(['@/views/user/role/index'], resolve),
+          component: resolve => require(['@/views/user/role/index'], resolve)
         }, {
           name: 'grade',
           path: 'grade',
-          component: resolve => require(['@/views/user/grade/index'], resolve),
+          component: resolve => require(['@/views/user/grade/index'], resolve)
         }, {
           name: 'businessUser',
           path: 'businessUser',
-          component: resolve => require(['@/views/user/business/index'], resolve),
+          component: resolve => require(['@/views/user/business/index'], resolve)
         }, {
           name: 'salesMan',
           path: 'salesMan',
-          component: resolve => require(['@/views/user/salesMan/index'], resolve),
+          component: resolve => require(['@/views/user/salesMan/index'], resolve)
+        },{
+          name: 'subaccount',
+          path: 'subaccount',
+          component: resolve => require(['@/views/user/subaccount/index'],resolve)
         }]
       }, {
         path: 'marketing',

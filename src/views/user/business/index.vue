@@ -136,6 +136,17 @@
                 <FormItem label="成为担保商家" v-if="activeItem.isGuaranteeUser == 1">
                     {{ activeItem.beGuaranteeUserTime | dateformat }}
                 </FormItem> -->
+
+                <FormItem label="保证金等级" >
+                    <Select v-model="editData.marginLevel" style="width:200px">
+                        <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    </Select>
+                </FormItem>
+                <FormItem label="求购等级" >
+                    <Select v-model="editData.purchaseLevel" style="width:200px">
+                        <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    </Select>
+                </FormItem>
                 <FormItem label="QQ" >
                     <Input v-model="editData.qq" placeholder="请输入qq"></Input>
                 </FormItem>
@@ -148,7 +159,7 @@
             </Form>
         </Modal>
         <Modal title="报价经营范围" width="900" v-model="showRange" loading :mask-closable="false" @on-ok="saveScope">
-            <rang v-if="showRange" :id= "activeItem.userId" ref="scope"></rang>
+            <rang v-if="showRange" :id= "activeItem.id" ref="scope"></rang>
         </Modal>
     </div>
 </template>
@@ -182,16 +193,20 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                 houseList: [],
                 totalCount: 0,
                 activeIndex: 0,
+                marginLevelList: [],
+                purchaseLevelList: [],
                 editData:{
-                    userId: '',
+                    companyId: '',
                     isFaithUser: false,
                     isGuaranteeUser: false,
-                    isStore: false,
+                    // isStore: false,
                     isHaveShop: false,
                     qq: '',
-                    storeHouseId:'',
+                    // storeHouseId:'',
                     storeHouseName:'',
-                    proInfo: ''
+                    proInfo: '',
+                    marginLevel: '',
+                    purchaseLevel: ''
                 },
                 dateOption:{
                     shortcuts: [
@@ -259,17 +274,43 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                     }
                 })
             },
+            //  全部保证金
+            getAllMarginLevel() {
+                let params = {
+                    name: ''
+                }
+                this.$http.post(this.api.findAllMarginLevel,params).then(res => {
+                    if(res.code === 1000){
+                        this.marginLevelList = res.data
+                    }
+                })
+            },
+            //  全部求购等级
+            getAllPurchaseLevel() {
+                let params = {
+                    name: ''
+                }
+                this.$http.post(this.api.findAllPurchaseLevel,params).then(res => {
+                    if(res.code === 1000){
+                        this.purchaseLevelList = res.data
+                    }
+                })
+            },
             showInfo(i) {
+                this.getAllMarginLevel();
+                this.getAllPurchaseLevel();
                 // this.getStroeHouse();
                 this.activeIndex = i;
                 let data = _.cloneDeep(this.activeItem);
-                this.editData.userId = data.userId;
+                this.editData.companyId = data.id;
                 this.editData.isFaithUser = data.isFaithUser == 1;
                 this.editData.isGuaranteeUser = data.isGuaranteeUser == 1;
                 this.editData.isHaveShop = data.isHaveShop == 1;
                 this.editData.proInfo = data.proInfo;
                 this.editData.storeHouseId = data.storeHouseId;
                 this.editData.storeHouseName = data.storeHouseName;
+                this.editData.marginLevel = data.marginLevel;
+                this.editData.purchaseLevel = data.purchaseLevel;
                 this.editData.qq = data.qq;
                 this.showEdit = true;
             },

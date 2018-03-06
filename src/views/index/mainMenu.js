@@ -12,6 +12,11 @@ export default [{
         router: {
           name: 'valetIron'
         }
+      },{
+        name: '求购调度管理',
+        router: {
+          name: 'dispatch'
+        }
       }
     ]
   }, {
@@ -76,6 +81,11 @@ export default [{
       name: '平台专员管理',
       router: {
         name: 'salesMan'
+      }
+    },{
+      name: '商家子账号管理',
+      router: {
+        name: 'subaccount'
       }
     }]
   },

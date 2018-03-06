@@ -118,6 +118,19 @@ export const saveAndUpdatePurchaseLevel = '/sys/purchaseLevel/saveAndUpdatePurch
  */
 export const removePurchaseLevel = '/sys/purchaseLevel/removePurchaseLevel'
 
+/**
+ * 查询全部求购等级
+ * 
+ */
+export const findAllPurchaseLevel = '/api/query/findAllPurchaseLevel'
+
+/**
+ * 查询全部保证金等级
+ * 
+ */
+export const findAllMarginLevel = '/api/query/findAllMarginLevel'
+
+
 //-----------------时间开关----------------------------------
 // 分页查询时间开关
 export const selectStoreTimePage = '/sys/storetime/selectStoreTimePage'
@@ -708,6 +721,46 @@ export const scopeByUserId = '/sys/businessScope/findBusinessScope'
 export const saveScopeByUserId = '/sys/businessScope/saveBusinessScope'
 
 
+/**
+ * 超管分页查询公司子账号列表
+ * path: /common/subaccountManagement/findSubaccountManagementPage
+ */
+
+export const findSubaccountManagementPage = '/common/subaccountManagement/findSubaccountManagementPage'
+
+/**
+ * 超管删除公司子账号列表
+ * path: /common/subaccountManagement/deleteSubaccountManagement
+ */
+
+export const deleteSubaccountManagement = '/common/subaccountManagement/deleteSubaccountManagement'
+  
+/**
+ * 超管重置公司子账号密码
+ * path: /common/subaccountManagement/resetPassword
+ */
+export const resetPassword = '/common/subaccountManagement/resetPassword'
+          
+/**
+ * 超管保存子账号信息
+ * path: /common/subaccountManagement/saveSubaccountManagement
+ */
+export const saveSubaccountManagement = '/common/subaccountManagement/saveSubaccountManagement'
+
+
+/**
+ * 超管更新子账号信息
+ * path: /common/subaccountManagement/updateSubaccountType
+ */
+export const updateSubaccountType = '/common/subaccountManagement/updateSubaccountType'
+
+
+/**
+ * 模糊匹配查询商户信息
+ * path: /common/subaccountManagement/findCompanyInfo
+ */
+export const findCompanyInfo = '/common/subaccountManagement/findCompanyInfo'
+      
 // *********************************广告位管理*********************************
 /**
  * 查询所有广告
@@ -893,3 +946,54 @@ export const queryIronTypes = '/api/query/findIronTypes'
 export const queryMaterials = '/api/query/findMaterials'
 
 export const querySurFaces = '/api/query/findSurFace'
+
+
+// -----------------------------------调度中心---------------------------------------------------
+
+/**
+ * 超管查看待处理处理的订单
+ * path /sys/ironSellSelect/findUnDealIronBuy
+ * params {
+ *  currentPage
+ *  pageSize
+ * }
+ **/
+
+export const findUnDealIronBuy = '/sys/ironSellSelect/findUnDealIronBuy'
+
+/**
+ * 超管选择无货
+ * path /sys/ironSellSelect/ironNotHave
+ **/
+
+export const ironNotHave = '/sys/ironSellSelect/ironNotHave'
+
+/**
+ * 超管查询报价信息
+ * path /sys/ironSellSelect/findSellBuser
+ **/
+
+export const findSellBuser = '/sys/ironSellSelect/findSellBuser'
+
+/**
+ * 超管查询当前求购尚未报价的商户信息
+ * path /sys/ironSellSelect/findNotSellBuser
+ **/
+
+export const findNotSellBuser = '/sys/ironSellSelect/findNotSellBuser'
+
+
+/**
+ * 超管选择推荐报价
+ * path /sys/ironSellSelect/saveIronSellSelect
+ **/
+
+export const saveIronSellSelect = '/sys/ironSellSelect/saveIronSellSelect'
+
+
+/**
+ * 超管查询已处理订单
+ * path /sys/ironSellSelect/findDealIronBuy
+ **/
+
+export const findDealIronBuy = '/sys/ironSellSelect/findDealIronBuy'

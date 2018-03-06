@@ -13,7 +13,7 @@ if (process.env.NODE_ENV == 'development')
 // axios.defaults.baseURL = 'http://192.168.0.164:8080'; //配置接口地址-胡
 // axios.defaults.baseURL = 'http://192.168.0.136:8080'; //配置接口地址-王
 // axios.defaults.baseURL = 'http://192.168.0.163:8080'; //配置接口地址
-// axios.defaults.baseURL = 'http://192.168.0.114:8080'; //配置接口地址-杭
+// axios.defaults.baseURL = 'http://192.168.0.146:8080'; //配置接口地址-杭
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
 axios.defaults.withCredentials = true;
 

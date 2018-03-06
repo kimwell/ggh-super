@@ -145,7 +145,7 @@
         <div class="group" v-for="(item,index) in list" :key="index">
             <div class="head">
                 {{ item.title }}
-                <a @click="setCheckAll(index)"><span class="iconfont" :class="checkAll[index] ? 'icon-check-box' : 'icon-check_box_unselecte'" ></span>全选</a>
+                <a @click="setCheckAll(index)"><span class="iconfont" :class="checkAll[index] ? 'icon-checkbox' : 'icon-check-box-outline-blank'" ></span>全选</a>
             </div>
             <div class="item-content clearfix">
                 <div class="item" :class="{'selected':sub.isCheck}" v-for="(sub,i) in item.arr" :ref="sub.id" :key="sub.id" @click="selectItem(item,sub,i)">
