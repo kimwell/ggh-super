@@ -13,11 +13,11 @@
         <div class="row-list-body">
           <Row class="head">
             <Col class-name="col" span="1">货源地</Col>
-            <Col class-name="col" span="1">品类</Col>
+            <Col class-name="col" span="2">品类</Col>
             <Col class-name="col" span="1">材质</Col>
             <Col class-name="col" span="1">表面</Col>
             <Col class-name="col" span="2">规格</Col>
-            <Col class-name="col" span="2">公差</Col>
+            <Col class-name="col" span="1">公差</Col>
             <Col class-name="col" span="2">计量</Col>
             <Col class-name="col" span="1">产地</Col>
             <Col class-name="col" span="2">备注</Col>
@@ -29,12 +29,12 @@
           </Row>
           <Row v-for="(iron ,j) in item.ironBuy" :key="j" class="row-body">
             <Col class-name="col" span="1">{{iron.location}}</Col>
-            <Col class-name="col" span="1">{{iron.ironType}}</Col>
+            <Col class-name="col" span="2">{{iron.ironType}}</Col>
             <Col class-name="col" span="1">{{iron.material}}</Col>
             <Col class-name="col" span="1">{{iron.surface}}</Col>
             <Col class-name="col" span="2">{{iron.specification != '' ? iron.specification : `${iron.height}*${iron.width}*${iron.length}`}}</Col>
-            <Col class-name="col" span="2">{{iron.tolerance != '' ? iron.tolerance : '空'}}</Col>
-            <Col class-name="col" span="2">{{iron.number != '' ? iron.number : '空'}}</Col>
+            <Col class-name="col" span="1">{{iron.tolerance != '' ? iron.tolerance : '空'}}</Col>
+            <Col class-name="col" span="2">{{iron.weight != '' ? iron.weight : '空'}}</Col>
             <Col class-name="col" span="1">{{iron.proPlace}}</Col>
             <Col class-name="col" span="2">{{iron.remark != '' ? iron.remark : '暂无备注'}}</Col>
             <Col class-name="col" span="2">
@@ -194,7 +194,6 @@
         }else{
           this.$http.post(this.api.findSellBuser,params).then(res => {
             if(res.code === 1000){
-              console.log(res)
               this.sellBuser = res.data.sell
               this.serverTime2 = res.data.systemTime
               this.sellerTime = res.data.sellTime

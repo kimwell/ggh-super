@@ -4,6 +4,9 @@ import Router from 'vue-router';
 import store from '@/store/store'
 import * as types from '@/store/types'
 import VueLocalStorage from 'vue-ls';
+import {
+  resolve
+} from 'path';
 
 Vue.use(VueLocalStorage);
 Vue.use(Router);
@@ -27,18 +30,18 @@ const router = new Router({
       children: [{
         path: 'dispatch',
         name: 'dispatch',
-        component: resolve => require(['@/views/business/dispatch/index'],resolve),
+        component: resolve => require(['@/views/business/dispatch/index'], resolve),
         redirect: 'dispatch/treated',
-        children:[{
+        children: [{
           path: 'treated',
           name: 'treated',
-          component: resolve => require(['@/views/business/dispatch/treated/index'],resolve),
-        },{
+          component: resolve => require(['@/views/business/dispatch/treated/index'], resolve),
+        }, {
           path: 'untreated',
           name: 'untreated',
-          component: resolve => require(['@/views/business/dispatch/untreated/index'],resolve),
+          component: resolve => require(['@/views/business/dispatch/untreated/index'], resolve),
         }]
-      },{
+      }, {
         path: 'order',
         name: 'order',
         component: resolve => require(['@/views/order/index'], resolve)
@@ -144,10 +147,18 @@ const router = new Router({
           name: 'salesMan',
           path: 'salesMan',
           component: resolve => require(['@/views/user/salesMan/index'], resolve)
-        },{
+        }, {
           name: 'subaccount',
           path: 'subaccount',
-          component: resolve => require(['@/views/user/subaccount/index'],resolve)
+          component: resolve => require(['@/views/user/subaccount/index'], resolve)
+        }, {
+          name: 'examine',
+          path: 'examine',
+          component: resolve => require(['@/views/user/examine/index'], resolve)
+        }, {
+          path: 'examineDetail/:id/:status',
+          name: 'examineDetail',
+          component: resolve => require(['@/views/user/examine/detail/index'], resolve)
         }]
       }, {
         path: 'marketing',

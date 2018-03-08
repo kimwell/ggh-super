@@ -997,3 +997,26 @@ export const saveIronSellSelect = '/sys/ironSellSelect/saveIronSellSelect'
  **/
 
 export const findDealIronBuy = '/sys/ironSellSelect/findDealIronBuy'
+
+
+// -----------------------------------商家审核管理---------------------------------
+/** 
+ * 超管审核未通过商户列表
+*/
+export const findNotBuserInfoPage = '/sys/buserInfo/findNotBuserInfoPage'
+
+/** 
+ * 超管更新商户审核状态
+*/
+export const updateBuserInfoById = '/sys/buserInfo/updateBuserInfoById'
+
+
+/** 
+ * 根据用户编号来查询商户信息
+*/
+export const getBuserInfoByUserId = '/sys/buserInfo/getBuserInfoByUserId'
+
+/** 
+ * 查询专员
+*/
+export const findSalemanInfo = '/api/bregist/findSalemanInfo'

@@ -87,6 +87,11 @@ export default [{
       router: {
         name: 'subaccount'
       }
+    },{
+      name:'商家用户审核',
+      router: {
+        name: 'examine'
+      }
     }]
   },
   {

@@ -28,6 +28,14 @@
                 return routerIndex
             }
         },
+        watch: {
+          'routerIndex':{
+                handler: _.debounce(function(val, oldVal) {
+                    this.activeTab = this.routerIndex
+                }, 200),
+                deep: true
+            }
+        },
         created() {
             this.activeTab = this.routerIndex
         },
