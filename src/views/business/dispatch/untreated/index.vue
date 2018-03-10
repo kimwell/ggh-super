@@ -4,17 +4,17 @@
     <p style="text-align:center;padding: 20px 0;" v-show="list.length<=0">暂无数据</p>
     <div class="data-list">
       <div class="list-card" v-for="(item,i) in list" :key="i">
-        <div class="card-head"><span>商户名称：{{item.companyName}}</span></div>
+        <div class="card-head">
+          <span>商户名称：{{item.companyName}}</span>
+          <div class="action"><a @click="detailAction(item)">查看报价</a></div>
+        </div>
         <div class="card-body clearfix">
-          <div class="item">操作人：{{item.createUser}}</div>
-          <div class="item">联系人：{{item.contactName}}</div>
-          <div class="item">联系电话：{{item.contactNum}}</div>
-          <div class="item">规格：{{item.specification != '' ? item.specification : `${item.height}*${item.width}*${item.length}`}}</div>
+          <div class="item">货源地：{{item.locationName}}</div>
           <div class="item">品类：{{item.ironType}}</div>
-          <div class="item">公差：{{item.tolerance}}</div>
           <div class="item">材质：{{item.material}}</div>
-          <div class="item">产地：{{item.proPlace}}</div>
-          <div class="item">表面：{{item.surface}}</div>
+          <div class="item">规格：{{item.specification != '' ? item.specification : `${item.height}*${item.width}*${item.length}`}}</div>
+          <div class="item">公差：{{item.tolerance}}</div>
+          <div class="item">计量：{{item.proPlace}}</div>
           <div class="item">是否有报价人：</div>
           <div class="item">货源地：{{item.locationName}}</div>
           <div class="item">更新时间：{{item.createTime | dateformat}}</div>
@@ -22,12 +22,62 @@
       </div>
     </div>
     <Page class="page-count" size="small" :total="totalCount" show-total :current="apiData.currentPage" :page-size="apiData.pageSize" @on-change="changePage"></Page>
+    <Modal v-model="detailShow" width="1100" title="报价详情">
+      <div class="detail" v-if="detailData.ironBuy">
+        <div>求购内容：{{detailData.ironBuy.ironTypeName}}/{{detailData.ironBuy.materialName}}/{{detailData.ironBuy.proPlacesName}}/{{detailData.ironBuy.surfaceName}}(收货城市：{{detailData.ironBuy.locationName}})</div>
+        <div>规格：{{detailData.ironBuy.specifications != '' ? detailData.ironBuy.specifications : `${detailData.ironBuy.height}*${detailData.ironBuy.width}*${detailData.ironBuy.length}`}}</div>
+        <div>公差：{{detailData.ironBuy.tolerance}}</div>
+        <div>计量：{{detailData.ironBuy.numbers}}{{detailData.ironBuy.numberUnit}}/{{detailData.ironBuy.weights}}{{detailData.ironBuy.weightUnit}}</div>
+        <div>备注：{{detailData.ironBuy.remark !='' ? detailData.ironBuy.remark: '暂无'}}</div>
+        <div>买家公司：{{detailData.buser.companyName}}</div>
+        <div>联系人：{{detailData.buser.contactName}}  联系方式：{{detailData.buser.contactNum}}</div>
+        <div>状态：{{detailData.ironBuy.createUser}}</div>
+        <div>剩余可报价商家数：{{detailData.remainBuserNum}}</div>
+        <div class="ironVal" style="padding:15px 0;">
+          <p>有效报价：{{detailData.validSell.length}}</p>
+          <div class="validSell table-contnet">
+            <Row class-name="head">
+              <Col class-name="col" span="1">&nbsp;</Col>
+              <Col class-name="col" span="5">公司名称</Col>
+              <Col class-name="col" span="2">报价人</Col>
+              <Col class-name="col" span="3">联系方式</Col>
+              <Col class-name="col" span="2">单价</Col>
+              <Col class-name="col" span="3">公差</Col>
+              <Col class-name="col" span="2">产地</Col>
+              <Col class-name="col" span="3">交货时间</Col>
+              <Col class-name="col" span="3">备注</Col>
+            </Row>
+            <Row v-for="(item,i) in detailData.validSell" :key="i">
+              <Col class-name="col" span="1">&nbsp;</Col>
+              <Col class-name="col" span="5">{{item.companyName}}</Col>
+              <Col class-name="col" span="2">{{item.contactName}}</Col>
+              <Col class-name="col" span="3">{{item.contactNum}}</Col>
+              <Col class-name="col" span="2">{{item.sellIng.offerPerPrice}}元/{{item.sellIng.baseUnit}}</Col>
+              <Col class-name="col" span="3">{{item.sellIng.tolerance}}</Col>
+              <Col class-name="col" span="2">{{item.sellIng.offerPlaces}}</Col>
+              <Col class-name="col" span="3">{{item.sellIng.deliveryTime}}</Col>
+              <Col class-name="col" span="3">{{item.sellIng.offerRemark !='' ? item.sellIng.offerRemark: '暂无'}}</Col>
+            </Row>
+          </div>
+        </div>
+        <div class="ironMiss">
+          <p>错过报价：{{detailData.missSell.length}}</p>
+          <p v-for="item in detailData.missSell" :key="item.id">
+              {{ item.companyName }} — 联系人：{{item.contactName}} — 联系电话：{{item.contactNum}}
+          </p>
+        </div>
+      </div>
+
+      <div slot="footer">
+
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
-import City from '@/components/basics/adress/citySelect.vue'
-import filterUnreated from '../parts/filterUntreated.vue'
+  import City from '@/components/basics/adress/citySelect.vue'
+  import filterUnreated from '../parts/filterUntreated.vue'
   export default {
     components: {
       City,
@@ -35,6 +85,7 @@ import filterUnreated from '../parts/filterUntreated.vue'
     },
     data() {
       return {
+        detailShow: false,
         apiData: {
           curentPage: 1,
           pageSize: 10,
@@ -119,7 +170,8 @@ import filterUnreated from '../parts/filterUntreated.vue'
             value: 'false'
           }
         ],
-        placeHolder: '请选择'
+        placeHolder: '请选择',
+        detailData: {}
       }
     },
     computed: {
@@ -159,9 +211,7 @@ import filterUnreated from '../parts/filterUntreated.vue'
       }
     },
     methods: {
-      doFilter(data) {
-        console.log(data)
-      },
+      doFilter(data) {},
       changePage(page) {
         this.apiData.curentPage = page;
         this.getList();
@@ -185,11 +235,22 @@ import filterUnreated from '../parts/filterUntreated.vue'
       getList() {
         this.$http.post(this.api.findDealIronBuy, this.apiData).then(res => {
           if (res.code === 1000) {
-            console.log(res)
             this.list = res.data.list;
             this.totalCount = res.data.totalCount;
           }
         })
+      },
+      //  查看报价
+      detailAction(data) {
+        let params = {
+          ironBuyId: data.ironBuyId
+        }
+        this.$http.post(this.api.findDealSell, params).then(res => {
+          if (res.code === 1000) {
+            this.detailData = res.data;
+          }
+        })
+        this.detailShow = true
       },
       resetFilter() {
         this.apiData = {
@@ -246,6 +307,7 @@ import filterUnreated from '../parts/filterUntreated.vue'
       bottom: 0;
     }
   }
+  
   .list-card {
     background: #fff;
     border: 1px solid #e6e6e6;
@@ -258,6 +320,11 @@ import filterUnreated from '../parts/filterUntreated.vue'
       height: 46px;
       line-height: 46px;
       padding: 0 20px;
+      .action {
+        position: absolute;
+        right: 20px;
+        top: 0;
+      }
     }
     .card-body {
       position: relative;
@@ -270,4 +337,22 @@ import filterUnreated from '../parts/filterUntreated.vue'
       }
     }
   }
+      .table-contnet {
+      line-height: 40px;
+      text-align: center;
+      border-top: 1px solid #d0d0d0;
+      border-left: 1px solid #d0d0d0;
+      .head {
+        background-color: #ddd;
+      }
+      .col {
+        height: 40px;
+        padding: 0 5px;
+        border-right: 1px solid #d0d0d0;
+        border-bottom: 1px solid #d0d0d0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
 </style>

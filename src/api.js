@@ -1,5 +1,5 @@
-export const uploadApi = 'http://192.168.0.251:8088/fileUpload/images';
-// export const uploadApi = '/fileUpload/images';
+// export const uploadApi = 'http://192.168.0.251:8088/common/fileUpload/images';
+export const uploadApi = 'http://192.168.0.251:90/common/fileUpload/images';
 
 // export const uploadExcelApi = 'http://192.168.0.251/sys/qualiticationmodel/uplodeQualiticationModel';
 export const uploadExcelApi = '/sys/qualiticationmodel/uplodeQualiticationModel';
@@ -997,6 +997,15 @@ export const saveIronSellSelect = '/sys/ironSellSelect/saveIronSellSelect'
  **/
 
 export const findDealIronBuy = '/sys/ironSellSelect/findDealIronBuy'
+
+
+/**
+ * 查询已处理的订单报价
+ * path /sys/ironSellSelect/findDealSell
+ **/
+
+export const findDealSell = '/sys/ironSellSelect/findDealSell'
+
 
 
 // -----------------------------------商家审核管理---------------------------------

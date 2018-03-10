@@ -182,7 +182,7 @@
             },
             //  查看
             detailNews(item){
-                this.$router.push('../nadd-'+item.id+'-detail')
+                this.$router.push('../nadd/'+item.id+'/edit')
             },
             // 删除新闻
             delNews(item) {

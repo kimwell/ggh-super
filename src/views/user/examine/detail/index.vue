@@ -66,11 +66,11 @@
       </Row>
       <Row v-else>
         <Col class-name="col" span="2" class="col-title">照片：</Col>
-        <Col class-name="col" span="4">
+        <Col class-name="col" span="4" style="margin-right:15px;">
         <p><span class="star">*</span>营业执照</p>
         <img :src="item.bussinessLic" style="max-width: 100%;" />
         </Col>
-        <Col class-name="col" span="4">
+        <Col class-name="col" span="4" style="margin-right:15px;">
         <p><span class="star">*</span>组织机构代码证</p>
         <img :src="item.codeLic"  style="max-width: 100%;" />
         </Col>
@@ -120,7 +120,7 @@ export default {
       show: false,
       loading: false,
       apiData: {
-        userId: "",
+        companyId: "",
         pass: "",
         remark: "",
         saleId: "",
@@ -143,7 +143,7 @@ export default {
   methods: {
     getData() {
       let params = {
-        userId: this.getId
+        companyId: this.getId
       };
       this.$http.post(this.api.getBuserInfoByUserId, params).then(res => {
         if (res.code === 1000) {
@@ -171,7 +171,7 @@ export default {
             if (this.sale != "") {
               let sales = this.sale.split("-");
               this.apiData = {
-                userId: this.getId,
+                companyId: this.getId,
                 pass: 1,
                 remark: "",
                 saleId: sales[1],
@@ -194,7 +194,7 @@ export default {
     unpass() {
       if (this.apiData.remark != "") {
         this.apiData = {
-          userId: this.getId,
+          companyId: this.getId,
           pass: 3,
           remark: this.apiData.remark,
           saleId: this.item.saleId,

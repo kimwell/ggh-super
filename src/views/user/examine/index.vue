@@ -174,7 +174,7 @@
         })
       },
       goRouter(data) {
-        this.$router.push('examineDetail/'+data.userId+'/'+ data.pass)
+        this.$router.push('examineDetail/'+data.companyId+'/'+ data.pass)
       }
     },
     created () {
