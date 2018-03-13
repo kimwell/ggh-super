@@ -6,22 +6,28 @@
       <div class="list-card" v-for="(item,i) in list" :key="i">
         <div class="card-head">
           <span>商户名称：{{item.companyName}}</span>
-          <div class="action"><a @click="detailAction(item)">查看报价</a></div>
+          <div class="action"><a @click="detailAction(item)">查看报价</a><a @click="offerAction(item)">查看剩余可报价量</a></div>
         </div>
         <div class="card-body clearfix">
           <div class="item">货源地：{{item.locationName}}</div>
           <div class="item">品类：{{item.ironType}}</div>
           <div class="item">材质：{{item.material}}</div>
+          <div class="item">表面：{{item.surface}}</div>
           <div class="item">规格：{{item.specification != '' ? item.specification : `${item.height}*${item.width}*${item.length}`}}</div>
           <div class="item">公差：{{item.tolerance}}</div>
-          <div class="item">计量：{{item.proPlace}}</div>
-          <div class="item">是否有报价人：</div>
-          <div class="item">货源地：{{item.locationName}}</div>
-          <div class="item">更新时间：{{item.createTime | dateformat}}</div>
+          <div class="item">计量：{{item.number}}{{item.numberUnit}}/{{item.weight}}{{item.weightUnit}}</div>
+          <div class="item">产地：{{item.proPlace}}</div>
+          <div class="item">可报价总量：{{item.buserNum}}</div>
+          <div class="item">有效报价：{{item.sellNum}}</div>
+          <div class="item">剩余可报价量：{{item.remainNum}}</div>
+          <div class="item">调度情况：{{item.bgStatus == 1 ?'有货':'无货'}}</div>
+          <div class="item">买家公司：{{item.companyName}}</div>
+          <div class="item">调度操作人：{{item.bgName}}</div>
+          <div class="item">备注：{{item.remark !='' ? item.remark : '暂无'}}</div>
         </div>
       </div>
     </div>
-    <Page class="page-count" size="small" :total="totalCount" show-total :current="apiData.currentPage" :page-size="apiData.pageSize" @on-change="changePage"></Page>
+    <Page class="page-count" size="small" :total="totalCount" show-total :current="screenApi.currentPage" :page-size="screenApi.pageSize" @on-change="changePage"></Page>
     <Modal v-model="detailShow" width="1100" title="报价详情">
       <div class="detail" v-if="detailData.ironBuy">
         <div>求购内容：{{detailData.ironBuy.ironTypeName}}/{{detailData.ironBuy.materialName}}/{{detailData.ironBuy.proPlacesName}}/{{detailData.ironBuy.surfaceName}}(收货城市：{{detailData.ironBuy.locationName}})</div>
@@ -48,7 +54,7 @@
               <Col class-name="col" span="3">备注</Col>
             </Row>
             <Row v-for="(item,i) in detailData.validSell" :key="i">
-              <Col class-name="col" span="1">&nbsp;</Col>
+              <Col class-name="col" span="1"><Icon v-show="item.choose" type="checkmark-circled" size="20" color="#2d8cf0"></Icon></Col>
               <Col class-name="col" span="5">{{item.companyName}}</Col>
               <Col class-name="col" span="2">{{item.contactName}}</Col>
               <Col class-name="col" span="3">{{item.contactNum}}</Col>
@@ -67,9 +73,29 @@
           </p>
         </div>
       </div>
-
       <div slot="footer">
-
+      </div>
+    </Modal>
+    <Modal v-model="notSellshow" width="900" title="剩余可报价量">
+      <div class="detail" v-if="notSellDetail.ironType">
+        <div>求购内容：{{notSellDetail.ironType}}/{{notSellDetail.material}}/{{notSellDetail.proPlaces}}/{{notSellDetail.surface}}(收货城市：{{notSellDetail.locationName}})</div>
+        <div>规格：{{notSellDetail.specification != '' ? notSellDetail.specification : `${notSellDetail.height}*${notSellDetail.width}*${notSellDetail.length}`}}</div>
+        <div>公差：{{notSellDetail.tolerance}}</div>
+        <div>计量：{{notSellDetail.numbers}}{{notSellDetail.numberUnit}}/{{notSellDetail.weights}}{{notSellDetail.weightUnit}}</div>
+        <div>备注：{{notSellDetail.remark !='' ? notSellDetail.remark: '暂无'}}</div>
+        <div style="color:red;padding:10px 0;">剩余可报价商家数：{{notSell.length}}</div>
+      </div>
+        <Row style="text-align: center;line-height:34px;">
+          <Col span="8">公司名称</Col>
+          <Col span="8">联系人</Col>
+          <Col span="8">联系方式</Col>
+        </Row>
+        <Row style="text-align: center;line-height:34px;" v-for="(item,i) in notSell" :key="i">
+          <Col span="8">{{item.companyName}}</Col>
+          <Col span="8">{{item.contactName}}</Col>
+          <Col span="8">{{item.contactNum}}</Col>
+        </Row>
+      <div slot="footer">
       </div>
     </Modal>
   </div>
@@ -86,154 +112,35 @@
     data() {
       return {
         detailShow: false,
-        apiData: {
-          curentPage: 1,
-          pageSize: 10,
-          startTime: '',
-          endTime: '',
-          heightMin: '',
-          heightMax: '',
-          widthMin: '',
-          widthMax: '',
-          lengthMin: '',
-          lengthMax: '',
-          specificaton: '',
-          createUser: '',
-          ironTypeId: '',
-          tolerance: '',
-          buserHave: '',
-          materialId: '',
-          proPlaceId: '',
-          surfaceId: '',
-          locationId: ''
+        screenApi: {
+            currentPage: 1,
+            pageSize: 10
         },
         totalCount: 0,
         list: [],
-        dateValue: ['', ''],
-        filterData: [{
-            title: '品类',
-            key: 'ironTypeId',
-            list: [],
-          },
-          {
-            title: '表面',
-            key: 'surfaceId',
-            list: [],
-          },
-          {
-            title: '材质',
-            key: 'materialId',
-            list: [],
-          },
-          {
-            title: '产地',
-            key: 'proPlaceId',
-            list: [],
-          }
-        ],
-        dateOption: {
-          shortcuts: [{
-              text: '最近一周',
-              value() {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                return [start, end];
-              }
-            },
-            {
-              text: '最近一个月',
-              value() {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                return [start, end];
-              }
-            },
-            {
-              text: '最近三个月',
-              value() {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                return [start, end];
-              }
-            }
-          ]
-        },
-        buserHaveData: [{
-            name: '是',
-            value: 'true'
-          },
-          {
-            name: '否',
-            value: 'false'
-          }
-        ],
-        placeHolder: '请选择',
-        detailData: {}
-      }
-    },
-    computed: {
-      handleData() {
-        return {
-          curentPage: this.apiData.curentPage,
-          pageSize: this.apiData.pageSize,
-          startTime: this.dateValue[0] != '' ? new Date(this.dateValue[0]).getTime() : '',
-          endTime: this.dateValue[1] != '' ? new Date(this.dateValue[1]).getTime() : '',
-          heightMin: this.apiData.heightMin,
-          heightMax: this.apiData.heightMax,
-          widthMin: this.apiData.widthMin,
-          widthMax: this.apiData.widthMax,
-          lengthMin: this.apiData.lengthMin,
-          lengthMax: this.apiData.lengthMax,
-          specificaton: this.apiData.specificaton,
-          createUser: this.apiData.createUser,
-          ironTypeId: this.apiData.ironTypeId,
-          tolerance: this.apiData.tolerance,
-          buserHave: this.apiData.buserHave,
-          materialId: this.apiData.materialId,
-          proPlaceId: this.apiData.proPlaceId,
-          surfaceId: this.apiData.surfaceId,
-          locationId: this.apiData.locationId
-        }
-      }
-    },
-    watch: {
-      'handleData': {
-        handler: _.debounce(function(val, oldVal) {
-          // 是否是翻页操作
-          if (val.currentPage == oldVal.currentPage)
-            this.apiData.currentPage = 1;
-          this.getList(this.handleData);
-        }, 200),
-        deep: true
+        detailData: {},
+        notSell: [],
+        notSellDetail: {},
+        notSellshow: false
       }
     },
     methods: {
-      doFilter(data) {},
+      doFilter(data) {
+            let params = _.cloneDeep(data);
+            this.screenApi.currentPage = 1;
+            params.currentPage = this.screenApi.currentPage;
+            params.pageSize = this.screenApi.pageSize;
+            this.params = params;
+            this.getList(params);
+      },
       changePage(page) {
-        this.apiData.curentPage = page;
-        this.getList();
+        this.screenApi.currentPage = page;
+        let params = _.cloneDeep(this.params);
+        params.currentPage = page;
+        this.getList(params);
       },
-      // 获取品类
-      getIronTypes() {
-        return this.$http.get(this.api.queryIronTypes)
-      },
-      // 获取材质
-      getMaterials() {
-        return this.$http.get(this.api.queryMaterials)
-      },
-      // 获取表面
-      getSurFaces() {
-        return this.$http.get(this.api.querySurFaces)
-      },
-      // 获取产地
-      getPlaces() {
-        return this.$http.get(this.api.queryPlaces)
-      },
-      getList() {
-        this.$http.post(this.api.findDealIronBuy, this.apiData).then(res => {
+      getList(params) {
+        this.$http.post(this.api.findDealIronBuy, params).then(res => {
           if (res.code === 1000) {
             this.list = res.data.list;
             this.totalCount = res.data.totalCount;
@@ -252,47 +159,21 @@
         })
         this.detailShow = true
       },
-      resetFilter() {
-        this.apiData = {
-          curentPage: 1,
-          pageSize: 10,
-          startTime: '',
-          endTime: '',
-          heightMin: '',
-          heightMax: '',
-          widthMin: '',
-          widthMax: '',
-          lengthMin: '',
-          lengthMax: '',
-          specificaton: '',
-          createUser: '',
-          ironTypeId: '',
-          tolerance: '',
-          buserHave: '',
-          materialId: '',
-          proPlaceId: '',
-          surfaceId: '',
-          locationId: ''
+      //  查看剩余可报价量
+      offerAction(data) {
+        this.notSellDetail = data
+        let params = {
+          ironBuyId: data.ironBuyId
         }
-      },
-      selectCity(data) {
-        this.apiData.locationId = data.cityId;
+        this.$http.post(this.api.findNotSellBuser,params).then(res => {
+            if(res.code === 1000){
+              this.notSell = res.data
+            }
+        })
+        this.notSellshow = true;
       }
     },
     created() {
-      this.$http.all([
-        this.getIronTypes(),
-        this.getSurFaces(),
-        this.getMaterials(),
-        this.getPlaces()
-      ]).then(res => {
-        res.forEach((el, index) => {
-          if (el.code === 1000) {
-            this.filterData[index].list.push(...el.data)
-          }
-        })
-      })
-      this.getList();
     }
   }
 </script>
@@ -324,6 +205,9 @@
         position: absolute;
         right: 20px;
         top: 0;
+        a{
+          margin-left: 15px;
+        }
       }
     }
     .card-body {

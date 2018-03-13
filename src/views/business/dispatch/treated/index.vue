@@ -55,7 +55,7 @@
       </Row>
       <Page class="page-count" size="small" :total="totalCount" :page-size="pageData.pageSize" @on-change="changePage"></Page>
     </Card>
-    <Modal v-model="show" :title="showLog ? '剩余待报价商家列表':'求购报价调度详情'" width="800" :closable="false" :mask-closable="false">
+    <Modal v-model="show" :title="showLog ? '剩余待报价商家列表':'求购报价调度详情'" width="1100" :closable="false" :mask-closable="false">
       <div>求购内容：{{currentData.ironType}}/{{currentData.surface}}/{{currentData.material}}/{{currentData.proPlace}}(求购城市：{{currentData.location}})</div>
       <div>规格：{{currentData.specification != '' ? currentData.specification : `${currentData.height}*${currentData.width}*${currentData.length}`}}</div>
       <div>公差：{{currentData.tolerance}}</div>
@@ -77,41 +77,49 @@
       <div v-else>
         <div  style="padding: 15px 0;">
           <span>剩余报价时间：
-              <countDown :normal="true" :endTime="sellerTime | dateformatS" :nowTime="serverTime2"></countDown>
+              <countDown v-if="sellerTime" :normal="true" :endTime="sellerTime | dateformatS" :nowTime="serverTime2"></countDown>
           </span>
           <span>剩余可报价商家数：{{currentData.remainBuserNum}}</span>
         </div>
-        <Row style="text-align: center;line-height:34px;">
-          <Col span="2">可多选</Col>
-          <Col span="5">公司名称</Col>
-          <Col span="2">报价人</Col>
-          <Col span="2">联系方式</Col>
-          <Col span="2">单价</Col>
-          <Col span="2">公差</Col>
-          <Col span="2">产地</Col>
-          <Col span="2">交货时间</Col>
-          <Col span="5">备注</Col>
+        <div class="table-contnet">
+        <Row class-name="head" >
+          <Col class-name="col" span="2">可多选</Col>
+          <Col class-name="col" span="5">公司名称</Col>
+          <Col class-name="col" span="2">报价人</Col>
+          <Col class-name="col" span="2">联系方式</Col>
+          <Col class-name="col" span="2">单价</Col>
+          <Col class-name="col" span="2">公差</Col>
+          <Col class-name="col" span="2">产地</Col>
+          <Col class-name="col" span="4">交货时间</Col>
+          <Col class-name="col" span="3">备注</Col>
         </Row>
-        <Row style="text-align: center;line-height:34px;" v-for="(item,i) in sellBuser" :key="i">
+        <Row  v-for="(item,i) in sellBuser" :key="i">
           <CheckboxGroup v-model="ironSellIds" @on-change="ironSellLen">
-            <Col span="2">
+            <Col span="2" class-name="col">
               <Checkbox :label="item.sellId">
                   <span>&nbsp;</span>
               </Checkbox>
             </Col>
-            <Col span="5">{{item.companyName}}</Col>
-            <Col span="2">{{item.contactName}}</Col>
-            <Col span="2">{{item.contactNum}}</Col>
-            <Col span="2">{{item.offerPerPrice}}元/{{item.baseUnit}}</Col>
-            <Col span="2">{{item.tolerance}}</Col>
-            <Col span="2">{{item.proPlace}}</Col>
-            <Col span="4">{{item.deliveryTime | dateformat}}</Col>
-            <Col span="3">{{item.remark != '' ? item.remark: '暂无备注'}}</Col>
+            <Col span="5" class-name="col">{{item.companyName}}</Col>
+            <Col span="2" class-name="col">{{item.contactName}}</Col>
+            <Col span="2" class-name="col">{{item.contactNum}}</Col>
+            <Col span="2" class-name="col">{{item.offerPerPrice}}元/{{item.baseUnit}}</Col>
+            <Col span="2" class-name="col">{{item.tolerance}}</Col>
+            <Col span="2" class-name="col">{{item.proPlace}}</Col>
+            <Col span="4" class-name="col">{{item.deliveryTime | dateformat}}</Col>
+            <Col span="3" class-name="col">{{item.remark != '' ? item.remark: '暂无备注'}}</Col>
           </CheckboxGroup>
         </Row>
+        </div>
+        <div class="ironMiss">
+          <p>错过报价：{{missBuser.length}}</p>
+          <p v-for="item in missBuser" :key="item.id">
+              {{ item.companyName }} — 联系人：{{item.contactName}} — 联系电话：{{item.contactNum}}
+          </p>
+        </div>
       </div>
       <div slot="footer">
-        <Button @click="show = false">取消</Button>
+        <Button @click="show = false,ironSellIds = []">取消</Button>
         <Button type="primary" @click="handleIronSell" v-show="!showLog">确认</Button>
       </div>
     </Modal>
@@ -141,7 +149,8 @@
         notSell: [],
         currentData: {},
         sellBuser: [],
-        ironSellIds: []
+        ironSellIds: [],
+        missBuser: []
       }
     },
     methods: {
@@ -179,6 +188,7 @@
           }
         })
       },
+      //   调度、查看剩余可报价量
       dispatchHandle(showLog,data) {
         this.showLog = showLog;
         this.currentData = data;
@@ -194,7 +204,8 @@
         }else{
           this.$http.post(this.api.findSellBuser,params).then(res => {
             if(res.code === 1000){
-              this.sellBuser = res.data.sell
+              this.sellBuser = res.data.validSell
+              this.missBuser = res.data.missSell
               this.serverTime2 = res.data.systemTime
               this.sellerTime = res.data.sellTime
             }
@@ -274,4 +285,25 @@
       bottom: 10px;
     }
   }
+  .ironMiss{
+    margin-top: 20px;
+  }
+  .table-contnet {
+      line-height: 40px;
+      text-align: center;
+      border-top: 1px solid #d0d0d0;
+      border-left: 1px solid #d0d0d0;
+      .head {
+        background-color: #ddd;
+      }
+      .col {
+        height: 40px;
+        padding: 0 5px;
+        border-right: 1px solid #d0d0d0;
+        border-bottom: 1px solid #d0d0d0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
 </style>

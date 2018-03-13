@@ -26,8 +26,21 @@
                         <FormItem label="求购时间：" class="magin0">
                             <DatePicker type="daterange" :options="dateOption" :clearable="false" v-model="dateValue" placement="bottom-end" placeholder="选择日期"></DatePicker>
                         </FormItem>
-                        <FormItem label="资源地区：" prop="cityId" class="magin0">
+                        <FormItem label="货源地：" prop="cityId" class="magin0">
                             <City ref="city" @on-pick="selectCity" :value="placeHolder"></City>
+                        </FormItem>
+                        <FormItem label="调度情况：" class="magin0">
+                            <Select v-model="detail.bgStatus" style="width:120px">
+                                <Option v-for="item in bgStatusData" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                            </Select>
+                        </FormItem>
+                        <FormItem label="可报价总量：" class="magin0">
+                            <Select v-model="detail.buserHave" style="width:120px">
+                                <Option v-for="item in [{name: '有',id:'true'},{name: '无',id:'false'}]" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                            </Select>
+                        </FormItem>
+                        <FormItem label="规格：" class="magin0" >
+                            <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.specificaton"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <FormItem label="厚度：" class="magin0">
                             <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.heightMin"  placeholder="请输入..." style="width:100px">
@@ -51,14 +64,11 @@
                             <input type="text" class="ivu-input" @keyup="setInputClears" v-model="detail.lengthMax"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <FormItem label="公差：" class="magin0">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.tolenceMin"  placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.toleranceMin"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <div class="split" style="">-</div>
                         <FormItem label="" class="magin0" style="margin-left: -80px">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.tolenceMax"  placeholder="请输入..." style="width:100px">
-                        </FormItem>
-                        <FormItem label="规格：" class="magin0" >
-                            <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.specifications"  placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.toleranceMax"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <FormItem label="公差：" class="magin0" >
                             <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.tolerance" placeholder="请输入..." style="width:100px">
@@ -108,6 +118,13 @@ import City from '@/components/basics/adress/citySelect.vue'
         },
         data() {
             return {
+                bgStatusData:[{
+                id: 1,
+                name:'有货'
+                },{
+                id:2,
+                name: '无货'
+                }],
                 toggle: false,
                 filterData: [{
                         title: '品类',
@@ -170,22 +187,19 @@ import City from '@/components/basics/adress/citySelect.vue'
                 detail: {
                     companyName: '',
                     buyId: '',
-                    provinceId:'',
-                    provinceName:'',
                     locationId: '',
-                    locationName: '',
-                    cityId: '',
-                    cityName: '',
                     heightMin: '',
                     heightMax: '',
                     widthMin: '',
                     widthMax: '',
                     lengthMin: '',
                     lengthMax: '',
-                    tolenceMin: '',
-                    tolenceMax: '',
-                    specifications:'',
-                    tolerance:''
+                    toleranceMin: '',
+                    toleranceMax: '',
+                    specificaton:'',
+                    tolerance:'',
+                    bgStatus:'',
+                    buserHave: ''
                 },
                 dateValue: ['', ''],
                 dateOption: {
@@ -232,24 +246,22 @@ import City from '@/components/basics/adress/citySelect.vue'
                 this.filterData.forEach(el => {
                     data[el.key] = el.list[el.activeIndex].id;
                 });
-                data.updateTimeStart = this.dateValue[0] != '' ? this.dateValue[0].getTime() : '';
-                data.updateTimeEnd = this.dateValue[1] != '' ? this.dateValue[1].getTime() : '';
+                data.startTime = this.dateValue[0] != '' ? this.dateValue[0].getTime() : '';
+                data.endTime = this.dateValue[1] != '' ? this.dateValue[1].getTime() : '';
                 data.companyName = this.detail.companyName;
-                data.buyId = this.detail.buyId;
                 data.locationId = this.detail.locationId;
-                data.provinceId = this.detail.provinceId;
-                data.locationName = this.detail.locationName;
-                data.provinceName = this.detail.provinceName;
                 data.widthMin = this.detail.widthMin;
                 data.widthMax = this.detail.widthMax;
                 data.heightMin = this.detail.heightMin;
                 data.heightMax = this.detail.heightMax;
                 data.lengthMin = this.detail.lengthMin;
                 data.lengthMax = this.detail.lengthMax;
-                data.tolenceMin = this.detail.tolenceMin;
-                data.tolenceMax = this.detail.tolenceMax;
-                data.specifications = this.detail.specifications;
+                data.toleranceMin = this.detail.toleranceMin;
+                data.toleranceMax = this.detail.toleranceMax;
+                data.specificaton = this.detail.specificaton;
                 data.tolerance = this.detail.tolerance
+                data.bgStatus = this.detail.bgStatus
+                data.buserHave = this.detail.buserHave
                 return data
             },
             placeHolder(){
@@ -264,22 +276,19 @@ import City from '@/components/basics/adress/citySelect.vue'
                 this.detail = {
                     companyName: '',
                     buyId: '',
-                    provinceId:'',
                     locationId: '',
-                    provinceName:'',
-                    locationName: '',
-                    cityId: '',
-                    cityName: '',
                     heightMin: '',
                     heightMax: '',
                     widthMin: '',
                     widthMax: '',
                     lengthMin: '',
                     lengthMax: '',
-                    tolenceMin: '',
-                    tolenceMax: '',
-                    specifications:'',
-                    tolerance:''
+                    toleranceMax: '',
+                    toleranceMin: '',
+                    specificaton:'',
+                    tolerance:'',
+                    bgStatus: '',
+                    buserHave: ''
                 }
                 this.dateValue = ['','']
                 this.$refs.city.clearData()
@@ -303,11 +312,11 @@ import City from '@/components/basics/adress/citySelect.vue'
             // 选择城市
             selectCity(data) {
                 this.detail.locationId = data.cityId;
-                this.detail.provinceId = data.provinceId;
+                // this.detail.provinceId = data.provinceId;
             },
             //  处理如果输入规格、公差，厚度、宽度、长度公差为空
             setInputClear() {
-                if(this.detail.specifications != '' || this.detail.tolerance != ''){
+                if(this.detail.specification != '' || this.detail.tolerance != ''){
                     this.detail.widthMin = '';
                     this.detail.widthMax = '';
                     this.detail.heightMin = '';
@@ -321,7 +330,7 @@ import City from '@/components/basics/adress/citySelect.vue'
             //  处理如果输入厚度、宽度、长度公差，规格、公差为空
             setInputClears() {
                 if(this.detail.widthMin != '' || this.detail.widthMax != '' || this.detail.heightMin != '' || this.detail.heightMax != '' || this.detail.lengthMin != '' || this.detail.tolenceMin != '' || this.detail.tolenceMax != ''){
-                    this.detail.specifications = '';
+                    this.detail.specification = '';
                     this.detail.tolerance = ''
                 }
             }
