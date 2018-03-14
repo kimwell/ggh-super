@@ -10,14 +10,14 @@ export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 // WebSocket链接
 export let ws = '';
 if (process.env.NODE_ENV == 'development') {
-  ws = 'ws://192.168.0.251/websocket'
-  // ws = 'ws://111.231.134.170:8080/websocket'
+    ws = 'ws://192.168.0.251/websocket'
+        // ws = 'ws://111.231.134.170:8080/websocket'
 } else {
-  ws = 'ws://192.168.0.251/websocket'
-  // ws = 'ws://120.55.63.70:8080/websocket';
-  // ws = 'ws://192.168.0.251/websocket'
-  // ws = 'ws://111.231.134.170:8080/websocket'
-  // ws = 'ws://192.168.0.251:8080/websocket'
+    ws = 'ws://192.168.0.251/websocket'
+        // ws = 'ws://120.55.63.70:8080/websocket';
+        // ws = 'ws://192.168.0.251/websocket'
+        // ws = 'ws://111.231.134.170:8080/websocket'
+        // ws = 'ws://192.168.0.251:8080/websocket'
 }
 /**
  * 登录
@@ -45,6 +45,8 @@ export const findProvince = '/api/query/findProvince'
 export const findCity = '/api/query/findCity'
 
 export const findArea = '/api/query/findArea'
+
+export const findDistrict = '/api/query/findDistrict'
 
 // ****************************系统配置***************************************
 
@@ -734,13 +736,13 @@ export const findSubaccountManagementPage = '/common/subaccountManagement/findSu
  */
 
 export const deleteSubaccountManagement = '/common/subaccountManagement/deleteSubaccountManagement'
-  
+
 /**
  * 超管重置公司子账号密码
  * path: /common/subaccountManagement/resetPassword
  */
 export const resetPassword = '/common/subaccountManagement/resetPassword'
-          
+
 /**
  * 超管保存子账号信息
  * path: /common/subaccountManagement/saveSubaccountManagement
@@ -760,7 +762,7 @@ export const updateSubaccountType = '/common/subaccountManagement/updateSubaccou
  * path: /common/subaccountManagement/findCompanyInfo
  */
 export const findCompanyInfo = '/common/subaccountManagement/findCompanyInfo'
-      
+
 // *********************************广告位管理*********************************
 /**
  * 查询所有广告
@@ -1011,21 +1013,53 @@ export const findDealSell = '/sys/ironSellSelect/findDealSell'
 // -----------------------------------商家审核管理---------------------------------
 /** 
  * 超管审核未通过商户列表
-*/
+ */
 export const findNotBuserInfoPage = '/sys/buserInfo/findNotBuserInfoPage'
 
 /** 
  * 超管更新商户审核状态
-*/
+ */
 export const updateBuserInfoById = '/sys/buserInfo/updateBuserInfoById'
 
 
 /** 
  * 根据用户编号来查询商户信息
-*/
+ */
 export const getBuserInfoByUserId = '/sys/buserInfo/getBuserInfoByUserId'
 
 /** 
  * 查询专员
-*/
+ */
 export const findSalemanInfo = '/api/bregist/findSalemanInfo'
+
+
+
+/**
+ * 查询关联规格
+ * @params surface ironType
+ */
+export const G_queryGG = '/api/query/findIronAndSurfaceAndSpecificationlist'
+
+/**
+ * 查询关联宽长
+ * @params surface ironType
+ */
+export const G_queryWL = '/api/query/findIronAndSurfaceAndSpecificationHeightAndLength'
+
+/**
+ * 查询品类计量单位信息
+ * @params ironId
+ */
+export const findUnitById = '/api/query/findIronAndUnitByIronId'
+
+/**
+ * 超管查询商户信息（超管代法求购）
+ */
+export const isShop = '/sys/ironBuySubstitute/findUserByLogin'
+
+/**
+ * 发布多条
+ */
+export const superPublishAll = '/sys/ironBuySubstitute/ironBuySaveList'
+
+export const publishHistory = '/sys/ironBuySubstitute/ironBuyHistory'
