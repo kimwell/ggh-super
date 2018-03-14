@@ -22,6 +22,11 @@
             height: 40px;
             line-height: 40px;
             font-weight: bold;
+            .option{
+                position: absolute;
+                right: 20px;
+                top: 0;
+            }
         }
         .card {
             padding: 10px;
@@ -66,6 +71,11 @@
                 <FormItem label="注册商户：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
                 </FormItem>
+                <FormItem label="诚信联盟会员：" class="magin0">
+                     <Select v-model="apiData.isSellUser" style="width:100px">
+                        <Option v-for="item in [{id:1,label:'是'},{id:0,label:'不是'}]" :value="item.id" :key="item.id">{{ item.label }}</Option>
+                    </Select>
+                </FormItem>
                 <!-- <FormItem label="成为诚信商户：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bFUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
                 </FormItem>
@@ -83,11 +93,15 @@
         <div class="item-group" v-for="(item,index) in list" :key="item.id">
             <div class="head">
                 {{ item.companyName }}
+                <span class="iconfont icon-hongqi" style="color:#F5A623" v-show="item.isSellUser == 1"></span>
                 <span class="iconfont icon-cheng" style="color:#F5A623" v-show="item.isFaithUser == 1"></span>
                 <span class="iconfont icon-bao" style="color:#C16BD6" v-show="item.isGuaranteeUser == 1"></span>
                 <span class="iconfont icon-dian" style="color:#57c5f7" v-show="item.isHaveShop == 1"></span>
-                <Button style="float:right;margin-top:10px" size="small" type="info" @click="showInfo(index)">详情</Button>
-                <Button style="float:right;margin-top:10px;margin-right:10px;" size="small" type="info" @click="showRangeInfo(index)">报价经营范围</Button>
+                <div class="option">
+                    <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>
+                    <Button size="small" type="info" @click="showInfo(index)">详情</Button>
+                    <Button size="small" type="info" @click="showRangeInfo(index)">报价经营范围</Button>
+                </div>
             </div>
             <div class="card clearfix">
                 <div class="item">入驻时间：{{ item.beBuserTime | dateformat }}</div>
@@ -114,8 +128,18 @@
                         <span slot="open">是</span>
                         <span slot="close">否</span>
                     </i-switch>
+                </FormItem> -->
+                 <FormItem label="诚信联盟">
+                     <RadioGroup v-model="editData.isSellUser" >
+                        <Radio label="1">
+                            <span>是</span>
+                        </Radio>
+                        <Radio label="0">
+                            <span>否</span>
+                        </Radio>
+                    </RadioGroup>
                 </FormItem>
-                <FormItem label="担保商家">
+                <!--<FormItem label="担保商家">
                     <i-switch size="large" v-model="editData.isGuaranteeUser">
                         <span slot="open">是</span>
                         <span slot="close">否</span>
@@ -161,22 +185,28 @@
         <Modal title="报价经营范围" width="900" v-model="showRange" loading :mask-closable="false" @on-ok="saveScope">
             <rang v-if="showRange" :id= "activeItem.id" ref="scope"></rang>
         </Modal>
+        <Modal title="商家客户管理" width="900" v-model="unionShow" loading :mask-closable="false" @on-ok="saveUnion" @on-cancel="closeUnion">
+            <union v-if="unionItem" :unionData="unionItem" ref="union"></union>
+            <div slot="footer"></div>
+        </Modal>
     </div>
 </template>
 
 <script>
 import rang from './rangInfor';
+import union from './union';
 import ajaxSelect from '@/components/basics/ajaxSelect' 
     export default {
         components: {
             rang,
-            ajaxSelect
-
+            ajaxSelect,
+            union
         },
         data() {
             return {
                 showEdit: false,
                 showRange: false,
+                unionShow: false,
                 apiData: {
                     name: '',
                     isFU: false,
@@ -186,6 +216,7 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                     bFUTime: ['',''],
                     bGUTime: ['',''],
                     bHSTime: ['',''],
+                    isSellUser: '',
                     currentPage: 1,
                     pageSize: 10
                 },
@@ -206,7 +237,8 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                     storeHouseName:'',
                     proInfo: '',
                     marginLevel: '',
-                    purchaseLevel: ''
+                    purchaseLevel: '',
+                    isSellUser:'0'
                 },
                 dateOption:{
                     shortcuts: [
@@ -238,7 +270,8 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                             }
                         }
                     ]
-                }
+                },
+                unionItem: {}
             }
         },
         computed: {
@@ -256,6 +289,7 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                     bGUEndTime: this.apiData.bGUTime[1] != '' && this.apiData.bGUTime[1] != null ? this.apiData.bGUTime[1].getTime() : '',
                     bHSStartTime: this.apiData.bHSTime[0] != '' && this.apiData.bHSTime[0] != null ? this.apiData.bHSTime[0].getTime() : '',
                     bHSEndTime: this.apiData.bHSTime[1] != '' && this.apiData.bHSTime[1] != null ? this.apiData.bHSTime[1].getTime() : '',
+                    isSellUser: this.apiData.isSellUser,
                     currentPage: this.apiData.currentPage,
                     pageSize: this.apiData.pageSize
                 }
@@ -311,6 +345,7 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                 this.editData.storeHouseName = data.storeHouseName;
                 this.editData.marginLevel = data.marginLevel;
                 this.editData.purchaseLevel = data.purchaseLevel;
+                this.editData.isSellUser = data.isSellUser;
                 this.editData.qq = data.qq;
                 this.showEdit = true;
             },
@@ -360,6 +395,7 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
                     bFUTime: ['',''],
                     bGUTime: ['',''],
                     bHSTime: ['',''],
+                    isSellUser:'',
                     currentPage: 1,
                     pageSize: 10
                 }
@@ -374,6 +410,21 @@ import ajaxSelect from '@/components/basics/ajaxSelect'
             saveScope() {
                 this.$refs.scope.saveScope();
                 this.showRange = false;
+            },
+            showUnion(item){
+                this.unionItem = item || {}
+                this.unionShow = true;
+                if(this.unionShow){
+                    this.$refs.union.getSalesman();
+                    this.$refs.union.getCompany();
+                }
+            },
+            saveUnion() {
+                this.$refs.union.allotAction();
+            },
+            closeUnion(){
+                this.$refs.union.reset();
+                this.unionShow = false;
             }
         },
         watch: {

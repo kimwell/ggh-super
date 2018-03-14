@@ -760,6 +760,27 @@ export const updateSubaccountType = '/common/subaccountManagement/updateSubaccou
  * path: /common/subaccountManagement/findCompanyInfo
  */
 export const findCompanyInfo = '/common/subaccountManagement/findCompanyInfo'
+
+/**
+ * 根据公司编号查询公司业务员
+ * 
+ */
+export const findSalesmanByCompanyId = '/sys/buserInfo/findSalesmanByCompanyId'
+
+
+/**
+ * 超管分页查询客户信息
+ * 
+ */
+export const findClientManagementPage = '/common/clientManagement/findClientManagementPage'
+
+
+/**
+ * 超管批量更新公司客户业务员
+ * 
+ */
+export const updateClientManagement = '/common/clientManagement/updateClientManagement'
+
       
 // *********************************广告位管理*********************************
 /**
