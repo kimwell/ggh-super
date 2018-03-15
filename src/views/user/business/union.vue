@@ -44,7 +44,7 @@
             <Col class-name="col" span="2">
             <Checkbox :label="item.id"><span></span></Checkbox>
             </Col>
-            <Col class-name="col" span="5">{{item.companypName}}</Col>
+            <Col class-name="col" span="5">{{item.companyName}}</Col>
             <Col class-name="col" span="2">{{item.contact}}</Col>
             <Col class-name="col" span="3">{{item.contactNum}}</Col>
             <Col class-name="col" span="2">{{item.saleName}}</Col>
@@ -79,7 +79,8 @@
           pageSize: 10,
           companyName: '',
           hasSale: '',
-          saleId: ''
+          saleId: '',
+          companypId: this.getId
         },
         selectLen: 0,
         saleMan: [],
@@ -107,7 +108,8 @@
           pageSize: this.filterData.pageSize,
           companyName: this.filterData.companyName,
           hasSale: this.filterData.hasSale,
-          saleId: this.filterData.saleId
+          saleId: this.filterData.saleId,
+          companypId: this.filterData.companypId
         }
       },
       allCheckIds(){
@@ -121,6 +123,7 @@
     watch: {
       getId(newVal, old) {
         this.getSalesman();
+        this.filterData.companypId = this.getId;
       },
       'filterApi': {
         handler: _.debounce(function(val, oldVal) {
@@ -171,7 +174,8 @@
           pageSize: 10,
           companyName: '',
           hasSale: '',
-          saleId: ''
+          saleId: '',
+          companypId: this.getId
         }
         this.allotApi.id = [];
         this.checkAll = false;

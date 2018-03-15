@@ -359,7 +359,7 @@ export const dateformatZ = (value, fromatStr = 'yyyy-MM-dd') => {
         return df.format(new Date(value), fromatStr)
     }
     // 时间戳转年月日时分秒
-export const dateformatS = (value, fromatStr = 'yyyy-MM-dd hh:mm:ss') => {
+export const dateformatS = (value, fromatStr = 'hh:mm:ss') => {
     return df.format(new Date(value), fromatStr)
 }
 

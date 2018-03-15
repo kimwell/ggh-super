@@ -126,12 +126,12 @@
     },
     methods: {
       doFilter(data) {
-            let params = _.cloneDeep(data);
-            this.screenApi.currentPage = 1;
-            params.currentPage = this.screenApi.currentPage;
-            params.pageSize = this.screenApi.pageSize;
-            this.params = params;
-            this.getList(params);
+        let params = _.cloneDeep(data);
+        this.screenApi.currentPage = 1;
+        params.currentPage = this.screenApi.currentPage;
+        params.pageSize = this.screenApi.pageSize;
+        this.params = params;
+        this.getList(params);
       },
       changePage(page) {
         this.screenApi.currentPage = page;

@@ -46,6 +46,10 @@ const router = new Router({
                 name: 'republish',
                 component: resolve => require(['@/views/business/rePublish/index'], resolve),
             }, {
+                path: 'ironBuys',
+                name: 'ironBuys',
+                component: resolve => require(['@/views/business/ironBuys/index'], resolve),
+            },{
                 path: 'order',
                 name: 'order',
                 component: resolve => require(['@/views/order/index'], resolve)

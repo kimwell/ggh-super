@@ -1030,6 +1030,32 @@ export const findDealIronBuy = '/sys/ironSellSelect/findDealIronBuy'
 export const findDealSell = '/sys/ironSellSelect/findDealSell'
 
 
+// ---------------------------------现货求购----------------------------------------
+
+/**
+ * 超管查看待处理处理的订单
+ * path /sys/ironBuy/queryIronBuy
+ * 
+ **/
+export const queryIronBuy = '/sys/ironBuy/queryIronBuy'
+
+
+
+/**
+ * 查询求购信息详情
+ * path /sys/ironBuy/queryIronBuyInfo
+ * 
+ **/
+export const queryIronBuyInfo = '/sys/ironBuy/queryIronBuyInfo'
+
+/**
+ * 超管删除求购
+ * path /sys/ironBuy/deleteIronBuyInfo
+ * 
+ **/
+ 
+ export const deleteIronBuyInfo = '/sys/ironBuy/deleteIronBuyInfo'
+
 
 // -----------------------------------商家审核管理---------------------------------
 /** 
