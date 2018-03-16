@@ -229,6 +229,7 @@
               this.$Message.success('操作成功');
               this.getList();
               this.show = false;
+              this.ironSellIds = [];
             }else{
               this.$Message.error(res.message)
             }

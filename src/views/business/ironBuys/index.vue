@@ -51,7 +51,7 @@
           <p>有效报价量：{{detailData.effectiveSeller.length}}</p>
           <p>错过报价量：{{detailData.missSeller.length}}</p>
           <p>剩余未报量：{{detailData.leftNum}}</p>
-          <p>调度完成时长：{{detailData.aTime | dateformatS}}</p>
+          <p>调度完成时长：{{detailData.aTime | dateformatT}}</p>
           <p>调度操作人：{{detailData.bgName != ''? detailData.bgName:'-'}}</p>
           <p>中标公司：{{detailData.storeOrder != ''? detailData.storeOrder.sellCompanyName:'-'}}</p>
           <p>中标单价：{{detailData.sell != ''? detailData.sell.sellPerPrice:'-'}}</p>
@@ -78,10 +78,10 @@
                   <Col class-name="col" span="2">竞标状态</Col>
                 </Row>
                 <p v-if="detailData.effectiveSeller.length == 0">暂无有效报价</p>
-                <div v-for="(n,index) in detailData.effectiveSeller" :key="i">
+                <div v-for="(n,index) in detailData.effectiveSeller"  :key="index">
                   <Row class="row-body">
                     <Col class-name="col" span="2">
-                    <a class="iconfont showMore" :class="n.hisShow?'icon-iconfontjiantou':'icon-jiantouarrow487'" @click="showMore(index)"></a>{{n.offerStatus | bgStatus}}</Col>
+                    <a class="iconfont showMore" :class="n.hisShow?'icon-iconfontjiantou':'icon-jiantouarrow487'" @click="showMore(index)"></a>{{n.hasBgStatus | bgStatus}}</Col>
                     <Col class-name="col" span="4">{{n.companyName}}</Col>
                     <Col class-name="col" span="2">{{n.contact}}</Col>
                     <Col class-name="col" span="2">{{n.contactNum}}</Col>
