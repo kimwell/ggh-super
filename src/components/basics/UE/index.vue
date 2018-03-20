@@ -55,7 +55,7 @@
             this.editor.addListener("ready", function() {
                 setTimeout(function(){
                     _this.editor.setContent(_this.defaultMsg,false); // 确保UE加载完成后，放入内容。
-                },500)
+                },600)
                 _this.uploadshow = true
             });
         },

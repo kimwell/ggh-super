@@ -136,6 +136,9 @@ export default {
     getId() {
       return this.$route.params.id;
     },
+    getUserId(){
+      return this.$route.params.userId
+    },
     getStatus() {
       return this.$route.params.status;
     }
@@ -172,6 +175,7 @@ export default {
               let sales = this.sale.split("-");
               this.apiData = {
                 companyId: this.getId,
+                userId: this.getUserId,
                 pass: 1,
                 remark: "",
                 saleId: sales[1],
@@ -195,6 +199,7 @@ export default {
       if (this.apiData.remark != "") {
         this.apiData = {
           companyId: this.getId,
+          userId: this.getUserId,
           pass: 3,
           remark: this.apiData.remark,
           saleId: this.item.saleId,

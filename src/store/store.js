@@ -9,7 +9,8 @@ export default new Vuex.Store({
     state: {
         user: {},
         authorization: undefined,
-        loginId: undefined
+        loginId: undefined,
+        pushData: '',
     },
     getters: {
         roleId: state => {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
         authorization: state => {
             //写死的超管id,后期修改为从state user中获取
             return state.authorization
+        },
+        pushData: state => {
+            return state.pushData
         }
     },
     mutations: {
@@ -37,6 +41,10 @@ export default new Vuex.Store({
             Vue.ls.remove('loginId_bg');
             state.authorization = undefined;
             state.loginId = undefined;
+        },
+        // 消息推送commit
+        [types.UPDATE_PUSH_MSG]: (state, payload) => {
+            state.pushData = payload;
         }
     }
 })

@@ -51,11 +51,13 @@
           <p>有效报价量：{{detailData.effectiveSeller.length}}</p>
           <p>错过报价量：{{detailData.missSeller.length}}</p>
           <p>剩余未报量：{{detailData.leftNum}}</p>
-          <p>调度完成时长：{{detailData.aTime | dateformatT}}</p>
+          <p v-if="detailData.aTime > 0">调度完成时长：{{detailData.aTime | dateformatT}}</p>
+          <p v-else>调度完成时长：暂未调度</p>
           <p>调度操作人：{{detailData.bgName != ''? detailData.bgName:'-'}}</p>
           <p>中标公司：{{detailData.storeOrder != ''? detailData.storeOrder.sellCompanyName:'-'}}</p>
           <p>中标单价：{{detailData.sell != ''? detailData.sell.sellPerPrice:'-'}}</p>
-          <p>中标时间：{{detailData.updateTime | dateformat}}</p>
+          <p v-if="detailData.updateTime !=''">中标时间：{{detailData.updateTime | dateformat}}</p>
+          <p v-else>中标时间：-</p>
           <p>生成订单：{{detailData.storeOrder != ''? detailData.storeOrder.id:'-'}}</p>
           </Col>
         </Row>
@@ -159,13 +161,13 @@
       bgStatus(val) {
         switch (val * 1) {
           case 0:
-            return '未调度'
+            return '待调度'
             break;
           case 1:
-            return '有货调度'
+            return '已被调度'
             break;
           case 2:
-            return '无货调度'
+            return '未被调度'
             break;
         }
       },

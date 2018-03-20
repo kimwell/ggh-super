@@ -164,7 +164,7 @@ const router = new Router({
                     path: 'examine',
                     component: resolve => require(['@/views/user/examine/index'], resolve)
                 }, {
-                    path: 'examineDetail/:id/:status',
+                    path: 'examineDetail/:id/:userId/:status',
                     name: 'examineDetail',
                     component: resolve => require(['@/views/user/examine/detail/index'], resolve)
                 }]

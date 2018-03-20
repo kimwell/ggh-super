@@ -1,53 +1,56 @@
 <template>
   <div>
     <Card :bordered="false" class="card">
-      <Row>
-        <Button type="warning" size="small" @click="getList">刷新</Button> 新任务数量：{{newTaskNum}}
-      </Row>
+      <div class="task-option">
+       新任务数量：{{newTaskNum}} <Button type="warning" size="small" @click="getList">刷新</Button> 
+      </div>
       <Row v-for="(item,i) in list" :key="i">
         <Row class="row-list-head">
           <Col class="list-head" span="3">{{item.buser.companyName}}</Col>
-          <Col class="list-head" span="1">{{item.buser.contactName}}</Col>
+          <Col class="list-head" span="2">{{item.buser.contactName}}</Col>
           <Col class="list-head" span="2">{{item.buser.contactNum}}</Col>
         </Row>
         <div class="row-list-body">
           <Row class="head">
-            <Col class-name="col" span="1">货源地</Col>
+            <Col class-name="col" span="2">货源地</Col>
             <Col class-name="col" span="2">品类</Col>
-            <Col class-name="col" span="1">材质</Col>
-            <Col class-name="col" span="1">表面</Col>
+            <Col class-name="col" span="2">材质</Col>
+            <Col class-name="col" span="2">表面</Col>
             <Col class-name="col" span="2">规格</Col>
-            <Col class-name="col" span="1">公差</Col>
+            <Col class-name="col" span="2">公差</Col>
             <Col class-name="col" span="2">计量</Col>
-            <Col class-name="col" span="1">产地</Col>
-            <Col class-name="col" span="2">备注</Col>
+            <Col class-name="col" span="2">产地</Col>
+            <!-- <Col class-name="col" span="2">备注</Col> -->
             <Col class-name="col" span="2">剩余时间</Col>
-            <Col class-name="col" span="2">可报价总量</Col>
-            <Col class-name="col" span="2">有效报价</Col>
-            <Col class-name="col" span="2">剩余可报价量</Col>
+            <Col class-name="col" span="1">报价<br>(总)</Col>
+            <Col class-name="col" span="1">报价<br>(有效)</Col>
+            <Col class-name="col" span="1">报价<br>(剩余)</Col>
             <Col class-name="col" span="3">操作</Col>
           </Row>
-          <Row v-for="(iron ,j) in item.ironBuy" :key="j" class="row-body">
-            <Col class-name="col" span="1">{{iron.location}}</Col>
-            <Col class-name="col" span="2">{{iron.ironType}}</Col>
-            <Col class-name="col" span="1">{{iron.material}}</Col>
-            <Col class-name="col" span="1">{{iron.surface}}</Col>
-            <Col class-name="col" span="2">{{iron.specification != '' ? iron.specification : `${iron.height}*${iron.width}*${iron.length}`}}</Col>
-            <Col class-name="col" span="1">{{iron.tolerance != '' ? iron.tolerance : '空'}}</Col>
-            <Col class-name="col" span="2">{{iron.weight != '' ? iron.weight : '空'}}</Col>
-            <Col class-name="col" span="1">{{iron.proPlace}}</Col>
-            <Col class-name="col" span="2">{{iron.remark != '' ? iron.remark : '暂无备注'}}</Col>
-            <Col class-name="col" span="2">
-              <countDown :normal="true" :endTime="iron.sellTime | dateformatS" :nowTime="serverTime"></countDown>
-            </Col>
-            <Col class-name="col" span="2">{{iron.buserNum}}</Col>
-            <Col class-name="col" span="2">{{iron.validBuserNum}}</Col>
-            <Col class-name="col" span="2"><Button style="color:#19be6b;" @click="dispatchHandle(true,iron)" type="text">{{iron.remainBuserNum}}</Button></Col>
-            <Col class-name="col" span="3">
-              <Button type="warning" size="small" @click="dispatchHandle(false,iron)">进行调度</Button>
-              <Button type="warning" size="small" @click="noGoods(iron)">确认无货</Button>
+          <div v-for="(iron ,j) in item.ironBuy" :key="j">
+          <Row class="row-body">
+              <Col class-name="col" span="2">{{iron.location}}</Col>
+              <Col class-name="col" span="2">{{iron.ironType}}</Col>
+              <Col class-name="col" span="2">{{iron.material}}</Col>
+              <Col class-name="col" span="2">{{iron.surface}}</Col>
+              <Col class-name="col" span="2">{{iron.specification != '' ? iron.specification : `${iron.height}*${iron.width}*${iron.length}`}}</Col>
+              <Col class-name="col" span="2">{{iron.tolerance != '' ? iron.tolerance : '空'}}</Col>
+              <Col class-name="col" span="2">{{iron.weight != '' ? iron.weight : '空'}}</Col>
+              <Col class-name="col" span="2">{{iron.proPlace}}</Col>
+              <!-- <Col class-name="col" span="2">{{iron.remark != '' ? iron.remark : '暂无备注'}}</Col> -->
+              <Col class-name="col" span="2">
+                <countDown :normal="true" :endTime="iron.sellTime | dateformatS" :nowTime="serverTime"></countDown>
+              </Col>
+              <Col class-name="col" span="1">{{iron.buserNum}}</Col>
+              <Col class-name="col" span="1">{{iron.validBuserNum}}</Col>
+              <Col class-name="col" span="1"><Button style="color:#19be6b;" @click="dispatchHandle(true,iron)" type="text">{{iron.remainBuserNum}}</Button></Col>
+              <Col class-name="col" span="3">
+                <Button type="warning" size="small" @click="dispatchHandle(false,iron)">进行调度</Button>
+                <Button type="warning" size="small" @click="noGoods(iron)">确认无货</Button>
             </Col>
           </Row>
+          <div class="remark">备注：{{iron.remark != '' ? iron.remark : '暂无备注'}}</div>
+          </div>
         </div>
       </Row>
       <Row v-if="list.length == 0">
@@ -86,11 +89,11 @@
           <Col class-name="col" span="2">可多选</Col>
           <Col class-name="col" span="5">公司名称</Col>
           <Col class-name="col" span="2">报价人</Col>
-          <Col class-name="col" span="2">联系方式</Col>
+          <Col class-name="col" span="3">联系方式</Col>
           <Col class-name="col" span="2">单价</Col>
           <Col class-name="col" span="2">公差</Col>
           <Col class-name="col" span="2">产地</Col>
-          <Col class-name="col" span="4">交货时间</Col>
+          <Col class-name="col" span="3">交货时间</Col>
           <Col class-name="col" span="3">备注</Col>
         </Row>
         <Row  v-for="(item,i) in sellBuser" :key="i">
@@ -102,11 +105,11 @@
             </Col>
             <Col span="5" class-name="col">{{item.companyName}}</Col>
             <Col span="2" class-name="col">{{item.contactName}}</Col>
-            <Col span="2" class-name="col">{{item.contactNum}}</Col>
+            <Col span="3" class-name="col">{{item.contactNum}}</Col>
             <Col span="2" class-name="col">{{item.offerPerPrice}}元/{{item.baseUnit}}</Col>
             <Col span="2" class-name="col">{{item.tolerance}}</Col>
             <Col span="2" class-name="col">{{item.proPlace}}</Col>
-            <Col span="4" class-name="col">{{item.deliveryTime | dateformat}}</Col>
+            <Col span="3" class-name="col">{{item.deliveryTime | dateformatZ}}</Col>
             <Col span="3" class-name="col">{{item.remark != '' ? item.remark: '暂无备注'}}</Col>
           </CheckboxGroup>
         </Row>
@@ -249,8 +252,8 @@
   .card {
       padding-bottom: 40px;
     .row-list-body {
-      border-top: 1px solid #d0d0d0;
-      border-left: 1px solid #d0d0d0;
+      border-top: 1px solid #e8e8e8;
+      border-left: 1px solid #e8e8e8;
     }
     .row-list-head {
       height: 40px;
@@ -263,9 +266,13 @@
     }
     .head {
       text-align: center;
-      background: #e6e6e6;
-      height: 40px;
-      line-height: 40px;
+      background: #F4F5F5;
+      height: 60px;
+      line-height: 20px;
+      .col{
+        min-height: 60px;
+        padding-top: 12px;
+      }
     }
     .row-body {
       text-align: center;
@@ -274,11 +281,17 @@
     }
     .col {
       padding: 0 5px;
-      border-right: 1px solid #d0d0d0;
-      border-bottom: 1px solid #d0d0d0;
+      border-right: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .remark{
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #CACACA;
+      border-right: 1px solid #e8e8e8;
     }
     .page-count {
       position: absolute;
@@ -306,5 +319,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+    }
+    .task-option{
+      position: absolute;
+      right: 20px;
+      top: -76px;
+      height: 60px;
+      padding-left: 20px;
+      padding-top: 18px;
+      border-left: 1px solid #e8e8e8
     }
 </style>

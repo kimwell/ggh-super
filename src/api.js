@@ -1,5 +1,5 @@
 // export const uploadApi = 'http://192.168.0.251:8088/common/fileUpload/images';
-export const uploadApi = 'http://192.168.0.251:90/common/fileUpload/images';
+export const uploadApi = 'http://192.168.0.252/common/fileUpload/images';
 
 // export const uploadExcelApi = 'http://192.168.0.251/sys/qualiticationmodel/uplodeQualiticationModel';
 export const uploadExcelApi = '/sys/qualiticationmodel/uplodeQualiticationModel';
@@ -10,10 +10,10 @@ export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 // WebSocket链接
 export let ws = '';
 if (process.env.NODE_ENV == 'development') {
-    ws = 'ws://192.168.0.251/websocket'
+    ws = 'ws://192.168.0.252:8080/websocket';
         // ws = 'ws://111.231.134.170:8080/websocket'
 } else {
-    ws = 'ws://192.168.0.251/websocket'
+    ws = 'ws://192.168.0.252:8080/websocket';
         // ws = 'ws://120.55.63.70:8080/websocket';
         // ws = 'ws://192.168.0.251/websocket'
         // ws = 'ws://111.231.134.170:8080/websocket'
@@ -1110,3 +1110,39 @@ export const isShop = '/sys/ironBuySubstitute/findUserByLogin'
 export const superPublishAll = '/sys/ironBuySubstitute/ironBuySaveList'
 
 export const publishHistory = '/sys/ironBuySubstitute/ironBuyHistory'
+
+
+
+// -----------------------------------订单管理---------------------------------
+
+export const findDateDictionary = '/api/query/findDateDictionary'
+/** 
+ * 
+ * 超管查询订单 
+ */
+
+export const findStoreOrder = '/sys/storeOrder/findStoreOrder'
+
+/** 
+ * 
+ * 超管取消订单 
+ */
+export const cancelStoreOrder = '/sys/storeOrder/cancelStoreOrder'
+
+/** 
+ * 超管作废订单 
+ */
+export const invalidStoreOrder = '/sys/storeOrder/invalidStoreOrder'
+
+/** 
+ * 
+ * 超管删除订单
+ */
+export const deleteStoreOrder = '/sys/storeOrder/deleteStoreOrder'
+
+/** 
+ * 
+ * 超管查询订单详情
+ */
+export const findStoreOrderInfo = '/sys/storeOrder/findStoreOrderInfo'
+

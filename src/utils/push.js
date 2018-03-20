@@ -21,13 +21,14 @@ export default {
         this.$ls.set('rand', rand);
       }
       // 建立WebSocket链接
-      let ws = new WebSocket(this.api.ws + '/quality?' + this.$store.state.loginId + rand);
+      let ws = new WebSocket(this.api.ws + "/ironHander?userId=" + this.$store.state.loginId + rand);
 
       ws.onopen = function (evt) {
         //  console.log("消息推送链接成功");
       };
 
       ws.onmessage = function (evt) {
+        console.log(evt)
         let data = JSON.parse(evt.data);
         _this.isNotice = false;
         _this.msg = data;
@@ -35,7 +36,7 @@ export default {
       };
 
       ws.onclose = function (evt) {
-        // console.log("Connection closed.");
+        console.log("Connection closed.");
         setTimeout(() => {
           _this.initScoket();
         }, 10000)
@@ -45,6 +46,7 @@ export default {
         Notification.requestPermission();
     },
     notify(data) {
+      console.log('弹出提示')
       let _this = this;
       let title = data.title;
       let body = data.body;
