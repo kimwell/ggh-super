@@ -22,7 +22,7 @@
         <Col span="6">
           <p>联系方式：{{detailData.buyContactNum}}</p>
           <p>求购产地：{{detailData.proPlace}}</p>
-          <p>求购等级：{{detailData.purchaseLevel}}</p>
+          <p>求购等级：{{detailData.purchaseLevel !=''?detailData.purchaseLevel: '-'}}</p>
         </Col>
       </Row>
     </div>
@@ -32,7 +32,7 @@
         <Col span="6">
           <p>中标时间：{{detailData.createTime | dateformat}}</p>
           <p>供货资质：{{detailData.marginLevel}}</p>
-          <p>供货单价：{{detailData.price}}</p>
+          <p>供货单价：{{detailData.price}}元/{{detailData.sellBaseUnit}}</p>
           <p>报价备注：{{detailData.sellRemark}}</p>
         </Col>
         <Col span="6">
@@ -43,12 +43,12 @@
         <Col span="6">
           <p>联系人：{{detailData.sellContactName}}</p>
           <p>业务员手机：{{detailData.saleMobile}}</p>
-          <p>供货公差：{{detailData.sellProPlace}}</p>
+          <p>供货产地：{{detailData.sellProPlace}}</p>
         </Col>
         <Col span="6">
           <p>联系方式：{{detailData.sellContactNum}}</p>
-          <p>最新绑定时间：{{detailData.saleTime}}</p>
-          <p>交货时间：{{detailData.deliveryTime}}</p>
+          <p>最新绑定时间：<span v-if="detailData.saleTime!=''">{{detailData.saleTime | dateformat}}</span><span v-else>-</span></p>
+          <p>交货时间：<span v-if="detailData.deliveryTime!=''">{{detailData.deliveryTime | dateformatZ}}</span><span v-else>-</span></p>
         </Col>
       </Row>
     </div>
@@ -57,10 +57,10 @@
       <Row>
         <Col span="8">
           <p>订单编号：{{detailData.storeOrderId}}</p>
-          <p>订单放弃时间：{{detailData.fqTime}}</p>
-          <p>订单完成时间：{{detailData.wcTime}}</p>
-          <p>订单作废时间：{{detailData.zfTime}}</p>
-          <p>订单确认时间：{{detailData.valityTime}}</p>
+          <p>订单放弃时间：<span v-if="detailData.fqTime!=''">{{detailData.fqTime | dateformat}}</span><span v-else>-</span></p>
+          <p>订单完成时间：<span v-if="detailData.wcTime!=''">{{detailData.wcTime | dateformat}}</span><span v-else>-</span></p>
+          <p>订单作废时间：<span v-if="detailData.zfTime!=''">{{detailData.zfTime | dateformat}}</span><span v-else>-</span></p>
+          <p>订单确认时间：<span v-if="detailData.valityTime!=''">{{detailData.valityTime | dateformat}}</span><span v-else>-</span></p>
         </Col>
         <Col span="8">
           <p>订单状态：{{detailData.status | status}}</p>
@@ -74,7 +74,7 @@
           <p>订单放弃理由：{{detailData.fqRemark}}</p>
           <p>订单最后修改人：{{detailData.modityUser}}</p>
           <p>订单作废理由：{{detailData.zfRemark}}</p>
-          <p>订单删除时间：{{detailData.scTime}}</p>
+          <p>订单删除时间：<span v-if="detailData.scTime!=''">{{detailData.scTime | dateformat}}</span><span v-else>-</span></p>
         </Col>
       </Row>
     </div>

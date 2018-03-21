@@ -730,6 +730,14 @@ export const saveScopeByUserId = '/sys/businessScope/saveBusinessScope'
 
 export const findSubaccountManagementPage = '/common/subaccountManagement/findSubaccountManagementPage'
 
+
+/**
+ * 更新公司主账号手机号
+ * path: /sys/buserInfo/updateMainAccountMobile
+ */
+
+export const updateMainAccountMobile = '/sys/buserInfo/updateMainAccountMobile'
+
 /**
  * 超管删除公司子账号列表
  * path: /common/subaccountManagement/deleteSubaccountManagement

@@ -66,16 +66,18 @@
       <div>备注：{{currentData.remark != '' ? currentData.remark : '暂无备注'}}</div>
       <div v-if="showLog">
         <div style="color:red;padding:15px 0;">剩余待报价商家：{{currentData.remainBuserNum}}</div>
-        <Row style="text-align: center;line-height:34px;">
-          <Col span="8">公司名称</Col>
-          <Col span="8">联系人</Col>
-          <Col span="8">联系方式</Col>
-        </Row>
-        <Row style="text-align: center;line-height:34px;" v-for="(item,i) in notSell" :key="i">
-          <Col span="8">{{item.companyName}}</Col>
-          <Col span="8">{{item.contactName}}</Col>
-          <Col span="8">{{item.contactNum}}</Col>
-        </Row>
+        <div class="table-contnet">
+          <Row class-name="head" >
+              <Col class-name="col" span="8">公司名称</Col>
+              <Col class-name="col" span="8">联系人</Col>
+              <Col class-name="col" span="8">联系方式</Col>
+          </Row>
+          <Row  v-for="(item,i) in notSell" :key="i">
+              <Col class-name="col" span="8">{{item.companyName}}</Col>
+              <Col class-name="col" span="8">{{item.contactName}}</Col>
+              <Col class-name="col" span="8">{{item.contactNum}}</Col>
+          </Row>
+        </div>
       </div>
       <div v-else>
         <div  style="padding: 15px 0;">
@@ -122,7 +124,7 @@
         </div>
       </div>
       <div slot="footer">
-        <Button @click="show = false,ironSellIds = []">取消</Button>
+        <Button @click="show = false,ironSellIds = []">关闭</Button>
         <Button type="primary" @click="handleIronSell" v-show="!showLog">确认</Button>
       </div>
     </Modal>

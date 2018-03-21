@@ -24,10 +24,10 @@
           <div class="item">买家公司：{{item.buyCompanyName}}</div>
           <div class="item">买家联系人：{{item.buyContactName}}-{{item.buyContactNum}}</div>
           <div class="item">卖家公司：{{item.sellCompanyName != ''? item.sellCompanyName : '-'}}</div>
-          <div class="item">买家联系人：{{item.sellContactName}}-{{item.sellContactNum}}</div>
+          <div class="item">卖家联系人：{{item.sellContactName}}-{{item.sellContactNum}}</div>
           <div class="item">卖家业务员：{{item.saleName}}-{{item.saleMobile}}</div>
-          <div class="item">订单单价：{{item.price}}</div>
-          <div class="item">交货时间：{{item.deliveryTime | dateformat}}</div>
+          <div class="item">订单单价：{{item.price}}元/{{item.sellBaseUnit}}</div>
+          <div class="item">交货时间：{{item.deliveryTime | dateformatZ}}</div>
           <div class="item">品类：{{item.ironType}}</div>
           <div class="item">材质|表面：{{item.material}}|{{item.surface}}</div>
           <div class="item">规格：{{item.specification != '' ? item.specification : `${item.height}*${item.width}*${item.length}`}}</div>
@@ -231,18 +231,21 @@
         })
       },
       onOk() {
-        if (this.optionApi.remark == '其他' && this.remark != '') {
+        if (this.optionApi.remark == '其他' && this.remark == '') {
           this.$Message.error('请填写原因')
         } else {
           this.loading = true
           let urlApi = this.optionStatus == 1 ? this.api.invalidStoreOrder : this.api.cancelStoreOrder
           let params = _.cloneDeep(this.optionApi)
-          params.remark = this.remark;
+          if(this.optionApi.remark == '其他'){
+            params.remark = this.remark;
+          }
           this.$http.post(urlApi, params).then(res => {
             if (res.code === 1000) {
               this.$Message.success('操作成功！')
               this.getList(this.params)
               this.optionShow = false
+              this.remark = ''
             } else {
               this.$Message.error(res.message)
             }

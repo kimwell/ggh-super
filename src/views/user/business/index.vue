@@ -22,7 +22,7 @@
             height: 40px;
             line-height: 40px;
             font-weight: bold;
-            .option{
+            .option {
                 position: absolute;
                 right: 20px;
                 top: 0;
@@ -51,40 +51,40 @@
                     <Input type="text" :value="apiData.name" @input="asyncValue($event)" placeholder="输入商家名称"></Input>
                 </FormItem>
                 <!-- <FormItem label="诚信商户：" class="magin0">
-                    <i-switch v-model="apiData.isFU">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem>
-                <FormItem label="担保商户：" class="magin0">
-                    <i-switch v-model="apiData.isGU">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem>
-                <FormItem label="开通店铺：" class="magin0">
-                    <i-switch v-model="apiData.isHS">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem> -->
+                        <i-switch v-model="apiData.isFU">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem>
+                    <FormItem label="担保商户：" class="magin0">
+                        <i-switch v-model="apiData.isGU">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem>
+                    <FormItem label="开通店铺：" class="magin0">
+                        <i-switch v-model="apiData.isHS">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem> -->
                 <FormItem label="注册商户：" class="magin0">
                     <DatePicker type="daterange" :options="dateOption" v-model="apiData.bUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
                 </FormItem>
                 <FormItem label="诚信联盟会员：" class="magin0">
-                     <Select v-model="apiData.isSellUser" style="width:100px">
-                        <Option v-for="item in [{id:1,label:'是'},{id:0,label:'不是'}]" :value="item.id" :key="item.id">{{ item.label }}</Option>
-                    </Select>
+                    <Select v-model="apiData.isSellUser" style="width:100px">
+                            <Option v-for="item in [{id:1,label:'是'},{id:0,label:'不是'}]" :value="item.id" :key="item.id">{{ item.label }}</Option>
+                        </Select>
                 </FormItem>
                 <!-- <FormItem label="成为诚信商户：" class="magin0">
-                    <DatePicker type="daterange" :options="dateOption" v-model="apiData.bFUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
-                </FormItem>
-                <FormItem label="成为担保商户：" class="magin0">
-                    <DatePicker type="daterange" :options="dateOption" v-model="apiData.bGUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
-                </FormItem>
-                <FormItem label="开通店铺时间：" class="magin0">
-                    <DatePicker type="daterange" :options="dateOption" v-model="apiData.bHSTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
-                </FormItem> -->
+                        <DatePicker type="daterange" :options="dateOption" v-model="apiData.bFUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
+                    </FormItem>
+                    <FormItem label="成为担保商户：" class="magin0">
+                        <DatePicker type="daterange" :options="dateOption" v-model="apiData.bGUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
+                    </FormItem>
+                    <FormItem label="开通店铺时间：" class="magin0">
+                        <DatePicker type="daterange" :options="dateOption" v-model="apiData.bHSTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
+                    </FormItem> -->
             </Form>
             <div style="margin-bottom:10px;text-align:right">
                 <Button type="warning" @click="reset">清空筛选</Button>
@@ -98,6 +98,7 @@
                     <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>
                     <Button size="small" type="info" @click="showInfo(index)">详情</Button>
                     <Button size="small" type="info" @click="showRangeInfo(index)">报价经营范围</Button>
+                    <Button size="small" type="info" @click="modityInfo(index)">修改账号</Button>
                 </div>
             </div>
             <div class="card clearfix">
@@ -121,13 +122,13 @@
                     {{ activeItem.companyName }}
                 </FormItem>
                 <!-- <FormItem label="诚信商家">
-                    <i-switch size="large" v-model="editData.isFaithUser">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem> -->
-                 <FormItem label="诚信联盟">
-                     <RadioGroup v-model="editData.isSellUser" >
+                        <i-switch size="large" v-model="editData.isFaithUser">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem> -->
+                <FormItem label="诚信联盟">
+                    <RadioGroup v-model="editData.isSellUser">
                         <Radio label="1">
                             <span>是</span>
                         </Radio>
@@ -137,38 +138,38 @@
                     </RadioGroup>
                 </FormItem>
                 <!--<FormItem label="担保商家">
-                    <i-switch size="large" v-model="editData.isGuaranteeUser">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem>
-                <FormItem label="开通店铺">
-                    <i-switch size="large" v-model="editData.isHaveShop">
-                        <span slot="open">是</span>
-                        <span slot="close">否</span>
-                    </i-switch>
-                </FormItem> -->
+                        <i-switch size="large" v-model="editData.isGuaranteeUser">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem>
+                    <FormItem label="开通店铺">
+                        <i-switch size="large" v-model="editData.isHaveShop">
+                            <span slot="open">是</span>
+                            <span slot="close">否</span>
+                        </i-switch>
+                    </FormItem> -->
                 <!-- <FormItem label="成为诚信商家" v-if="activeItem.isFaithUser == 1">
-                    {{ activeItem.beFaithUserTime | dateformat }}
-                </FormItem>
-                <FormItem label="开通店铺时间" v-if="activeItem.isHaveShop == 1">
-                    {{ activeItem.beHaveShopTime | dateformat }}
-                </FormItem>
-                <FormItem label="成为担保商家" v-if="activeItem.isGuaranteeUser == 1">
-                    {{ activeItem.beGuaranteeUserTime | dateformat }}
-                </FormItem> -->
-
-                <FormItem label="保证金等级" >
+                        {{ activeItem.beFaithUserTime | dateformat }}
+                    </FormItem>
+                    <FormItem label="开通店铺时间" v-if="activeItem.isHaveShop == 1">
+                        {{ activeItem.beHaveShopTime | dateformat }}
+                    </FormItem>
+                    <FormItem label="成为担保商家" v-if="activeItem.isGuaranteeUser == 1">
+                        {{ activeItem.beGuaranteeUserTime | dateformat }}
+                    </FormItem> -->
+    
+                <FormItem label="保证金等级">
                     <Select v-model="editData.marginLevel" style="width:200px">
-                        <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
-                    </Select>
+                            <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                        </Select>
                 </FormItem>
-                <FormItem label="求购等级" >
+                <FormItem label="求购等级">
                     <Select v-model="editData.purchaseLevel" style="width:200px">
-                        <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
-                    </Select>
+                            <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                        </Select>
                 </FormItem>
-                <FormItem label="QQ" >
+                <FormItem label="QQ">
                     <Input v-model="editData.qq" placeholder="请输入qq"></Input>
                 </FormItem>
                 <FormItem label="仓库">
@@ -180,20 +181,41 @@
             </Form>
         </Modal>
         <Modal title="报价经营范围" width="900" v-model="showRange" loading :mask-closable="false" @on-ok="saveScope">
-            <rang v-if="showRange" :id= "activeItem.id" ref="scope"></rang>
+            <rang v-if="showRange" :id="activeItem.id" ref="scope"></rang>
         </Modal>
         <Modal title="商家客户管理" width="900" v-model="unionShow" loading :mask-closable="false" @on-ok="saveUnion" @on-cancel="closeUnion">
             <union v-if="unionItem" :unionData="unionItem" ref="union"></union>
             <div slot="footer"></div>
         </Modal>
+        <Modal title="修改商家账号" widh="500" v-model="modityShow" :mask-closable="false" @on-cancel="resetmodi">
+            <Form :label-width="100" :ref="ref" :model="modityApi" :rules="rules">
+                <FormItem label="旧账号">
+                    <Input v-model="modityApi.originalMobile" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="新账号" prop="nowMoblie">
+                    <Input v-model="modityApi.nowMoblie" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="密码" prop="passwordOne">
+                    <Input type="password" v-model="modityApi.passwordOne" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="确认密码" prop="passwordTwo">
+                    <Input type="password" v-model="modityApi.passwordTwo" placeholder="请输入..."></Input>
+                </FormItem>
+            </Form>
+    
+            <div slot="footer">
+                <Button @click="resetmodi">取消</Button>
+                <Button type="primary" @click="saveAccount" :loading="loading">修改</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
-import rang from './rangInfor';
-import union from './union';
-import ajaxSelect from '@/components/basics/ajaxSelect' 
-import grade from '../../../components/basics/grade' 
+    import rang from './rangInfor';
+    import union from './union';
+    import ajaxSelect from '@/components/basics/ajaxSelect'
+    import grade from '../../../components/basics/grade'
     export default {
         components: {
             rang,
@@ -203,6 +225,7 @@ import grade from '../../../components/basics/grade'
         },
         data() {
             return {
+                ref: 'form' + new Date().getTime(),
                 showEdit: false,
                 showRange: false,
                 unionShow: false,
@@ -211,10 +234,10 @@ import grade from '../../../components/basics/grade'
                     isFU: false,
                     isGU: false,
                     isHS: false,
-                    bUTime: ['',''],
-                    bFUTime: ['',''],
-                    bGUTime: ['',''],
-                    bHSTime: ['',''],
+                    bUTime: ['', ''],
+                    bFUTime: ['', ''],
+                    bGUTime: ['', ''],
+                    bHSTime: ['', ''],
                     isSellUser: '',
                     currentPage: 1,
                     pageSize: 10
@@ -225,7 +248,7 @@ import grade from '../../../components/basics/grade'
                 activeIndex: 0,
                 marginLevelList: [],
                 purchaseLevelList: [],
-                editData:{
+                editData: {
                     companyId: '',
                     isFaithUser: false,
                     isGuaranteeUser: false,
@@ -233,17 +256,16 @@ import grade from '../../../components/basics/grade'
                     isHaveShop: false,
                     qq: '',
                     // storeHouseId:'',
-                    storeHouseName:'',
+                    storeHouseName: '',
                     proInfo: '',
                     marginLevel: '',
                     purchaseLevel: '',
-                    isSellUser:'0'
+                    isSellUser: '0'
                 },
-                dateOption:{
-                    shortcuts: [
-                        {
+                dateOption: {
+                    shortcuts: [{
                             text: '最近一周',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
@@ -252,7 +274,7 @@ import grade from '../../../components/basics/grade'
                         },
                         {
                             text: '最近一个月',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
@@ -261,7 +283,7 @@ import grade from '../../../components/basics/grade'
                         },
                         {
                             text: '最近三个月',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
@@ -270,7 +292,34 @@ import grade from '../../../components/basics/grade'
                         }
                     ]
                 },
-                unionItem: {}
+                unionItem: {},
+                modityApi: {
+                    id: '',
+                    originalMobile: '',
+                    nowMoblie: '',
+                    passwordOne: '',
+                    passwordTwo: ''
+                },
+                modityShow: false,
+                loading: false,
+                rules: {
+                    nowMoblie: [{
+                        required: true,
+                        message: '请输入新账号',
+                        trigger: 'blur'
+                    }],
+                    passwordOne: [{
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                    }],
+                    passwordTwo: [{
+                        required: true,
+                        message: '请输入确认密码',
+                        trigger: 'blur'
+                    }],
+    
+                },
             }
         },
         computed: {
@@ -295,6 +344,9 @@ import grade from '../../../components/basics/grade'
             },
             activeItem() {
                 return this.list.length > 0 ? this.list[this.activeIndex] : {}
+            },
+            checkPsd() {
+                return this.modityApi.passwordOne == this.modityApi.passwordTwo
             }
         },
         methods: {
@@ -312,8 +364,8 @@ import grade from '../../../components/basics/grade'
                 let params = {
                     name: ''
                 }
-                this.$http.post(this.api.findAllMarginLevel,params).then(res => {
-                    if(res.code === 1000){
+                this.$http.post(this.api.findAllMarginLevel, params).then(res => {
+                    if (res.code === 1000) {
                         this.marginLevelList = res.data
                     }
                 })
@@ -323,8 +375,8 @@ import grade from '../../../components/basics/grade'
                 let params = {
                     name: ''
                 }
-                this.$http.post(this.api.findAllPurchaseLevel,params).then(res => {
-                    if(res.code === 1000){
+                this.$http.post(this.api.findAllPurchaseLevel, params).then(res => {
+                    if (res.code === 1000) {
                         this.purchaseLevelList = res.data
                     }
                 })
@@ -356,16 +408,16 @@ import grade from '../../../components/basics/grade'
                 this.editData.storeHouseId = data.id;
                 this.editData.storeHouseName = data.name;
             },
-            edit(){
+            edit() {
                 let params = _.cloneDeep(this.editData);
                 params.isFaithUser = params.isFaithUser ? 1 : 0;
                 params.isGuaranteeUser = params.isGuaranteeUser ? 1 : 0;
                 params.isHaveShop = params.isHaveShop ? 1 : 0;
-                this.$http.post(this.api.eidtBusiness,params).then(res => {
-                    if(res.code === 1000){
+                this.$http.post(this.api.eidtBusiness, params).then(res => {
+                    if (res.code === 1000) {
                         this.$Message.success('修改成功！');
                         this.getBusinesses();
-                    }else{
+                    } else {
                         this.$Message.error('修改失败');
                     }
                     this.showEdit = false;
@@ -378,8 +430,8 @@ import grade from '../../../components/basics/grade'
             // 获取仓库
             getStroeHouse() {
                 this.$http.post(this.api.getStroeHouse).then(res => {
-                    if(res.code === 1000){
-                        this.houseList = res.data;      
+                    if (res.code === 1000) {
+                        this.houseList = res.data;
                     }
                 })
             },
@@ -390,11 +442,11 @@ import grade from '../../../components/basics/grade'
                     isFU: false,
                     isGU: false,
                     isHS: false,
-                    bUTime: ['',''],
-                    bFUTime: ['',''],
-                    bGUTime: ['',''],
-                    bHSTime: ['',''],
-                    isSellUser:'',
+                    bUTime: ['', ''],
+                    bFUTime: ['', ''],
+                    bGUTime: ['', ''],
+                    bHSTime: ['', ''],
+                    isSellUser: '',
                     currentPage: 1,
                     pageSize: 10
                 }
@@ -410,10 +462,10 @@ import grade from '../../../components/basics/grade'
                 this.$refs.scope.saveScope();
                 this.showRange = false;
             },
-            showUnion(item){
+            showUnion(item) {
                 this.unionItem = item || {}
                 this.unionShow = true;
-                if(this.unionShow){
+                if (this.unionShow) {
                     this.$refs.union.getSalesman();
                     this.$refs.union.getCompany();
                 }
@@ -421,15 +473,55 @@ import grade from '../../../components/basics/grade'
             saveUnion() {
                 this.$refs.union.allotAction();
             },
-            closeUnion(){
+            closeUnion() {
                 this.$refs.union.reset();
                 this.unionShow = false;
+            },
+            //   修改账号
+            modityInfo(index) {
+                this.modityShow = true
+                this.modityApi.originalMobile = this.list[index].buserMobile;
+                this.modityApi.id = this.list[index].id
+            },
+            resetmodi(){
+                this.modityShow = false
+                this.modityApi = {
+                    id: '',
+                    originalMobile: '',
+                    nowMoblie: '',
+                    passwordOne: '',
+                    passwordTwo: ''
+                }
+            },
+            //  保存新账号
+            saveAccount() {
+                this.$refs[this.ref].validate((valid) => {
+                    if (valid) {
+                        if(this.checkPsd){
+                        this.loading = true;
+                        this.$http.post(this.api.updateMainAccountMobile, this.modityApi).then(res => {
+                            if (res.code === 1000) {
+                                this.getBusinesses();
+                                this.$Message.success('操作成功');
+                                this.resetmodi();
+                            } else {
+                                this.$Message.error(res.message);
+                            }
+                            this.loading = false
+                        })
+                        }else{
+                            this.$Message.error('两次密码输入不一致');
+                        }
+                    } else {
+                        this.$Message.error('表单验证失败');
+                    }
+                })
             }
         },
         watch: {
-            pipApi(a,b) {
+            pipApi(a, b) {
                 // 如果分页参数没变过，其他筛选参数变了，说明是筛选不是分页，把页码设为1
-                if(a.currentPage == b.currentPage)
+                if (a.currentPage == b.currentPage)
                     this.apiData.currentPage = 1;
                 this.getBusinesses();
             }

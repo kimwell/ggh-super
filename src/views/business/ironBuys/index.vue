@@ -27,7 +27,8 @@
           <div class="item">买家公司：{{item.companyName}}</div>
           <div class="item">卖家公司：{{item.companyPName != ''? item.companyPName : '-'}}</div>
           <div class="item">调度情况：{{item.bgStatus | bgStatus}}</div>
-          <div class="item">调度时间：<span v-if="item.bgTime != ''">{{item.bgTime | dateformat}}</span ><span v-else>-</span></div>
+          <div class="item" v-if="item.aTime > 0">调度时长：{{item.aTime | dateformatT}}</div>
+          <div class="item" v-else>调度时长：-</div>
           <div class="item">匹配卖家总量：{{item.buserNum}}</div>
           <div class="item">品类：{{item.ironTypeName}}</div>
           <div class="item">材质|表面：{{item.materialName}}|{{item.surfaceName}}</div>
@@ -102,7 +103,7 @@
                     <Col class-name="col" span="1">{{n.offerPlaces}}</Col>
                     <Col class-name="col" span="2">{{n.historyIronSellerInfo[0].deliveryTime}}</Col>
                     <Col class-name="col" span="3">{{n.offerRemark}}</Col>
-                    <Col class-name="col" span="3">{{n.historyIronSellerInfo[0].updateTime | dateformat}}</Col>
+                    <Col class-name="col" span="3">{{n.historyIronSellerInfo[0].createTime | dateformat}}</Col>
                     <Col class-name="col" span="2" ><span :class="{'active':n.historyIronSellerInfo[0].offerStatus == 2}">{{n.historyIronSellerInfo[0].offerStatus == 2 ? "已中标":"未中标"}}</span></Col>
                   </Row>
                   <div v-show="n.hisShow" id="keywords" class="history">
@@ -122,7 +123,7 @@
                           <Col class-name="col" span="4">{{h.offerPlaces}}</Col>
                           <Col class-name="col" span="4">{{h.deliveryTime}}</Col>
                           <Col class-name="col" span="4">{{h.offerRemark}}</Col>
-                          <Col class-name="col" span="4">{{h.updateTime | dateformat}}</Col>
+                          <Col class-name="col" span="4">{{h.createTime | dateformat}}</Col>
                         </Row>
                       </div>
                     </div>
@@ -240,6 +241,9 @@
       getList(params) {
         this.$http.post(this.api.queryIronBuy, params).then(res => {
           if (res.code === 1000) {
+            res.data.result.forEach(el =>{
+              el.aTime = el.bgTime - el.createTime
+            })
             this.list = res.data.result;
             this.totalCount = res.data.totalCount;
           }

@@ -18,17 +18,17 @@
                     <div class="card-contnet">
                         <div class="table-contnet">
                             <Row class-name="head">
-                                <Col class-name="col" span="5">专员编号</Col>
+                                <Col class-name="col" span="7">专员编号</Col>
                                 <Col class-name="col" span="5">专员账号</Col>
                                 <Col class-name="col" span="5">专员姓名</Col>
-                                <Col class-name="col" span="5">绑定用户数</Col>
+                                <Col class-name="col" span="3">绑定用户数</Col>
                                 <Col class-name="col" span="4">操作</Col>
                             </Row>
                             <Row v-for="(item,index) in listData" :key="item.id">
-                                <Col class-name="col" span="5">{{ item.salesmanUserId }}</Col>
+                                <Col class-name="col" span="7">{{ item.salesmanUserId }}</Col>
                                 <Col class-name="col" span="5">{{ item.tel }}</Col>
                                 <Col class-name="col" span="5">{{ item.name }}</Col>
-                                <Col class-name="col" span="5">{{ item.bindNum }}</Col>
+                                <Col class-name="col" span="3">{{ item.bindNum }}</Col>
                                 <Col class-name="col" span="4">
                                 <Button size="small" type="primary" @click="openModel(true,item)">业务详情</Button>
                                 <Button size="small" type="warning" @click="openModel(true,item)">编辑</Button>

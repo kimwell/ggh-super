@@ -50,29 +50,24 @@ export default {
       let _this = this;
       let title = data.title;
       let body = data.body;
+      let icon = `https://tbxoss.oss-cn-hangzhou.aliyuncs.com/ggh/push_icons/bg${data.code}.png`;
       if (window.Notification && Notification.permission == 'granted') {
         let notif = new Notification(title, {
           body: body, //通知的具体内容
+          icon: icon,
           requireInteraction: true
         });
         notif.onclick = () => {
-          // 1 求购消息推送 2 质检消息推送 3 中标
-          if (data.code == 1 || data.code == 3) {
-            //  跳转到求购
+          if (data.code == 1) {
             this.$router.push('/ironBuys');
-          } else if (data.code == 3) {
-            //  跳转到质检
-            this.$router.push('/quality');
-          } else if (data.code == 21 || data.code == 24 || data.code == 27) {
-            this.$router.push('/stockOrder')
-          } else if (data.code == 22 || data.code == 25 || data.code == 28) {
-            this.$router.push('/planOrder')
-          } else if (data.code == 23 || data.code == 26 || data.code == 29) {
-            this.$router.push('/specialOrder')
-          } else if (data.code == 31 || data.code == 32 || data.code == 33) {
-            this.$router.push('/authentication')
-          } else if (data.code == 34 || data.code == 35 || data.code == 36) {
-            this.$router.push('/authList')
+          } else if (data.code == 2) {
+            this.$router.push('/ironBuys');
+          } else if(data.code == 5){
+            this.$router.push('/dispatch');
+          } else if(data.code == 6 || data.code == 7 || data.code == 9){
+            this.$router.push('/order');
+          }else if(data.code == 10){
+            this.$router.push('/examine');
           }
           window.focus();
           notif.close();

@@ -41,31 +41,31 @@
                                 </Select>
                         </FormItem>
                         <FormItem label="规格：" class="magin0">
-                            <input type="text" class="ivu-input" @keyup="setInputClear" v-model="detail.specificaton" placeholder="请输入..." style="width:100px">
+                            <input type="text" class="ivu-input" @keyup="setInputClear" v-model="detail.specificaton" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <FormItem label="公差：" class="magin0">
-                            <input type="number" class="ivu-input" @keyup="setInputClear" v-model="detail.tolerance" placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClear" v-model="detail.tolerance" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <FormItem label="厚度：" class="magin0">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.heightMin" placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.heightMin" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <div class="split" style="">-</div>
                         <FormItem label="" class="magin0" style="margin-left: -80px">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.heightMax" placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.heightMax" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <FormItem label="宽度：" class="magin0">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.widthMin" placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.widthMin" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <div class="split" style="">-</div>
                         <FormItem label="" class="magin0" style="margin-left: -80px">
-                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.widthMax" placeholder="请输入..." style="width:100px">
+                            <input type="number" class="ivu-input" @keyup="setInputClears" v-model="detail.widthMax" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <FormItem label="长度：" class="magin0">
-                            <input type="text" class="ivu-input" @keyup="setInputClears" v-model="detail.lengthMin" placeholder="请输入..." style="width:100px">
+                            <input type="text" class="ivu-input" @keyup="setInputClears" v-model="detail.lengthMin" placeholder="请输入..." style="width:80px">
                         </FormItem>
                         <div class="split" style="">-</div>
                         <FormItem label="" class="magin0" style="margin-left: -80px">
-                            <input type="text" class="ivu-input" @keyup="setInputClears" v-model="detail.lengthMax" placeholder="请输入..." style="width:100px">
+                            <input type="text" class="ivu-input" @keyup="setInputClears" v-model="detail.lengthMax" placeholder="请输入..." style="width:80px">
                         </FormItem>
                     </Form>
                 </div>
@@ -116,7 +116,7 @@
                 toggle: false,
                 filterData: [{
                         title: '品类',
-                        key: 'ironType',
+                        key: 'ironTypeId',
                         list: [{
                             name: '全部',
                             id: '',
@@ -126,7 +126,7 @@
                     },
                     {
                         title: '表面',
-                        key: 'surface',
+                        key: 'surfaceId',
                         list: [{
                             name: '全部',
                             id: '',
@@ -136,7 +136,7 @@
                     },
                     {
                         title: '材质',
-                        key: 'material',
+                        key: 'materialId',
                         list: [{
                             name: '全部',
                             id: '',
@@ -146,7 +146,7 @@
                     },
                     {
                         title: '产地',
-                        key: 'proPlace',
+                        key: 'proPlaceId',
                         list: [{
                             name: '全部',
                             id: '',

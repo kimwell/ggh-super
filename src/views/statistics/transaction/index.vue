@@ -3,7 +3,7 @@
     <screenHead @date-change="filterData">平台数据分析</screenHead>
     <div class="allData clearfix">
       <div class="item">
-        <p>成家率</p>
+        <p>成交率</p>
         <h3>{{ allData.getRate }}%</h3>
       </div>
       <div class="item">
