@@ -11,15 +11,15 @@
        </Col>
        <Col span="6">
             <span class="expand-key">响应次数: </span>
-            <span class="expand-value">{{row.ironSellTotalNum}}</span>
+            <span class="expand-value">{{row.totalNum}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">有效报价: </span>
-            <span class="expand-value">{{row.ironSellValidNum}}</span>
+            <span class="expand-value">{{row.validSell}}</span>
        </Col>
        <Col span="6">
-            <span class="expand-key">错过报价: </span>
-            <span class="expand-value">{{row.ironSellMissRate}}</span>
+            <span class="expand-key">无效报价: </span>
+            <span class="expand-value">{{row.missSell}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">品类: </span>

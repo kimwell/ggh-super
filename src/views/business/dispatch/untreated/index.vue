@@ -37,7 +37,7 @@
         <div>备注：{{detailData.ironBuy.remark !='' ? detailData.ironBuy.remark: '暂无'}}</div>
         <div>买家公司：{{detailData.buser.companyName}}</div>
         <div>联系人：{{detailData.buser.contactName}}  联系方式：{{detailData.buser.contactNum}}</div>
-        <div>状态：{{detailData.ironBuy.createUser}}</div>
+        <div>调度状态：{{detailData.bgStatus == 1 ?'有货':'无货'}}</div>
         <div>剩余可报价商家数：{{detailData.remainBuserNum}}</div>
         <div class="ironVal" style="padding:15px 0;">
           <p>有效报价：{{detailData.validSell.length}}</p>
@@ -81,7 +81,7 @@
         <div>求购内容：{{notSellDetail.ironType}}/{{notSellDetail.material}}/{{notSellDetail.proPlaces}}/{{notSellDetail.surface}}(收货城市：{{notSellDetail.locationName}})</div>
         <div>规格：{{notSellDetail.specification != '' ? notSellDetail.specification : `${notSellDetail.height}*${notSellDetail.width}*${notSellDetail.length}`}}</div>
         <div>公差：{{notSellDetail.tolerance}}</div>
-        <div>计量：{{notSellDetail.numbers}}{{notSellDetail.numberUnit}}/{{notSellDetail.weights}}{{notSellDetail.weightUnit}}</div>
+        <div>计量：{{notSellDetail.number}}{{notSellDetail.numberUnit}}/{{notSellDetail.weight}}{{notSellDetail.weightUnit}}</div>
         <div>备注：{{notSellDetail.remark !='' ? notSellDetail.remark: '暂无'}}</div>
         <div style="color:red;padding:10px 0;">剩余可报价商家数：{{notSell.length}}</div>
       </div>

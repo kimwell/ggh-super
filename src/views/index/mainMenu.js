@@ -147,17 +147,17 @@ export default [{
         name: '数据统计',
         icon: 'icon-iconset0358',
         children: [{
-                name: '交易数据汇总',
+                name: '平台数据分析',
                 router: {
                     name: 'countTransaction'
                 }
             }, {
-                name: '买方排行分析',
+                name: '买家数据分析',
                 router: {
                     name: 'countBuyer'
                 }
             }, {
-                name: '卖方排行分析',
+                name: '卖家数据分析',
                 router: {
                     name: 'countSeller'
                 }

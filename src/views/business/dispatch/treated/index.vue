@@ -35,7 +35,7 @@
               <Col class-name="col" span="2">{{iron.surface}}</Col>
               <Col class-name="col" span="2">{{iron.specification != '' ? iron.specification : `${iron.height}*${iron.width}*${iron.length}`}}</Col>
               <Col class-name="col" span="2">{{iron.tolerance != '' ? iron.tolerance : '空'}}</Col>
-              <Col class-name="col" span="2">{{iron.weight != '' ? iron.weight : '空'}}</Col>
+              <Col class-name="col" span="2"><span v-if="iron.number != ''">{{iron.number}}{{iron.numberUnit}}</span><span v-if="iron.weight != ''">{{iron.weight}}{{iron.weightUnit}}</span><span v-if="iron.weight ==''&& iron.number == ''">-</span></Col>
               <Col class-name="col" span="2">{{iron.proPlace}}</Col>
               <!-- <Col class-name="col" span="2">{{iron.remark != '' ? iron.remark : '暂无备注'}}</Col> -->
               <Col class-name="col" span="2">
@@ -62,7 +62,7 @@
       <div>求购内容：{{currentData.ironType}}/{{currentData.surface}}/{{currentData.material}}/{{currentData.proPlace}}(求购城市：{{currentData.location}})</div>
       <div>规格：{{currentData.specification != '' ? currentData.specification : `${currentData.height}*${currentData.width}*${currentData.length}`}}</div>
       <div>公差：{{currentData.tolerance}}</div>
-      <div>计量：{{currentData.number}}</div>
+      <div>计量：<span v-if="currentData.number != ''">{{currentData.number}}{{currentData.numberUnit}}</span><span v-if="currentData.weight != ''">{{currentData.weight}}{{currentData.weightUnit}}</span><span v-if="currentData.weight ==''&& currentData.number == ''">-</span></div>
       <div>备注：{{currentData.remark != '' ? currentData.remark : '暂无备注'}}</div>
       <div v-if="showLog">
         <div style="color:red;padding:15px 0;">剩余待报价商家：{{currentData.remainBuserNum}}</div>
@@ -222,6 +222,9 @@
         }
       },
       handleIronSell() {
+        if(this.sellBuser.length == 0){
+          this.show = false
+        }else{
         if(this.ironSellIds.length != 0){
           let params = {
             ironBuyId: this.currentData.id,
@@ -239,6 +242,7 @@
           })
         }else{
           this.$Message.error('请选择报价');
+        }
         }
       }
     },

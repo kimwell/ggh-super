@@ -364,7 +364,7 @@ export const dateformatS = (value, fromatStr = 'yyyy-MM-dd hh:mm:ss') => {
 }
 
 // 时间戳转时分秒
-export const dateformatT = (value, fromatStr = 'hh:mm:ss') => {
+export const dateformatT = (value, fromatStr = 'mm:ss') => {
     return df.format(new Date(value), fromatStr)
 }
 

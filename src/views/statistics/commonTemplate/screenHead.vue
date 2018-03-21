@@ -38,7 +38,7 @@
         border-bottom: 1px solid #ddd;
         .date-pick {
             position: absolute;
-            right: 20px;
+            right: 80px;
             top: 10px;
         }
     }

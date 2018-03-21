@@ -6,10 +6,20 @@
       <div class="list-card" v-for="(item,i) in list" :key="i">
         <div class="card-head">
           <span>求购编号：{{item.id}}</span><span style="margin-left:15px;" v-if="item.salesManName != ''">({{item.salesManName}}{{item.salesManTel}})</span>
-          <div class="action"><a @click="detailAction(item)">查看详情</a><a @click="delAction(item)">删除求购</a></div>
+          <div class="action">
+            <a @click="detailAction(item)">查看详情</a>
+            <a v-if="item.status == 1" @click="delAction(item)">删除求购</a>
+          </div>
         </div>
         <div class="card-body clearfix">
-          <div class="item">求购状态：{{item.buyStatus | buyStatus}}</div>
+          <div class="item">求购状态：
+            <span v-if="item.status == 2">超管删除</span>
+            <span v-else-if="item.status == 0">买家删除</span>
+            <span v-else-if="item.status == 1 && item.buyStatus ==3">已失效</span>
+            <span v-else-if="item.status == 1 && item.buyStatus ==2 && item.bgStatus == 1">已成交</span>
+            <span v-else-if="item.bgStatus == 1 || item.bgStatus == 2 && item.buyStatus ==1 && item.status==1">待确认</span>
+            <span v-else-if="item.bgStatus == 0  && item.buyStatus ==1 && item.status==1">待调度</span>
+          </div>
           <div class="item">发起时间：{{item.createTime | dateformat}}</div>
           <div class="item">报价期限：{{item.sellTime | dateformat}}</div>
           <div class="item">选标期限：<span v-if="item.checkTime != ''">{{item.checkTime | dateformat}}</span ><span v-else>-</span></div>
@@ -43,7 +53,7 @@
           <p>备注：{{detailData.remark}}</p>
           <p>买家公司：{{detailData.companyName}}</p>
           <p>联系方式：{{detailData.contactNum}}</p>
-          <p>买家求购等级：{{detailData.purchaseLevel}}</p>
+          <p>买家求购等级：{{detailData.purchaseLevel!=''?detailData.purchaseLevel:'-'}}</p>
           </Col>
           <Col span="12">
           <p>求购状态：{{detailData.buyStatus | dStatus}}</p>
@@ -55,7 +65,7 @@
           <p v-else>调度完成时长：暂未调度</p>
           <p>调度操作人：{{detailData.bgName != ''? detailData.bgName:'-'}}</p>
           <p>中标公司：{{detailData.storeOrder != ''? detailData.storeOrder.sellCompanyName:'-'}}</p>
-          <p>中标单价：{{detailData.sell != ''? detailData.sell.sellPerPrice:'-'}}</p>
+          <p>中标单价：{{detailData.sell != ''? detailData.sell.sellPerPrice:'-'}}<span v-if="detailData.sell != ''">元/{{detailData.sell.sellPriceUnit}}</span></p>
           <p v-if="detailData.updateTime !=''">中标时间：{{detailData.updateTime | dateformat}}</p>
           <p v-else>中标时间：-</p>
           <p>生成订单：{{detailData.storeOrder != ''? detailData.storeOrder.id:'-'}}</p>
@@ -93,7 +103,7 @@
                     <Col class-name="col" span="2">{{n.historyIronSellerInfo[0].deliveryTime}}</Col>
                     <Col class-name="col" span="3">{{n.offerRemark}}</Col>
                     <Col class-name="col" span="3">{{n.historyIronSellerInfo[0].updateTime | dateformat}}</Col>
-                    <Col class-name="col" span="2">{{n.historyIronSellerInfo[0].offerStatus == 2 ? "已中标":"未中标"}}</Col>
+                    <Col class-name="col" span="2" ><span :class="{'active':n.historyIronSellerInfo[0].offerStatus == 2}">{{n.historyIronSellerInfo[0].offerStatus == 2 ? "已中标":"未中标"}}</span></Col>
                   </Row>
                   <div v-show="n.hisShow" id="keywords" class="history">
                     <div class="card-contnet">
@@ -107,7 +117,7 @@
                           <Col class-name="col" span="4">报价时间</Col>
                         </Row>
                         <Row v-for="(h,j) in n.historyIronSellerInfo" :key="j">
-                          <Col class-name="col" span="4">{{h.offerPrice}}元/{{h.baseUnit}}</Col>
+                          <Col class-name="col" span="4">{{h.offerPerPrice}}元/{{h.baseUnit}}</Col>
                           <Col class-name="col" span="4">{{h.tolerance}}</Col>
                           <Col class-name="col" span="4">{{h.offerPlaces}}</Col>
                           <Col class-name="col" span="4">{{h.deliveryTime}}</Col>
@@ -354,6 +364,9 @@
     }
     .row-body {
       border-bottom: 1px solid #e6e6e6;
+      .active{
+        color: green;
+      }
     }
     .col {
       position: relative;

@@ -7,19 +7,19 @@
        </Col>
        <Col span="6">
             <span class="expand-key">求购量: </span>
-            <span class="expand-value">{{row.ironBuyTotalNum}}</span>
+            <span class="expand-value">{{row.totalNum}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">成交次数: </span>
-            <span class="expand-value">{{row.ironBuyGetNum}}</span>
+            <span class="expand-value">{{row.getNum}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">成交率: </span>
-            <span class="expand-value">{{row.ironBuyGetRate}}</span>
+            <span class="expand-value">{{row.getRate}}</span>
        </Col>
        <Col span="6">
-            <span class="expand-key">平均有效响应: </span>
-            <span class="expand-value">{{row.ironSellTotalRate}}</span>
+            <span class="expand-key">有货调度次数: </span>
+            <span class="expand-value">{{row.maimaimai}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">品类: </span>

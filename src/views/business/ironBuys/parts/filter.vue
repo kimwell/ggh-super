@@ -41,7 +41,7 @@
                             </Select>
                         </FormItem>
                         <FormItem label="规格：" class="magin0" >
-                            <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.specificaton"  placeholder="请输入..." style="width:100px">
+                            <input type="text" class="ivu-input"@keyup="setInputClear" v-model="detail.specificaton"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <FormItem label="公差：" class="magin0" >
                             <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.tolerance" placeholder="请输入..." style="width:100px">

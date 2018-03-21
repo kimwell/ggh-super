@@ -10,10 +10,10 @@ export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 // WebSocket链接
 export let ws = '';
 if (process.env.NODE_ENV == 'development') {
-    ws = 'ws://192.168.0.252:8080/websocket';
+    ws = 'ws://192.168.0.252/websocket';
         // ws = 'ws://111.231.134.170:8080/websocket'
 } else {
-    ws = 'ws://192.168.0.252:8080/websocket';
+    ws = 'ws://192.168.0.252/websocket';
         // ws = 'ws://120.55.63.70:8080/websocket';
         // ws = 'ws://192.168.0.251/websocket'
         // ws = 'ws://111.231.134.170:8080/websocket'
@@ -882,16 +882,19 @@ export const addAd = '/sys/ad/saveAd';
 
 
 
-// -----------------------------------数据统计---------------------------------
-export const jd_totalData = '/sys/ironDataStatistic/totalStatisticByTime'
+// -----------------------------------新的数据统计---------------------------------
+//平台数据分析
 
-export const jd_buyerRank = '/sys/ironDataStatistic/ironBuyTopTen'
+export const jd_platFormData = '/sys/dataStatics/platFormData'
 
-export const jd_sellerRank = '/sys/ironDataStatistic/ironSellTopTen'
+export const jd_buyData = '/sys/dataStatics/buyData'
 
-export const jd_ironsRank = '/sys/ironDataStatistic/ironBaseRank'
+export const jd_sellData = '/sys/dataStatics/sellData'
 
-export const jd_regionalRank = '/sys/ironDataStatistic/ironAreaTopFive'
+export const jd_locationData = '/sys/dataStatics/locationData'
+
+export const jd_typeData = '/sys/dataStatics/typeData'
+
 
 //订单统计数据
 export const totalOrderData = '/sys/orderData/totalOrderData'

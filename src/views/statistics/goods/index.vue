@@ -35,42 +35,54 @@
           startTime: '',
           endTime: '',
           currentPage: 1,
-          pageSize: 20,
+          pageSize: 10,
           sort: 0
         },
         totalCount: 0,
         list: [],
         columns: [{
           title: '品类',
-          key: 'typeName',
+          key: 'type',
           ellipsis: true
         }, {
-          title: '求购量',
-          key: 'ironBuyTotalNum',
+          title: '平均有效报价',
+          key: 'avgValidSell',
           className: 'red',
           sortable: true
         }, {
-          title: '响应次数',
-          key: 'ironSellTotalNum'
+          title: '总求购',
+          key: 'totalNum'
         }, {
-          title: '有效报价',
-          key: 'ironSellValidNum'
+          title: '成交数',
+          key: 'getNum'
         }, {
           title: '错过报价',
-          key: 'ironSellMissNum',
+          key: 'missSell',
           ellipsis: true
         }, {
-          title: '平均有效响应',
-          key: 'ironSellAvgNum'
+          title: '有货调度次数',
+          key: 'maimaimai'
         }, {
-          title: '总成交次数',
-          key: 'ironBuyGetNum',
+          title: '平均错过报价',
+          key: 'avgMissSell',
           ellipsis: true
         }, {
-          title: '总成交率',
-          key: 'ironBuyGetRate',
+          title: '有效报价',
+          key: 'validSell',
           ellipsis: true
-        }]
+        },{
+          title: '无货调度次数',
+          key: 'ptlb',
+          ellipsis: true
+        },{
+          title: '有货调度率',
+          key: 'maiRate',
+          ellipsis: true
+        }],
+        totalApi:{
+          startTime: '',
+          endTime: ''
+        }
       }
     },
     computed: {
@@ -83,7 +95,7 @@
             if (_.isArray(el[el2.key])) {
               item[el2.key] = el[el2.key].join();
             } else {
-              let isRate = el2.key.indexOf('Rate') >= 0;
+              let isRate = el2.key.indexOf('maiRate') >= 0;
               item[el2.key] = isRate ? el[el2.key] + '%' : el[el2.key];
             }
           });
@@ -99,11 +111,11 @@
     },
     methods: {
       getData() {
-        this.$http.get(this.api.jd_ironsRank, {
+        this.$http.get(this.api.jd_typeData, {
           params: this.apiData
         }).then(res => {
           if (res.code === 1000) {
-            this.list = res.data.result;
+            this.list = res.data.list;
             this.totalCount = res.data.totalCount;
           }
         })

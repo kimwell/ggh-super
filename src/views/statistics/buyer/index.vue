@@ -1,7 +1,14 @@
 <template>
-  <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
-    买家大客户分析(前10名)
+  <div>
+    <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
+    买家数据分析
+    <div class="inputs" style="position: absolute;top:0;right:310px;">
+      <Input v-model="dataApi.companyName" @on-blur="getData" placeholder="请输入买家公司名称" style="width: 200px;"></Input>
+    </div>
+    <a style="position: absolute;top:0;right:10px;" @click="reset">清除筛选</a>
   </commonTemplate>
+  <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="dataApi.currentPage" :page-size="dataApi.pageSize"></Page>
+  </div>
 </template>
 
 <script>
@@ -35,18 +42,27 @@
           ellipsis: true
         }, {
           title: '求购量',
-          key: 'ironBuyTotalNum',
+          key: 'totalNum',
           className: 'red',
           sortable: true
         }, {
-          title: '成交次数',
-          key: 'ironBuyGetNum'
+          title: '求购调度率',
+          key: 'maiRate'
         }, {
-          title: '成交率',
-          key: 'ironBuyGetRate'
+          title: '有效报价',
+          key: 'validNum'
         }, {
           title: '平均有效报价',
-          key: 'ironSellValidAvgNum'
+          key: 'avgValidNum'
+        }, {
+          title: '成交率',
+          key: 'getRate'
+        }, {
+          title: '成交量',
+          key: 'getNum'
+        }, {
+          title: '有货调度率',
+          key: 'maimaimai'
         }, {
           title: '品类',
           key: 'ironType',
@@ -63,7 +79,16 @@
           title: '产地',
           key: 'proPlace',
           ellipsis: true
-        }]
+        }],
+        dataApi:{
+          startTime: '',
+          endTime:'',
+          currentPage: 1,
+          pageSize: 10,
+          sort: '',
+          companyName: ''
+        },
+        totalCount: 0
       }
     },
     computed: {
@@ -86,16 +111,34 @@
     },
     methods: {
       getData(params = {}){
-        this.$http.get(this.api.jd_buyerRank,{
-          params:params
+        this.$http.get(this.api.jd_buyData,{
+          params:this.dataApi
         }).then(res => {
           if(res.code === 1000){
-            this.list = res.data;
+            this.list = res.data.list;
+            this.totalCount = res.data.totalCount
           }
         })
       },
       filterData(data){
+        this.dataApi.startTime = data.startTime;
+        this.dataApi.endTime = data.endTime;
         this.getData(data);
+      },
+      pageChange(page){
+        this.dataApi.currentPage = page;
+        this.getData();
+      },
+      reset(){
+        this.dataApi ={
+          startTime: '',
+          endTime:'',
+          currentPage: 1,
+          sort: '',
+          pageSize: 10,
+          companyName: ''
+        }
+        this.getData();
       }
     },
     created () {

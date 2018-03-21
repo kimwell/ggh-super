@@ -93,10 +93,7 @@
         <div class="item-group" v-for="(item,index) in list" :key="item.id">
             <div class="head">
                 {{ item.companyName }}
-                <span class="iconfont icon-hongqi" style="color:#F5A623" v-show="item.isSellUser == 1"></span>
-                <span class="iconfont icon-cheng" style="color:#F5A623" v-show="item.isFaithUser == 1"></span>
-                <span class="iconfont icon-bao" style="color:#C16BD6" v-show="item.isGuaranteeUser == 1"></span>
-                <span class="iconfont icon-dian" style="color:#57c5f7" v-show="item.isHaveShop == 1"></span>
+                <grade :value="item.marginLevel"></grade>
                 <div class="option">
                     <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>
                     <Button size="small" type="info" @click="showInfo(index)">详情</Button>
@@ -110,8 +107,8 @@
                 <div class="item">联系方式：{{ item.contactNum }}</div>
                 <div class="item">办公地址：{{ item.address }}</div>
                 <div class="item">注册资金：{{ item.regMoney }}万</div>
-                <div class="item">负责专员：{{ item.salesManName }}</div>
-                <div class="item">专员手机：{{ item.salesManMobile }}</div>
+                <div class="item">负责专员：{{ item.saleName }}</div>
+                <div class="item">专员手机：{{ item.saleMobile }}</div>
             </div>
         </div>
     
@@ -196,11 +193,13 @@
 import rang from './rangInfor';
 import union from './union';
 import ajaxSelect from '@/components/basics/ajaxSelect' 
+import grade from '../../../components/basics/grade' 
     export default {
         components: {
             rang,
             ajaxSelect,
-            union
+            union,
+            grade
         },
         data() {
             return {
