@@ -52,7 +52,7 @@
           <p>公差：{{detailData.tolerance}}</p>
           <p>计量：
             <span v-if="detailData.numbers !=''">{{detailData.numbers}}{{detailData.numberUnit}}</span>
-            <span v-if="detailData.number != '' && detailData.weights != ''">/</span>
+            <span v-if="detailData.number != ''"><span v-if="detailData.weights != ''">/</span></span>
             <span v-if="detailData.weights !=''">{{detailData.weights}}{{detailData.weightUnit}}</span>
           </p>
           <p>备注：{{detailData.remark}}</p>
@@ -182,7 +182,7 @@
             return '已被调度'
             break;
           case 2:
-            return '未被调度'
+            return '无货调度'
             break;
         }
       },

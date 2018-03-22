@@ -14,12 +14,20 @@
             <span class="expand-value">{{row.totalNum}}</span>
        </Col>
        <Col span="6">
-            <span class="expand-key">求购调度率: </span>
+            <span class="expand-key">有货调度率: </span>
             <span class="expand-value">{{row.maiRate}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">有效报价: </span>
             <span class="expand-value">{{row.validNum}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">成交率: </span>
+            <span class="expand-value">{{row.getRate}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">成交量: </span>
+            <span class="expand-value">{{row.getNum}}</span>
        </Col>
        <Col span="6">
             <span class="expand-key">平均有效报价: </span>

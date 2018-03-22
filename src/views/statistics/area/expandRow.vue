@@ -22,6 +22,14 @@
             <span class="expand-value">{{row.maimaimai}}</span>
        </Col>
        <Col span="6">
+            <span class="expand-key">无货调度次数: </span>
+            <span class="expand-value">{{row.ptlb}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">有货调度率: </span>
+            <span class="expand-value">{{row.maiRate}}</span>
+       </Col>
+       <Col span="6">
             <span class="expand-key">品类: </span>
             <span class="expand-value">{{row.ironType}}</span>
        </Col> 

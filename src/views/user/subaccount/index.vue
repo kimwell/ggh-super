@@ -20,20 +20,20 @@
       <div class="card-contnet">
         <div class="table-contnet">
           <Row class-name="head">
-            <Col class-name="col" span="5">商户名称</Col>
+            <Col class-name="col" span="4">商户名称</Col>
             <Col class-name="col" span="3">用户账号</Col>
             <Col class-name="col" span="2">真实姓名</Col>
-            <Col class-name="col" span="2">角色</Col>
+            <Col class-name="col" span="3">角色</Col>
             <Col class-name="col" span="2">备注</Col>
             <Col class-name="col" span="3">创建人</Col>
             <Col class-name="col" span="3">账号创建时间</Col>
             <Col class-name="col" span="4">操作</Col>
           </Row>
           <Row v-for="item in list" :key="item.id">
-            <Col class-name="col" span="5">{{item.companyName}}</Col>
+            <Col class-name="col" span="4">{{item.companyName}}</Col>
             <Col class-name="col" span="3">{{item.mobile}}</Col>
             <Col class-name="col" span="2">{{item.real_name}}</Col>
-            <Col class-name="col" span="2">{{item.usrType | usrType}}</Col>
+            <Col class-name="col" span="3"><roleTag :role="item.usrType"></roleTag></Col>
             <Col class-name="col" span="2">{{item.remark != '' ? item.remark: '暂无备注'}}</Col>
             <Col class-name="col" span="3">{{item.createUser}}</Col>
             <Col class-name="col" span="3">{{item.createTime | dateformat}}</Col>
@@ -102,7 +102,11 @@
 </template>
 
 <script>
+  import roleTag from "@/components/basics/roleTag";
   export default {
+    components: {
+      roleTag
+    },
     data() {
       return {
         ref: 'form' + new Date().getTime(),

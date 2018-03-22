@@ -60,7 +60,7 @@
           <p>订单放弃时间：<span v-if="detailData.fqTime!=''">{{detailData.fqTime | dateformat}}</span><span v-else>-</span></p>
           <p>订单完成时间：<span v-if="detailData.wcTime!=''">{{detailData.wcTime | dateformat}}</span><span v-else>-</span></p>
           <p>订单作废时间：<span v-if="detailData.zfTime!=''">{{detailData.zfTime | dateformat}}</span><span v-else>-</span></p>
-          <p>订单确认时间：<span v-if="detailData.valityTime!=''">{{detailData.valityTime | dateformat}}</span><span v-else>-</span></p>
+          <p>订单确认期限：<span v-if="detailData.valityTime!=''">{{detailData.valityTime | dateformat}}</span><span v-else>-</span></p>
         </Col>
         <Col span="8">
           <p>订单状态：{{detailData.status | status}}</p>

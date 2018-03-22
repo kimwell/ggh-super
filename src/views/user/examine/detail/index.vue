@@ -22,11 +22,11 @@
         <Col class-name="col" span="22">{{item.contactNum}}</Col>
       </Row>
       <Row>
-        <Col class-name="col" span="2" class="col-title"><span class="star">*</span>QQ：</Col>
+        <Col class-name="col" span="2" class="col-title">QQ：</Col>
         <Col class-name="col" span="22">{{item.qq}}</Col>
       </Row>
       <Row>
-        <Col class-name="col" span="2" class="col-title"><span class="star">*</span>传真：</Col>
+        <Col class-name="col" span="2" class="col-title">>传真：</Col>
         <Col class-name="col" span="22">{{item.fax}}</Col>
       </Row>
       <Row>
@@ -44,7 +44,10 @@
       <Row>
         <Col class-name="col" span="2" class="col-title">店铺封面：</Col>
         <Col class-name="col" span="22">
-          <div style="width: 200px;"><img :src="item.cover" style="max-width:100%" /></div>
+          <div class="preview" style="width:200px;">
+            <img :src="item.cover" style="max-width: 100%;" />
+            <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.cover)"></i></span>
+          </div>
         </Col>
       </Row>
       <Row>
@@ -61,22 +64,34 @@
       <Row v-if="item.flag == 1">
         <Col class-name="col" span="2" class="col-title">营业执照：</Col>
         <Col class-name="col" span="22">
-          <div style="width: 200px;"><img :src="item.allCer" style="max-width:100%" /></div>
+          <div class="preview" style="width:200px;">
+            <img :src="item.allCer" style="max-width: 100%;" />
+            <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.allCer)"></i></span>
+          </div>
         </Col>
       </Row>
       <Row v-else>
         <Col class-name="col" span="2" class="col-title">照片：</Col>
         <Col class-name="col" span="4" style="margin-right:15px;">
         <p><span class="star">*</span>营业执照</p>
-        <img :src="item.bussinessLic" style="max-width: 100%;" />
+        <div class="preview">
+          <img :src="item.bussinessLic" style="max-width: 100%;" />
+          <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.bussinessLic)"></i></span>
+        </div>
         </Col>
         <Col class-name="col" span="4" style="margin-right:15px;">
         <p><span class="star">*</span>组织机构代码证</p>
-        <img :src="item.codeLic"  style="max-width: 100%;" />
+          <div class="preview">
+            <img :src="item.codeLic"  style="max-width: 100%;" />
+            <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.codeLic)"></i></span>
+          </div>
         </Col>
         <Col class-name="col" span="4">
         <p><span class="star">*</span>税务登记证</p>
-        <img :src="item.financeLic" style="max-width: 100%;" />
+          <div class="preview">
+            <img :src="item.financeLic" style="max-width: 100%;" />
+            <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.financeLic)"></i></span>
+          </div>
         </Col>
       </Row>
     </Card>
@@ -110,6 +125,14 @@
         <Button type="primary" @click="unpass" :loading="loading">确认</Button>
       </div>
     </Modal>
+    <Modal v-model="preShow" width="800" title="查看大图">
+      <div class="preview-img">
+        <img :src="showImg">
+      </div>
+      <div slot="footer">
+        <a class="btns" @click="preShow = false">关闭</a>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -129,7 +152,9 @@ export default {
       },
       item: {},
       saleman: [],
-      sale: ""
+      sale: "",
+      preShow: false,
+      showImg: ''
     };
   },
   computed: {
@@ -230,6 +255,11 @@ export default {
           });
         }
       });
+    },
+    //  预览大图
+    showPreview(data){
+      this.preShow = true
+      this.showImg = data;
     }
   },
   mounted() {
@@ -258,5 +288,30 @@ export default {
   display: block;
   text-align: center;
   margin-bottom: 15px;
+}
+.preview{
+  position: relative;
+  .pre-bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    padding-right: 10px;
+    background: rgba(255,255,255,.7);
+    color: #fff;
+    .iconfont{
+      cursor: pointer;
+    }
+  }
+}
+.preview-img{
+  img{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
 }
 </style>

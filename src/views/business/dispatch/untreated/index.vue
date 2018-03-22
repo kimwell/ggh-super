@@ -37,7 +37,7 @@
         <div>备注：{{detailData.ironBuy.remark !='' ? detailData.ironBuy.remark: '暂无'}}</div>
         <div>买家公司：{{detailData.buser.companyName}}</div>
         <div>联系人：{{detailData.buser.contactName}}  联系方式：{{detailData.buser.contactNum}}</div>
-        <div>调度状态：{{detailData.bgStatus == 1 ?'有货':'无货'}}</div>
+        <div>调度状态：{{detailData.ironBuy.bgStatus == 1 ?'有货':'无货'}}</div>
         <div>剩余可报价商家数：{{detailData.remainBuserNum}}</div>
         <div class="ironVal" style="padding:15px 0;">
           <p>有效报价：{{detailData.validSell.length}}</p>

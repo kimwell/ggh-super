@@ -41,7 +41,7 @@
           key: 'address',
           ellipsis: true
         }, {
-          title: '求购量',
+          title: '求购数量',
           key: 'totalNum',
           className: 'red',
           sortable: true
@@ -94,7 +94,7 @@
         let arr = [];
         this.list.forEach(el => {
           let item = {};
-          el.avgValidNum = el.avgValidNum * 100;
+          el.avgValidNum = el.avgValidNum;
           el.maiRate = el.maiRate + '%';
           el.getRate = el.getRate + '%';
           el.maimaimai = el.maimaimai + '%';

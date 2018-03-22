@@ -22,6 +22,22 @@
             <span class="expand-value">{{row.missSell}}</span>
        </Col>
        <Col span="6">
+            <span class="expand-key">调度选中次数: </span>
+            <span class="expand-value">{{row.chooseNum}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">中标次数: </span>
+            <span class="expand-value">{{row.getSell}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">调度选中率: </span>
+            <span class="expand-value">{{row.chooseRate}}</span>
+       </Col>
+       <Col span="6">
+            <span class="expand-key">中标率: </span>
+            <span class="expand-value">{{row.getRate}}</span>
+       </Col>
+       <Col span="6">
             <span class="expand-key">品类: </span>
             <span class="expand-value">{{row.ironType}}</span>
        </Col> 
