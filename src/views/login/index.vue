@@ -20,17 +20,12 @@
                 <Button type="primary" size="large" :loading='isLoading' @click.native="login" long>登录</Button>
             </div>
         </div>
-        <CanvasBg></CanvasBg>
     </div>
 </template>
 
 <script>
     import * as types from '@/store/types'
-    import CanvasBg from './canvasBg.vue'
     export default {
-        components: {
-            CanvasBg
-        },
         data() {
             return {
                 formInline: {
@@ -91,9 +86,7 @@
         width: 100%;
         height: 100%;
         background-color: #141a48;
-        background-image: url('https://file.iviewui.com/dist/ddb81d457e66ab31d3a2e7726a5b793a.png');
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-image: url('../../assets/imgs/bg.png');
         overflow: hidden;
     }
     
@@ -101,14 +94,18 @@
         position: absolute;
         left: 0;
         right: 0;
-        width: 400px;
-        padding: 35px 35px 15px;
-        margin: 120px auto;
+        width: 500px;
+        padding: 60px;
+        margin: 180px auto;
         z-index: 100;
+        background-color: #fff;
+        -webkit-box-shadow: 0px 15px 15px 0px rgba(24, 117, 240, .1); 
+        -moz-box-shadow: 0px 15px 15px 0px rgba(24, 117, 240, .1); 
+        box-shadow: 0px 15px 15px 0px rgba(24, 117, 240, .1); 
         h1 {
             font-size: 26px;
             font-weight: 400;
-            color: #eee;
+            color: #2780EE;
             margin: 0 auto 40px;
             text-align: center;
             font-weight: 700;
@@ -124,10 +121,10 @@
             -webkit-text-fill-color: #555
         }
         .form-item {
-            border: 1px solid hsla(0, 0%, 100%, .1);
-            background: rgba(0, 0, 0, .1);
+            border: 1px solid #ddd;
+            background: #fff;
             border-radius: 5px;
-            color: #454545;
+            color: #333;
             margin-bottom: 22px;
             overflow: hidden;
             &:before {
@@ -143,7 +140,7 @@
                     position: relative;
                     font-size: 14px;
                     display: inline-block;
-                    height: 47px;
+                    height: 44px;
                     width: 100%;
                 }
                 input {
@@ -154,8 +151,8 @@
                     -webkit-appearance: none;
                     border-radius: 0;
                     padding: 12px 5px 12px 15px;
-                    color: #eee;
-                    height: 47px;
+                    color: #333;
+                    height: 44px;
                 }
             }
         }

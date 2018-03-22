@@ -45,10 +45,10 @@
             <Row class-name="head">
               <Col class-name="col" span="1">&nbsp;</Col>
               <Col class-name="col" span="5">公司名称</Col>
-              <Col class-name="col" span="2">报价人</Col>
+              <Col class-name="col" span="3">报价人</Col>
               <Col class-name="col" span="3">联系方式</Col>
               <Col class-name="col" span="2">单价</Col>
-              <Col class-name="col" span="3">公差</Col>
+              <Col class-name="col" span="2">公差</Col>
               <Col class-name="col" span="2">产地</Col>
               <Col class-name="col" span="3">交货时间</Col>
               <Col class-name="col" span="3">备注</Col>
@@ -56,10 +56,10 @@
             <Row v-for="(item,i) in detailData.validSell" :key="i">
               <Col class-name="col" span="1"><Icon v-show="item.choose" type="checkmark-circled" size="20" color="#2d8cf0"></Icon></Col>
               <Col class-name="col" span="5">{{item.companyName}}</Col>
-              <Col class-name="col" span="2">{{item.contactName}}</Col>
+              <Col class-name="col" span="3">{{item.contactName}}</Col>
               <Col class-name="col" span="3">{{item.contactNum}}</Col>
               <Col class-name="col" span="2">{{item.sellIng.offerPerPrice}}元/{{item.sellIng.baseUnit}}</Col>
-              <Col class-name="col" span="3">{{item.sellIng.tolerance}}</Col>
+              <Col class-name="col" span="2">{{item.sellIng.tolerance}}</Col>
               <Col class-name="col" span="2">{{item.sellIng.offerPlaces}}</Col>
               <Col class-name="col" span="3">{{item.sellIng.deliveryTime}}</Col>
               <Col class-name="col" span="3">{{item.sellIng.offerRemark !='' ? item.sellIng.offerRemark: '暂无'}}</Col>

@@ -19,7 +19,7 @@
                     <h4><span class="title" title="发起时间">详细</span> ：</h4>
                 </div>
                 <div class="body">
-                    <Form ref="formInline" inline :label-width="80" style="margin-top:20px">
+                    <Form ref="formInline" inline :label-width="75" style="margin-top:20px">
                         <FormItem label="订单编号：" class="magin0">
                             <Input type="text" v-model="detail.ironBuyId" placeholder="请输入..."></Input>
                         </FormItem>

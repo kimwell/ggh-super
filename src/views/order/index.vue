@@ -31,8 +31,8 @@
           <div class="item">品类：{{item.ironType}}</div>
           <div class="item">材质|表面：{{item.material}}|{{item.surface}}</div>
           <div class="item">规格：{{item.specification != '' ? item.specification : `${item.height}*${item.width}*${item.length}`}}</div>
-          <div class="item">求购产地|公差：{{item.proPlace}}|{{item.tolerance}}</div>
-          <div class="item">供货产地公差：{{item.sellProPlace}}|{{item.sellTolerance}}</div>
+          <div class="item">求购产地|公差：{{item.proPlace}}<span v-if="item.tolerance != ''">|{{item.tolerance}}</span></div>
+          <div class="item">供货产地公差：{{item.sellProPlace}}<span v-if="item.sellTolerance != ''">|{{item.sellTolerance}}</span></div>
         </div>
       </div>
       <div class="pages">

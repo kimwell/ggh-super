@@ -104,9 +104,7 @@
                 padding: 20px;
                 margin-top: 10px;
                 border: 2px solid #fff;
-                &:not(:nth-child(4n)) {
-                    margin-right: 30px;
-                }
+                margin-right: 30px;
                 &:hover{
                     border: 2px solid @blue;
                     .box-shadow(0 1px 6px @blue);
