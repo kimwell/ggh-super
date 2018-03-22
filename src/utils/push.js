@@ -28,7 +28,6 @@ export default {
       };
 
       ws.onmessage = function (evt) {
-        console.log(evt)
         let data = JSON.parse(evt.data);
         _this.isNotice = false;
         _this.msg = data;
@@ -36,7 +35,6 @@ export default {
       };
 
       ws.onclose = function (evt) {
-        console.log("Connection closed.");
         setTimeout(() => {
           _this.initScoket();
         }, 10000)
@@ -46,7 +44,6 @@ export default {
         Notification.requestPermission();
     },
     notify(data) {
-      console.log('弹出提示')
       let _this = this;
       let title = data.title;
       let body = data.body;
@@ -58,16 +55,12 @@ export default {
           requireInteraction: true
         });
         notif.onclick = () => {
-          if (data.code == 1) {
+          if (data.code == 1 || data.code == 2 || data.code == 5) {
             this.$router.push('/ironBuys');
-          } else if (data.code == 2) {
-            this.$router.push('/ironBuys');
-          } else if(data.code == 5){
-            this.$router.push('/dispatch');
           } else if(data.code == 6 || data.code == 7 || data.code == 9){
             this.$router.push('/order');
           }else if(data.code == 10){
-            this.$router.push('/examine');
+            this.$router.push('/user/examine');
           }
           window.focus();
           notif.close();

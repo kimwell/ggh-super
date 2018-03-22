@@ -143,6 +143,16 @@ export default {
       return this.$route.params.status;
     }
   },
+  watch: {
+    sale(val){
+      if(val != ''){
+        let saless = val.split('-');
+        this.apiData.saleId = saless[1]
+        this.apiData.saleMobile = saless[2]
+        this.apiData.saleName = saless[0]
+      }
+    }
+  },
   methods: {
     getData() {
       let params = {
@@ -151,9 +161,9 @@ export default {
       this.$http.post(this.api.getBuserInfoByUserId, params).then(res => {
         if (res.code === 1000) {
           this.item = res.data;
-          this.sale = `${this.item.saleName}-${this.item.saleId}-${
-            this.item.saleMobile
-          }`;
+          if(this.item.saleName != ''){
+            this.sale = `${this.item.saleName}-${this.item.saleId}-${this.item.saleMobile}`;
+          }
         }
       });
     },
@@ -171,23 +181,23 @@ export default {
           title: " 审核提示！",
           content: "确认审核通过该商户？",
           onOk: () => {
-            if (this.sale != "") {
-              let sales = this.sale.split("-");
+            // if (this.sale != "") {
+            //   let sales = this.sale.split("-");
               this.apiData = {
                 companyId: this.getId,
                 userId: this.getUserId,
                 pass: 1,
                 remark: "",
-                saleId: sales[1],
-                saleMobile: sales[2],
-                saleName: sales[0]
+                saleId: this.apiData.saleId,
+                saleMobile: this.apiData.saleMobile,
+                saleName: this.apiData.saleName
               };
-            }
-            if (this.apiData.saleId != "") {
+            // }
+            // if (this.apiData.saleId != "") {
               this.handleSubmit();
-            } else {
-              this.$Message.error("请选择专员");
-            }
+            // } else {
+            //   this.$Message.error("请选择专员");
+            // }
           }
         });
       } else {

@@ -93,6 +93,7 @@
         <div class="item-group" v-for="(item,index) in list" :key="item.id">
             <div class="head">
                 {{ item.companyName }}
+                <span class="iconfont icon-cheng" v-show="item.isSellUser == 1" style="color:#f90"></span>
                 <grade :value="item.marginLevel"></grade>
                 <div class="option">
                     <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>

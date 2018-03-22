@@ -41,7 +41,7 @@
                             </Select>
                         </FormItem>
                         <FormItem label="规格：" class="magin0" >
-                            <input type="text" class="ivu-input"@keyup="setInputClear" v-model="detail.specificaton"  placeholder="请输入..." style="width:100px">
+                            <input type="text" class="ivu-input"@keyup="setInputClear" v-model="detail.specification"  placeholder="请输入..." style="width:100px">
                         </FormItem>
                         <FormItem label="公差：" class="magin0" >
                             <input type="number" class="ivu-input"@keyup="setInputClear" v-model="detail.tolerance" placeholder="请输入..." style="width:100px">
@@ -231,7 +231,7 @@ import City from '@/components/basics/adress/citySelect.vue'
                     widthMax: '',
                     lengthMin: '',
                     lengthMax: '',
-                    specificaton:'',
+                    specification:'',
                     tolerance:'',
                     bgStatus:'',
                     salesManId: ''
@@ -294,7 +294,7 @@ import City from '@/components/basics/adress/citySelect.vue'
                 data.heightMax = this.detail.heightMax;
                 data.lengthMin = this.detail.lengthMin;
                 data.lengthMax = this.detail.lengthMax;
-                data.specificaton = this.detail.specificaton;
+                data.specification = this.detail.specification;
                 data.tolerance = this.detail.tolerance
                 return data
             },
@@ -318,7 +318,7 @@ import City from '@/components/basics/adress/citySelect.vue'
                     widthMax: '',
                     lengthMin: '',
                     lengthMax: '',
-                    specificaton:'',
+                    specification:'',
                     tolerance:'',
                     bgStatus:'',
                     salesManId: ''

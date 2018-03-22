@@ -5,7 +5,7 @@
     <div class="data-list">
       <div class="list-card" v-for="(item,i) in list" :key="i">
         <div class="card-head">
-          <span>求购编号：{{item.id}}</span><span style="margin-left:15px;" v-if="item.salesManName != ''">({{item.salesManName}}{{item.salesManTel}})</span>
+          <span>求购编号：{{item.id}}</span><span style="margin-left:15px;" v-if="item.salesManName != ''">({{item.salesManName}}&nbsp;&nbsp;{{item.salesManTel}})</span>
           <div class="action">
             <a @click="detailAction(item)">查看详情</a>
             <a v-if="item.status == 1" @click="delAction(item)">删除求购</a>
@@ -33,7 +33,7 @@
           <div class="item">品类：{{item.ironTypeName}}</div>
           <div class="item">材质|表面：{{item.materialName}}|{{item.surfaceName}}</div>
           <div class="item">规格：{{item.specifications != '' ? item.specifications : `${item.height}*${item.width}*${item.length}`}}</div>
-          <div class="item">产地|公差：{{item.proPlacesName}}|{{item.tolerance}}</div>
+          <div class="item">产地|公差：{{item.proPlacesName}}<span v-if="item.tolerance !=''">|{{item.tolerance}}</span></div>
         </div>
       </div>
       <div class="pages">
@@ -50,7 +50,11 @@
           <p>货源地：{{detailData.locationName}}</p>
           <p>规格：{{detailData.specifications != '' ? detailData.specifications : `${detailData.height}*${detailData.width}*${detailData.length}`}}</p>
           <p>公差：{{detailData.tolerance}}</p>
-          <p>计量：{{detailData.numbers}}{{detailData.numberUnit}}/{{detailData.weights}}{{detailData.weightUnit}}</p>
+          <p>计量：
+            <span v-if="detailData.numbers !=''">{{detailData.numbers}}{{detailData.numberUnit}}</span>
+            <span v-if="detailData.number != '' && detailData.weights != ''">/</span>
+            <span v-if="detailData.weights !=''">{{detailData.weights}}{{detailData.weightUnit}}</span>
+          </p>
           <p>备注：{{detailData.remark}}</p>
           <p>买家公司：{{detailData.companyName}}</p>
           <p>联系方式：{{detailData.contactNum}}</p>
@@ -221,6 +225,9 @@
     watch: {
       'detailData' () {
         this.detailShow = true;
+      },
+      '$route'(){
+        this.getList(this.params)
       }
     },
     methods: {

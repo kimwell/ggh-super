@@ -94,6 +94,8 @@
         let arr = [];
         this.list.forEach(el => {
           let item = {};
+          el.chooseRate = el.chooseRate + '%';
+          el.getRate = el.getRate + '%';
           this.columns.forEach(el2 => {
             if(_.isArray(el[el2.key])){
               item[el2.key] =  el[el2.key].join()

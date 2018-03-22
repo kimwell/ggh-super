@@ -46,9 +46,6 @@
           className: 'red',
           sortable: true
         }, {
-          title: '求购调度率',
-          key: 'maiRate'
-        }, {
           title: '有效报价',
           key: 'validNum'
         }, {
@@ -62,7 +59,7 @@
           key: 'getNum'
         }, {
           title: '有货调度率',
-          key: 'maimaimai'
+          key: 'maiRate'
         }, {
           title: '品类',
           key: 'ironType',
@@ -97,6 +94,10 @@
         let arr = [];
         this.list.forEach(el => {
           let item = {};
+          el.avgValidNum = el.avgValidNum * 100;
+          el.maiRate = el.maiRate + '%';
+          el.getRate = el.getRate + '%';
+          el.maimaimai = el.maimaimai + '%';
           this.columns.forEach(el2 => {
             if(_.isArray(el[el2.key])){
               item[el2.key] =  el[el2.key].join()

@@ -72,7 +72,7 @@
         <Col span="8">
           <p>求购编号：{{detailData.ironBuyId}}</p>
           <p>订单放弃理由：{{detailData.fqRemark}}</p>
-          <p>订单最后修改人：{{detailData.modityUser}}</p>
+          <p>订单最后修改人：{{detailData.modifyUser}}</p>
           <p>订单作废理由：{{detailData.zfRemark}}</p>
           <p>订单删除时间：<span v-if="detailData.scTime!=''">{{detailData.scTime | dateformat}}</span><span v-else>-</span></p>
         </Col>
