@@ -68,8 +68,8 @@
                             <span slot="close">否</span>
                         </i-switch>
                     </FormItem> -->
-                <FormItem label="注册商户：" class="magin0">
-                    <DatePicker type="daterange" :options="dateOption" v-model="apiData.bUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
+                <FormItem label="入驻时间：" class="magin0">
+                    <DatePicker type="daterange" :options="dateOption" v-model="apiData.bUTime" placement="bottom-end" placeholder="选择日期" style="width: 200px"></DatePicker>
                 </FormItem>
                 <FormItem label="诚信联盟会员：" class="magin0">
                     <Select v-model="apiData.isSellUser" style="width:100px">

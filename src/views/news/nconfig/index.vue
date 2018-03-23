@@ -34,6 +34,9 @@
                 <FormItem label="分类名称" prop="name">
                     <Input type="text" v-model="itemApi.name" size="small" placeholder="请输入..."></Input>
                 </FormItem>
+                <FormItem label="分类排序" prop="orderIndex">
+                    <Input type="text" v-model="itemApi.orderIndex" size="small" placeholder="请输入..."></Input>
+                </FormItem>
                 <FormItem label="备注说明" prop="remark">
                     <Input type="text" v-model="itemApi.remark" size="small" placeholder="请输入..."></Input>
                 </FormItem>
@@ -59,7 +62,7 @@
                 itemApi: {
                     id: '',
                     name: '',
-                    orderIndex: 1,
+                    orderIndex: '',
                     remark: ''
                 },
                 apiData: {
@@ -68,6 +71,11 @@
                 },
                 rules: {
                     name: [{
+                        required: true,
+                        message: '不能为空',
+                        trigger: 'blur'
+                    }],
+                    orderIndex:[{
                         required: true,
                         message: '不能为空',
                         trigger: 'blur'

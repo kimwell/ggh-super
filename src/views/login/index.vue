@@ -31,6 +31,7 @@
                 formInline: {
                     mobile: '',
                     password: '',
+                    flag: 1
                 },
                 isLoading: false
             }
