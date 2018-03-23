@@ -50,8 +50,8 @@
         </div>
       </div>
       <Modal v-model="resetPassword" title="修改密码" :closable="false" :mask-closable="false">
-        <Form :label-width="110" :ref="ref" :model="passwordData" :rules="rulesPassword">
-          <FormItem label="密码" prop="password">
+        <Form :label-width="110" :model="passwordData">
+          <FormItem label="密码">
             <Input type="password" v-model="passwordData.password" placeholder="验证6-16位任意数字或字母"></Input>
           </FormItem>
         </Form>
@@ -64,7 +64,7 @@
         <Form :label-width="110" :ref="ref" :model="dataApi" :rules="rules">
           <FormItem label="企业名称" prop="companyName" v-if="!isEdit">
             <Select v-model="dataApi.companyName" filterable remote :remote-method="remoteMethod" :loading="serLoading">
-              <Option v-for="(option, index) in companyData" :value="`${option.companyName}-${option.companyId}`" :key="index">{{option.conpanyName}}</Option>
+              <Option v-for="(option, index) in companyData" :value="`${option.companyName}-${option.companyId}`" :key="index">{{option.companyName}}</Option>
             </Select>
           </FormItem>
           <FormItem label="企业名称" prop="companyName" v-else>
@@ -123,13 +123,6 @@
         passwordData: {
           userId: '',
           password: ''
-        },
-        rulesPassword: {
-          password: [{
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          }]
         },
         rules: {
           companyName: [{
@@ -302,8 +295,7 @@
       },
       //  提交修密码
       handlePassword() {
-        this.$refs[this.ref].validate((valid) => {
-          if (valid) {
+        if(this.passwordData.password != ''){
             let params = JSON.parse(JSON.stringify(this.passwordData));
             this.loading = true;
             this.$http.post(this.api.resetPassword, params).then(res => {
@@ -315,8 +307,9 @@
               }
               this.loading = false
             })
+          } else {
+            this.$Message.error('密码不能为空')
           }
-        })
       },
       //  编辑、新增
       handleAccount() {
@@ -346,7 +339,7 @@
               this.loading = false
             })
           } else {
-            ths.$Message.error('请完善表单信息')
+            this.$Message.error('请完善表单信息')
           }
         })
       },

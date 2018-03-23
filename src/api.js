@@ -1,5 +1,5 @@
-// export const uploadApi = 'http://192.168.0.251:8088/common/fileUpload/images';
-export const uploadApi = 'http://192.168.0.252/common/fileUpload/images';
+// export const uploadApi = 'http://192.168.0.252/common/fileUpload/images';
+export const uploadApi = '/common/fileUpload/images';
 
 // export const uploadExcelApi = 'http://192.168.0.251/sys/qualiticationmodel/uplodeQualiticationModel';
 export const uploadExcelApi = '/sys/qualiticationmodel/uplodeQualiticationModel';
@@ -14,6 +14,7 @@ if (process.env.NODE_ENV == 'development') {
         // ws = 'ws://111.231.134.170:8080/websocket'
 } else {
     ws = 'ws://192.168.0.252/websocket';
+    // ws = 'ws://47.97.191.14/websocket';
         // ws = 'ws://120.55.63.70:8080/websocket';
         // ws = 'ws://192.168.0.251/websocket'
         // ws = 'ws://111.231.134.170:8080/websocket'

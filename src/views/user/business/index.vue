@@ -98,7 +98,7 @@
                 <div class="option">
                     <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>
                     <Button size="small" type="info" @click="showInfo(index)">详情</Button>
-                    <Button size="small" type="info" @click="showRangeInfo(index)">报价经营范围</Button>
+                    <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showRangeInfo(index)">报价经营范围</Button>
                     <Button size="small" type="info" @click="modityInfo(index)">修改账号</Button>
                 </div>
             </div>

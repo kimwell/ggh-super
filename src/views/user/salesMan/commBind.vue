@@ -5,9 +5,9 @@
       <FormItem prop="name" label="商家名称">
         <Input type="text" v-model="filterData.name" @on-blur="onFilter" placeholder="请输入..."></Input>
       </FormItem>
-      <FormItem prop="login" label="商家账号">
+      <!-- <FormItem prop="login" label="商家账号">
         <Input type="text" v-model="filterData.login" @on-blur="onFilter" placeholder="请输入..."></Input>
-      </FormItem>
+      </FormItem> -->
       <FormItem prop="bind" label="绑定状态：">
         <Select v-model="filterData.bind" @on-change="onFilter" placeholder="请选择" style="width:150px">
                 <Option v-for="bind in stateData" :key="bind.val" :value="bind.val">{{ bind.name }}</Option>
