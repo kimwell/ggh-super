@@ -7,16 +7,18 @@
                 <div class="table-contnet">
                     <Row class-name="head">
                         <Col class-name="col" span="7">分类名称</Col>
+                        <Col class-name="col" span="3">分类排序</Col>
                         <Col class-name="col" span="5">备注</Col>
-                        <Col class-name="col" span="5">更新时间</Col>
-                        <Col class-name="col" span="5">最近操作人</Col>
+                        <Col class-name="col" span="4">更新时间</Col>
+                        <Col class-name="col" span="3">最近操作人</Col>
                         <Col class-name="col" span="2">操作</Col>
                     </Row>
                     <Row v-for="(item,index) in list" :key="item.id">
                         <Col class-name="col" span="7">{{ item.name }}</Col>
+                        <Col class-name="col" span="3">{{ item.orderIndex }}</Col>
                         <Col class-name="col" span="5">{{ item.remark | isEmpty(params ='暂无')}}</Col>
-                        <Col class-name="col" span="5">{{ item.updateTime | dateformat}}</Col>
-                        <Col class-name="col" span="5">{{ item.updateUser}}</Col>
+                        <Col class-name="col" span="4">{{ item.updateTime | dateformat}}</Col>
+                        <Col class-name="col" span="3">{{ item.updateUser}}</Col>
                         <Col class-name="col" span="2">
                         <Button size="small" type="warning" @click="openModel(true,item)">编辑</Button>
                         <Button size="small" type="error" @click="deleteItem(item)">删除</Button>
