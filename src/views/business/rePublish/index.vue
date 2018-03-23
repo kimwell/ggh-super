@@ -1,10 +1,9 @@
 <template>
     <div>
         <Row style="height:40px;line-height:40px">
-            <Row v-if="showWarm">请先输入公司名称并选中需要代发求购的公司</Row>
             <Col span="4">
-            <Select v-model="user" filterable remote :remote-method="remoteMethod1" :loading="loading">
-                    <Option v-for="(option, index) in options" :value="`${option.id}-${option.companyName}`" :key="index">{{option.companyName}}</Option>
+                <Select v-model="user" filterable remote :remote-method="remoteMethod1" :loading="loading">
+                    <Option v-for="(option, index) in options" :value="`${option.id}-${option.companyName}`" :key="index" :label="option.companyName"></Option>
                 </Select>
             </Col>
             <Col span="2">&nbsp;</Col>
@@ -14,6 +13,7 @@
         </Row>
     
         <publish :id="splitUser[0]" v-if="showPanel"></publish>
+        <Row v-if="!showPanel">请先输入公司名称并选中需要代发求购的公司</Row>
     </div>
 </template>
 
@@ -37,9 +37,6 @@
             },
             showPanel() {
                 return this.splitUser.length > 1 && this.splitUser[0] != ''
-            },
-            showWarm(){
-                return this.user == ''
             }
         },
         methods: {

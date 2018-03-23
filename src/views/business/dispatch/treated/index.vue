@@ -218,10 +218,11 @@
         }
         this.show = true;
       },
-      ironSellLen() {
-        if(this.ironSellIds.length > 2){
-          console.log()
-        }
+      ironSellLen(data) {
+        // if(this.ironSellIds.length == 3){
+        //   this.ironSellIds.pop();
+        //   this.$Message.error('最多调度2家公司')
+        // }
       },
       handleIronSell() {
         if(this.sellBuser.length == 0){
@@ -243,7 +244,7 @@
             }
           })
         }else{
-          this.$Message.error('请选择报价');
+          this.$Message.error('请选择调度公司');
         }
         }
       }
@@ -311,16 +312,16 @@
   .table-contnet {
       line-height: 40px;
       text-align: center;
-      border-top: 1px solid #d0d0d0;
-      border-left: 1px solid #d0d0d0;
+      border-top: 1px solid #e8e8e8;
+      border-left: 1px solid #e8e8e8;
       .head {
-        background-color: #ddd;
+        background-color: #F4F5F5;
       }
       .col {
         height: 40px;
         padding: 0 5px;
-        border-right: 1px solid #d0d0d0;
-        border-bottom: 1px solid #d0d0d0;
+        border-right: 1px solid #e8e8e8;
+        border-bottom: 1px solid #e8e8e8;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

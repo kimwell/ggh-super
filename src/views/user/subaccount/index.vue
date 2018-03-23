@@ -63,8 +63,8 @@
       <Modal v-model="show" :title="isEdit ? '修改商户子账号':'新增商户子账号'" :closable="false" :mask-closable="false">
         <Form :label-width="110" :ref="ref" :model="dataApi" :rules="rules">
           <FormItem label="企业名称" prop="companyName" v-if="!isEdit">
-            <Select v-model="dataApi.companyName" filterable remote :remote-method="remoteMethod" :loading="loading">
-              <Option v-for="(option, index) in companyData" :value="option.conpanyName+'-'+option.companyId" :key="index">{{option.conpanyName}}</Option>
+            <Select v-model="dataApi.companyName" filterable remote :remote-method="remoteMethod" :loading="serLoading">
+              <Option v-for="(option, index) in companyData" :value="`${option.companyName}-${option.companyId}`" :key="index">{{option.conpanyName}}</Option>
             </Select>
           </FormItem>
           <FormItem label="企业名称" prop="companyName" v-else>
@@ -179,7 +179,8 @@
           companyId: '',
           companyName: ''
         },
-        companyData: []
+        companyData: [],
+        serLoading: false
       }
     },
     filters: {
@@ -352,11 +353,10 @@
       //  模糊搜索商户名称
       remoteMethod(query) {
         if (query != '') {
-          let params = {
-            companyName: query
-          }
-          this.$http.post(this.api.findCompanyInfo, params).then(res => {
+          this.serLoading = true;
+          this.$http.post(this.api.findCompanyInfo, {companyName: query}).then(res => {
             if (res.code === 1000) {
+              this.serLoading = false;
               this.companyData = res.data
             }
           })
