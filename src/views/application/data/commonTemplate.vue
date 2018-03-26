@@ -7,24 +7,14 @@
                 <div class="table-contnet">
                     <Row class-name="head">
                         <Col class-name="col" span="10">{{ title }}名称</Col>
-                        <template v-if="title != '表面'">
-                            <Col class-name="col" span="5">{{ title }}排序</Col>
-                            <Col class-name="col" span="5">{{ title }}备注</Col>
-                        </template>
-                        <template v-else>
-                            <Col class-name="col" span="10">{{ title }}备注</Col>
-                        </template>
+                        <Col class-name="col" span="5">{{ title }}排序</Col>
+                        <Col class-name="col" span="5">{{ title }}备注</Col>
                         <Col class-name="col" span="4">操作</Col>
                     </Row>
                     <Row v-for="(item,index) in list" :key="item.id">
                         <Col class-name="col" span="10">{{ item.name }}</Col>
-                        <template v-if="title != '表面'">
-                            <Col class-name="col" span="5">{{ item.sortIndex }}</Col>
-                            <Col class-name="col" span="5">{{ item.notice }}</Col>
-                        </template>
-                        <template v-else>
-                            <Col class-name="col" span="10">{{ item.notice }}</Col>
-                        </template>
+                        <Col class-name="col" span="5">{{ item.sortIndex }}</Col>
+                        <Col class-name="col" span="5">{{ item.notice }}</Col>
                         <Col class-name="col" span="4">
                         <Button size="small" type="warning" @click="openModel(true,item)">编辑</Button>
                         <Button size="small" type="error" @click="deleteItem(item)">删除</Button>
@@ -43,7 +33,7 @@
                 <FormItem :label="`${title}名称`" prop="name">
                     <Input type="text" v-model="itemApi.name" size="small" placeholder="请输入..."></Input>
                 </FormItem>
-                <FormItem :label="`${title}排序`" v-show="this.title != '表面'">
+                <FormItem :label="`${title}排序`">
                     <Input type="text" v-model="itemApi.sortIndex" size="small" placeholder="请输入..."></Input>
                 </FormItem>
                 <FormItem :label="`${title}备注`">

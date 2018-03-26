@@ -52,7 +52,7 @@
           <p>公差：{{detailData.tolerance}}</p>
           <p>计量：
             <span v-if="detailData.numbers !=''">{{detailData.numbers}}{{detailData.numberUnit}}</span>
-            <span v-if="detailData.number != ''"><span v-if="detailData.weights != ''">/</span></span>
+            <template v-if="detailData.numbers != '' && detailData.weights != ''">/</template>
             <span v-if="detailData.weights !=''">{{detailData.weights}}{{detailData.weightUnit}}</span>
           </p>
           <p>备注：{{detailData.remark}}</p>
@@ -61,7 +61,14 @@
           <p>买家求购等级：{{detailData.purchaseLevel!=''?detailData.purchaseLevel:'-'}}</p>
           </Col>
           <Col span="12">
-          <p>求购状态：{{detailData.buyStatus | dStatus}}</p>
+          <p>求购状态：
+            <span v-if="detailData.status == 2">超管删除</span>
+            <span v-else-if="detailData.status == 0">买家删除</span>
+            <span v-else-if="detailData.status == 1 && detailData.buyStatus ==3">已失效 <template v-if="detailData.reason != ''">({{detailData.reason}})</template></span>
+            <span v-else-if="detailData.status == 1 && detailData.buyStatus ==2 && detailData.bgStatus == 1">已成交</span>
+            <span v-else-if="detailData.bgStatus == 1 || detailData.bgStatus == 2 && detailData.buyStatus ==1 && detailData.status==1">待确认</span>
+            <span v-else-if="detailData.bgStatus == 0  && detailData.buyStatus ==1 && detailData.status==1">待调度</span>
+          </p>
           <p>可报价总量：{{detailData.buserNum}}</p>
           <p>有效报价量：{{detailData.effectiveSeller.length}}</p>
           <p>错过报价量：{{detailData.missSeller.length}}</p>
@@ -179,7 +186,7 @@
             return '待调度'
             break;
           case 1:
-            return '已被调度'
+            return '有货调度'
             break;
           case 2:
             return '无货调度'

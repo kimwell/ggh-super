@@ -22,6 +22,9 @@
             height: 40px;
             line-height: 40px;
             font-weight: bold;
+            /deep/ .grade{
+                vertical-align: -3px;
+            } 
             .option {
                 position: absolute;
                 right: 20px;
@@ -73,8 +76,13 @@
                 </FormItem>
                 <FormItem label="诚信联盟会员：" class="magin0">
                     <Select v-model="apiData.isSellUser" style="width:100px">
-                            <Option v-for="item in [{id:1,label:'是'},{id:0,label:'不是'}]" :value="item.id" :key="item.id">{{ item.label }}</Option>
-                        </Select>
+                        <Option v-for="item in [{id:1,label:'是'},{id:0,label:'不是'}]" :value="item.id" :key="item.id">{{ item.label }}</Option>
+                    </Select>
+                </FormItem>
+                <FormItem label="保证金等级：" class="magin0">
+                    <Select v-model="apiData.marginLevel" style="width:100px">
+                        <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    </Select>
                 </FormItem>
                 <!-- <FormItem label="成为诚信商户：" class="magin0">
                         <DatePicker type="daterange" :options="dateOption" v-model="apiData.bFUTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
@@ -84,7 +92,7 @@
                     </FormItem>
                     <FormItem label="开通店铺时间：" class="magin0">
                         <DatePicker type="daterange" :options="dateOption" v-model="apiData.bHSTime" placement="bottom-end" placeholder="选择日期"></DatePicker>
-                    </FormItem> -->
+                </FormItem> -->
             </Form>
             <div style="margin-bottom:10px;text-align:right">
                 <Button type="warning" @click="reset">清空筛选</Button>
@@ -93,7 +101,7 @@
         <div class="item-group" v-for="(item,index) in list" :key="item.id">
             <div class="head">
                 {{ item.companyName }}
-                <span class="iconfont icon-cheng" v-show="item.isSellUser == 1" style="color:#f90"></span>
+                <span class="iconfont icon-cheng" v-show="item.isSellUser == 1" style="color:#f90;vertical-align: -1px;"></span>
                 <grade :value="item.marginLevel"></grade>
                 <div class="option">
                     <Button size="small" v-show="item.isSellUser == 1" type="info" @click="showUnion(item)">客户管理</Button>
@@ -113,7 +121,7 @@
                 <div class="item">专员手机：{{ item.saleMobile }}</div>
             </div>
         </div>
-    
+        <p v-if="list.length == 0" style="text-align: center;">暂无数据</p>
         <Page :total="totalCount" @on-change="pageChange" show-total :current="apiData.currentPage" :page-size="apiData.pageSize"></Page>
     
     
@@ -162,13 +170,13 @@
     
                 <FormItem label="保证金等级">
                     <Select v-model="editData.marginLevel" style="width:200px">
-                            <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
-                        </Select>
+                        <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    </Select>
                 </FormItem>
                 <FormItem label="求购等级">
                     <Select v-model="editData.purchaseLevel" style="width:200px">
-                            <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
-                        </Select>
+                        <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    </Select>
                 </FormItem>
                 <FormItem label="QQ">
                     <Input v-model="editData.qq" placeholder="请输入qq"></Input>
@@ -184,7 +192,7 @@
         <Modal title="报价经营范围" width="900" v-model="showRange" loading :mask-closable="false" @on-ok="saveScope">
             <rang v-if="showRange" :id="activeItem.id" ref="scope"></rang>
         </Modal>
-        <Modal title="商家客户管理" width="900" v-model="unionShow" loading :mask-closable="false" @on-ok="saveUnion" @on-cancel="closeUnion">
+        <Modal title="商家客户管理" width="1000" v-model="unionShow" loading :mask-closable="false" @on-ok="saveUnion" @on-cancel="closeUnion">
             <union v-if="unionItem" :unionData="unionItem" ref="union"></union>
             <div slot="footer"></div>
         </Modal>
@@ -216,7 +224,7 @@
     import rang from './rangInfor';
     import union from './union';
     import ajaxSelect from '@/components/basics/ajaxSelect'
-    import grade from '../../../components/basics/grade'
+    import grade from '@/components/basics/grade'
     export default {
         components: {
             rang,
@@ -240,6 +248,7 @@
                     bGUTime: ['', ''],
                     bHSTime: ['', ''],
                     isSellUser: '',
+                    marginLevel:'',
                     currentPage: 1,
                     pageSize: 10
                 },
@@ -339,6 +348,7 @@
                     bHSStartTime: this.apiData.bHSTime[0] != '' && this.apiData.bHSTime[0] != null ? this.apiData.bHSTime[0].getTime() : '',
                     bHSEndTime: this.apiData.bHSTime[1] != '' && this.apiData.bHSTime[1] != null ? this.apiData.bHSTime[1].getTime() : '',
                     isSellUser: this.apiData.isSellUser,
+                    marginLevel: this.apiData.marginLevel,
                     currentPage: this.apiData.currentPage,
                     pageSize: this.apiData.pageSize
                 }
@@ -383,7 +393,7 @@
                 })
             },
             showInfo(i) {
-                this.getAllMarginLevel();
+                // this.getAllMarginLevel();
                 this.getAllPurchaseLevel();
                 // this.getStroeHouse();
                 this.activeIndex = i;
@@ -448,6 +458,7 @@
                     bGUTime: ['', ''],
                     bHSTime: ['', ''],
                     isSellUser: '',
+                    // marginLevel:'',
                     currentPage: 1,
                     pageSize: 10
                 }
@@ -529,6 +540,7 @@
         },
         created() {
             this.getBusinesses();
+            this.getAllMarginLevel();
         }
     }
 </script>

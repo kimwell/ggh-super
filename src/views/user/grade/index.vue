@@ -36,7 +36,7 @@
         <FormItem label="名称：" prop="name">
           <Input v-model="apiData.name" placeholder="请输入"></Input>
         </FormItem>
-        <FormItem label="排序">
+        <FormItem label="排序：">
           <Input v-model="apiData.orderIndex" placeholder="请输入"></Input>
         </FormItem>
         <FormItem label="备注：">
