@@ -58,7 +58,6 @@
                 },600)
                 _this.uploadshow = true
             });
-            console.log(this.editor)
         },
         computed: {
             //  设置文件上传headers

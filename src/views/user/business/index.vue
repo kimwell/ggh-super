@@ -127,7 +127,7 @@
     
         <Modal title="商家详情编辑" v-model="showEdit" loading :mask-closable="false" @on-ok="edit">
             <Form :label-width="100">
-                <FormItem label="商户名称">
+                <FormItem label="商户名称" v-if="activeItem">
                     {{ activeItem.companyName }}
                 </FormItem>
                 <!-- <FormItem label="诚信商家">

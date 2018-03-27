@@ -67,8 +67,8 @@
             <Page class="page-count" size="small" :total="totalCount" show-total :current="filterData.currentPage" :page-size="filterData.pageSize" @on-change="changePage"></Page>
         </div>
         <Modal v-model="editTopShow" title="置顶" :closable="false" :mask-closable="false">
-            <Form :label-width="80" :ref="ref" :model="topApi" :rules="rules">
-                <FormItem label="排序数字" prop="num">
+            <Form :label-width="80" :model="topApi">
+                <FormItem label="排序数字" class="ivu-form-item-required" >
                     <Input type="text" v-model="topApi.num" size="small" placeholder="请输入..."></Input>
                 </FormItem>
             </Form>
@@ -84,7 +84,6 @@
     export default {
         data() {
             return {
-                ref: 'form' + new Date().getTime(),
                 list: [],
                 filterData: {
                     pageSize: 10,
@@ -268,22 +267,21 @@
                 this.editTopShow = true;
             },
             saveTop() {
-                this.$refs[this.ref].validate((valid) => {
-                    if(valid){
-                        this.loading = true;
-                        this.$http.post(this.api.articleRise,this.topApi).then(res => {
-                            if(res.code === 1000){
-                                this.$Message.success('置顶成功');
-                                this.editTopShow = false
-                                this.getList(this.handleData);
-                            }else{
-                                this.$Message.error(res.message)
-                            }
-                            this.loading = false
-                        })
-                    } 
-                })
-
+                if(this.topApi.num != ''){
+                    this.loading = true;
+                    this.$http.post(this.api.articleRise,this.topApi).then(res => {
+                        if(res.code === 1000){
+                            this.$Message.success('置顶成功');
+                            this.editTopShow = false
+                            this.getList(this.handleData);
+                        }else{
+                            this.$Message.error(res.message)
+                        }
+                        this.loading = false
+                    })
+                }else{
+                    this.$Message.error('排序不能为空')
+                } 
             },
             // 取消置顶
             cancelTop(data) {
