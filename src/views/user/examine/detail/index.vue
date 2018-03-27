@@ -26,7 +26,7 @@
         <Col class-name="col" span="22">{{item.qq}}</Col>
       </Row>
       <Row>
-        <Col class-name="col" span="2" class="col-title">>传真：</Col>
+        <Col class-name="col" span="2" class="col-title">传真：</Col>
         <Col class-name="col" span="22">{{item.fax}}</Col>
       </Row>
       <Row>

@@ -5,7 +5,7 @@
             <div class="card-contnet">
                 <div class="publish">
                     <Form :label-width="100" :ref="ref" :model="itemApi" :rules="rules">
-                        <FormItem label="分类" prop="type">
+                        <FormItem label="分类" class="ivu-form-item-required">
                             <Select v-model="type" style="width:200px;">
                                 <Option v-for="item in typeList" :value="item.name+'-'+item.id" :key="item.id">{{ item.name }}</Option>
                             </Select>
@@ -85,11 +85,6 @@
                     initialFrameHeight: 550
                 },
                 rules: {
-                    type:[{
-                        required: true,
-                        message: '请选择新闻分类',
-                        trigger: 'change'
-                    }],
                     title: [{
                         required: true,
                         message: '请输入标题',
@@ -188,7 +183,11 @@
                                     this.$http.post(this.api.saveAndUpdateIndustryNew, params).then(res => {
                                         if (res.code === 1000) {
                                             this.$Message.success(status == "1" ? '发布成功' : '保存成功');
-                                            this.$router.push('../../nlist')
+                                            if(status == '1'){
+                                                this.$router.push('../../nlist/publish')
+                                            }else{
+                                                this.$router.push('../../nlist/drafts')
+                                            }
                                         }
                                     })
                                 }

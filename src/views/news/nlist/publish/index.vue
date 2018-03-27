@@ -87,7 +87,7 @@
                 ref: 'form' + new Date().getTime(),
                 list: [],
                 filterData: {
-                    pageSize: 20,
+                    pageSize: 10,
                     currentPage: 1,
                     status: '1',
                     typeId: '',
@@ -203,7 +203,7 @@
             },
             resetFilter() {
                 this.filterData = {
-                    pageSize : 20,
+                    pageSize : 10,
                     currentPage : 1,
                     status : '1',
                     typeId : '',

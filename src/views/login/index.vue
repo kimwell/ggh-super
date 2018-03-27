@@ -5,14 +5,14 @@
             <div class="form-item">
                 <div class="form-item-content">
                     <div class="el-input">
-                        <input v-model="formInline.mobile" placeholder="管理员账号" type="text" class="el-input__inner" @keyup.enter="login">
+                        <input v-model="formInline.mobile" @keyup.enter="keyHandle"  placeholder="管理员账号" type="text" class="el-input__inner" >
                     </div>
                 </div>
             </div>
             <div class="form-item">
                 <div class="form-item-content">
                     <div class="el-input">
-                        <input v-model="formInline.password" placeholder="管理员密码" type="password" class="el-input__inner" @keyup.enter="login">
+                        <input v-model="formInline.password" @keyup.enter="keyHandle" placeholder="管理员密码" type="password" class="el-input__inner">
                     </div>
                 </div>
             </div>
@@ -75,6 +75,11 @@
                     })
                 } else {
                     this.$Message.error('请将账号密码填写完整！');
+                }
+            },
+            keyHandle(eve){
+                if(eve.keyCode == 13){
+                    this.login();
                 }
             }
         }

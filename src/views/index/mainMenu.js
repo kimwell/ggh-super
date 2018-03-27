@@ -16,7 +16,18 @@ export default [{
                 name: '求购调度管理',
                 router: {
                     name: 'dispatch'
-                }
+                },
+                child:[{
+                    name: '需要处理的任务',
+                    router: {
+                        name: '/dispatch/treated'
+                    }
+                },{
+                    name: '已处理的任务',
+                    router: {
+                        name: '/dispatch/untreated'
+                    }
+                }]
             }
         ]
     }, {
@@ -136,7 +147,18 @@ export default [{
             name: '新闻内容管理',
             router: {
                 name: 'nlist'
-            }
+            },
+            child:[{
+                name: '已发布',
+                router: {
+                    name: '/news/nlist/publish'
+                }
+            },{
+                name: '草稿箱',
+                router: {
+                    name: '/news/nlist/drafts'
+                }
+            }]
         }, {
             name: '新闻中心配置',
             router: {

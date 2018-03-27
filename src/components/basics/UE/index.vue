@@ -3,7 +3,7 @@
         <div class="upload" v-if="uploadshow">
             <Button type="text" @click="showUploadModal" icon="ios-cloud-upload-outline">上传图片</Button>
         </div>
-    <script id="editor" type="text/plain"></script>
+        <script id="editor" type="text/plain"></script>
     <Modal v-model="show" title="上传图片" :closable="false" :mask-closable="false">
         <div>
             <Upload multiple :action="api.uploadApi" :headers="uplaodHeader" :max-size="2048" :format="['png','jpg','jpeg']" :show-upload-list="false" :on-exceeded-size="handleMaxSize" :on-success="handleSuccess" :on-format-error="handleFormatError" style="display:inline-block;width: 100px;">
@@ -58,6 +58,7 @@
                 },600)
                 _this.uploadshow = true
             });
+            console.log(this.editor)
         },
         computed: {
             //  设置文件上传headers
@@ -111,8 +112,12 @@
             }
         },
         destroyed() {
+            let me = this
             this.editor.destroy();
             this.editor = null;
+            if(!me){
+                me.window.scrollTo(0,0);
+            }
         }
     }
 </script>
