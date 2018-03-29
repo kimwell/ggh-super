@@ -122,12 +122,13 @@ import screenHead from '../commonTemplate/screenHead.vue'
     background-color: #fff;
     .allData {
       width: 100%;
-      padding: 10px 0;
+      border-left: 1px solid #e6e6e6;
       .item {
-        width: calc(~"100%/12");
         height: 88px;
         float: left;
-        border-right: 1px solid #ddd;
+        border-right: 1px solid #e6e6e6;
+        border-bottom: 1px solid #e6e6e6;
+        width: 20%;
         p {
           color: #868E9A;
           margin: 10px 0;
@@ -137,9 +138,6 @@ import screenHead from '../commonTemplate/screenHead.vue'
           font-size: 24px;
           color: #535B68;
           text-indent: 15px;
-        }
-        &:last-child {
-          border: 0;
         }
       }
     }

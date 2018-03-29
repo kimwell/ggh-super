@@ -32,22 +32,22 @@
                     <Col class-name="col" span="2">分类</Col>
                     <Col class-name="col" span="3">发布时间</Col>
                     <Col class-name="col" span="6">标题</Col>
-                    <Col class-name="col" span="2">状态</Col>
-                    <Col class-name="col" span="3">创建人</Col>
+                    <Col class-name="col" span="1">状态</Col>
+                    <Col class-name="col" span="2">创建人</Col>
                     <Col class-name="col" span="2">最近操作人</Col>
                     <Col class-name="col" span="2">置顶排序</Col>
-                    <Col class-name="col" span="4">操作</Col> 
+                    <Col class-name="col" span="6">操作</Col> 
                 </Row>
                 <Row v-for="(item,index) in list" :key="item.id">
                     <Col class-name="col" span="2">{{item.typeName}}</Col>
                     <Col class-name="col" span="3" v-if="item.releaseTime == ''">  </Col>
                     <Col class-name="col" span="3" v-else>{{item.releaseTime | dateformat}}</Col>
                     <Col class-name="col" span="6">{{item.title}}</Col>
-                    <Col class-name="col" span="2">{{item.dStatus == 1 ? '在线': '已删除'}}</Col>
-                    <Col class-name="col" span="3">{{item.createUser}}</Col>
+                    <Col class-name="col" span="1">{{item.dStatus == 1 ? '在线': '已删除'}}</Col>
+                    <Col class-name="col" span="2">{{item.createUser}}</Col>
                     <Col class-name="col" span="2">{{item.updateUser}}</Col>
                     <Col class-name="col" span="2">{{item.flag}}</Col>
-                    <Col class-name="col" span="4">
+                    <Col class-name="col" span="6">
                     <template v-if="item.dStatus == 1">
                         <Button type="warning" size="small" @click="detailNews(item)">查看</Button>
                         <Button type="warning" size="small" @click="editNews(item)">编辑</Button>
