@@ -42,7 +42,7 @@
                 <Col class-name="col" span="2">{{item.buserLoginCount}}</Col>
                 <Col class-name="col" span="2">{{item.ironBuyNum}}</Col>
                 <Col class-name="col" span="2">{{item.ironBuyFinishNum}}</Col>
-                <Col class-name="col" span="2">{{item.storeOrderPercent}}%</Col>
+                <Col class-name="col" span="2">{{item.ironBuyPercent}}%</Col>
                 <Col class-name="col" span="2">{{item.storeOrderNum}}</Col>
                 <Col class-name="col" span="2">{{item.storeOrderFinishNum}}</Col>
                 <Col class-name="col" span="2">{{item.storeOrderPercent}}%</Col>

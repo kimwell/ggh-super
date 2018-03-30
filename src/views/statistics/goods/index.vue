@@ -4,6 +4,7 @@
       <RadioGroup v-model="apiData.type" type="button" @on-change="getData" style="position: relative;top:-5px;">
         <Radio v-for="btn in btns" :key="btn.value" :label="btn.value">{{ btn.name }}</Radio>
       </RadioGroup>
+      <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.downloadExcel+'?loginId='+this.ajaxHead.loginId+'&s=typeData&authorization='+this.ajaxHead.authorization+'&type='+this.apiData.type+'&startTime='+this.apiData.startTime+'&endTime='+this.apiData.endTime">导出EXCEl</a>
     </commonTemplate>
     <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="apiData.currentPage" :page-size="apiData.pageSize"></Page>
   </div>
@@ -11,6 +12,9 @@
 
 <script>
   import commonTemplate from '../commonTemplate/index.vue'
+   import {
+    mapGetters
+  } from 'vuex'
   export default {
     components: {
       commonTemplate
@@ -107,6 +111,12 @@
         let columns = this.$clearData(this.columns);
         columns[0].title = this.btns[this.apiData.type - 1].name;
         return columns
+      },
+      ajaxHead(){
+        return {
+          loginId: this.$store.state.loginId,
+          authorization: this.$store.state.authorization
+        }
       }
     },
     methods: {
@@ -137,6 +147,14 @@
 </script>
 
 <style lang="less" scoped>
-  
+  .warning{
+    display: inline-block;
+    background: #f90;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+  }
 </style>
 

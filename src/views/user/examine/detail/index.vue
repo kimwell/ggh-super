@@ -37,7 +37,7 @@
         <Col class-name="col" span="2" class="col-title">我的专员：</Col>
         <Col class-name="col" span="22">
           <Select v-model="sale" placeholder="请选择" :disabled="this.getStatus == 3 ? true: false" size="small" style="width:200px">
-            <Option v-for="item in saleman" :value="item.saleName + '-'+item.saleId + '-'+ item.saleMobile" :key="item.saleId" >{{ item.saleName }}</Option>
+            <Option v-for="item in saleman" :value="item.saleName + '-'+item.saleId + '-'+ item.saleMobile" :key="item.saleId" >{{ item.saleName }}  {{ item.saleMobile }}</Option>
           </Select>
         </Col>
       </Row>

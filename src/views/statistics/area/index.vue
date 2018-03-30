@@ -2,6 +2,7 @@
   <div>
     <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
     热门地区分析
+     <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.downloadExcel+'?loginId='+this.ajaxHead.loginId+'&s=locationData&authorization='+this.ajaxHead.authorization">导出EXCEl</a>
   </commonTemplate>
   <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="dataApi.currentPage" :page-size="dataApi.pageSize"></Page>
   </div>
@@ -10,6 +11,9 @@
 <script>
   import commonTemplate from '../commonTemplate/index.vue'
   import expandRow from './expandRow.vue';
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
     components: {
       commonTemplate,
@@ -100,6 +104,12 @@
           arr.push(item)
         });
         return arr
+      },
+      ajaxHead(){
+        return {
+          loginId: this.$store.state.loginId,
+          authorization: this.$store.state.authorization
+        }
       }
     },
     methods: {
@@ -128,3 +138,15 @@
     }
   }
 </script>
+<style lang="less" scoped>
+  .warning{
+    display: inline-block;
+    background: #f90;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+  }
+</style>
+

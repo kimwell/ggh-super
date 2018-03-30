@@ -1,4 +1,3 @@
-
 export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 
 // WebSocket链接
@@ -7,20 +6,46 @@ let host = window.location.host;
 export let ws = '';
 let commHost = ''
 if (process.env.NODE_ENV == 'development') {
-    ws = 'ws://192.168.0.252/websocket';
-    commHost = 'http://192.168.0.252'
-    
+  ws = 'ws://192.168.0.252/websocket';
+  commHost = 'http://192.168.0.134:8080'
 } else {
-    ws = 'ws://'+host+'/websocket';
+  ws = 'ws://' + host + '/websocket';
 }
 
 export const uploadApi = commHost + '/common/fileUpload/images';
+
+export const downloadExcel = commHost + '/export.jsp'
 
 /*
  * 导出专员EXCEl
  * 
  */
-export const exportsalesManData = commHost +'/sys/dataStatics/salesManData/export/excel'
+
+export const exportsalesManData = commHost + '/sys/dataStatics/salesManData/export/excel'
+
+/*
+ * 买家数据分析导出excel
+ * 
+ */
+export const exportbuyData = commHost + '/sys/dataStatics/buyData/excel'
+
+/*
+ * 卖家数据分析导出excel
+ * 
+ */
+export const exportsellData = commHost + '/sys/dataStatics/sellData/excel'
+/*
+ * 买家数据分析导出excel
+ * 
+ */
+export const exportlocationData = commHost + '/sys/dataStatics/locationData/excel'
+/*
+ * 买家数据分析导出excel
+ * 
+ */
+export const exporttypeData = commHost + '/sys/dataStatics/typeData/excel'
+
+
 /**
  * 登录
  * path: /login/userLogin
@@ -1075,8 +1100,8 @@ export const queryIronBuyInfo = '/sys/ironBuy/queryIronBuyInfo'
  * path /sys/ironBuy/deleteIronBuyInfo
  * 
  **/
- 
- export const deleteIronBuyInfo = '/sys/ironBuy/deleteIronBuyInfo'
+
+export const deleteIronBuyInfo = '/sys/ironBuy/deleteIronBuyInfo'
 
 
 // -----------------------------------商家审核管理---------------------------------
@@ -1167,4 +1192,3 @@ export const deleteStoreOrder = '/sys/storeOrder/deleteStoreOrder'
  * 超管查询订单详情
  */
 export const findStoreOrderInfo = '/sys/storeOrder/findStoreOrderInfo'
-

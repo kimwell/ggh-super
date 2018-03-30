@@ -36,7 +36,7 @@
                 <FormItem label="分类名称" prop="name">
                     <Input type="text" v-model="itemApi.name" size="small" placeholder="请输入..."></Input>
                 </FormItem>
-                <FormItem label="分类排序" prop="orderIndex">
+                <FormItem label="分类排序" class="ivu-form-item-required">
                     <Input type="text" v-model="itemApi.orderIndex" size="small" placeholder="请输入..."></Input>
                 </FormItem>
                 <FormItem label="备注说明" prop="remark">
@@ -73,11 +73,6 @@
                 },
                 rules: {
                     name: [{
-                        required: true,
-                        message: '不能为空',
-                        trigger: 'blur'
-                    }],
-                    orderIndex:[{
                         required: true,
                         message: '不能为空',
                         trigger: 'blur'
@@ -124,25 +119,29 @@
             handleSubmit() {
                 this.$refs[this.ref].validate((valid) => {
                     if (valid) {
-                        this.loading = true;
-                        let params = JSON.parse(JSON.stringify(this.itemApi));
-                        if (this.isEdit) {
-                            params.id = this.editItem.id;
-                            params.name = this.itemApi.name;
-                            params.orderIndex = this.itemApi.orderIndex;
-                            params.remark = this.itemApi.remark;
-                        }
-                        let apiUrl = this.isEdit ? this.api.saveAndUpadteArticleType : this.api.saveAndUpadteArticleType;
-                        this.$http.post(apiUrl, params).then(res => {
-                            if (res.code === 1000) {
-                                this.getList();
-                                this.$Message.success('操作成功');
-                                this.show = false;
-                            } else {
-                                this.$Message.error(res.message);
+                        if (this.itemApi.orderIndex != '') {
+                            this.loading = true;
+                            let params = JSON.parse(JSON.stringify(this.itemApi));
+                            if (this.isEdit) {
+                                params.id = this.editItem.id;
+                                params.name = this.itemApi.name;
+                                params.orderIndex = this.itemApi.orderIndex;
+                                params.remark = this.itemApi.remark;
                             }
-                            this.loading = false
-                        })
+                            let apiUrl = this.isEdit ? this.api.saveAndUpadteArticleType : this.api.saveAndUpadteArticleType;
+                            this.$http.post(apiUrl, params).then(res => {
+                                if (res.code === 1000) {
+                                    this.getList();
+                                    this.$Message.success('操作成功');
+                                    this.show = false;
+                                } else {
+                                    this.$Message.error(res.message);
+                                }
+                                this.loading = false
+                            })
+                        } else {
+                            this.$Message.error('分类排序不能为空');
+                        }
                     } else {
                         this.$Message.error('表单验证失败');
                     }
