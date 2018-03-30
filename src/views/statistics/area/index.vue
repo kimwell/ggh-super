@@ -2,7 +2,7 @@
   <div>
     <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
     热门地区分析
-     <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.downloadExcel+'?loginId='+this.ajaxHead.loginId+'&s=locationData&authorization='+this.ajaxHead.authorization">导出EXCEl</a>
+     <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=locationData&authorization='+this.ajaxHead.authorization">导出EXCEl</a>
   </commonTemplate>
   <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="dataApi.currentPage" :page-size="dataApi.pageSize"></Page>
   </div>

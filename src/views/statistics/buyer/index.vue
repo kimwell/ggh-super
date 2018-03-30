@@ -2,7 +2,7 @@
   <div>
     <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
       买家数据分析
-      <a class="warning" style="position: absolute;top:10px;right:540px;" target="_blank" :href="this.api.downloadExcel+'?loginId='+this.ajaxHead.loginId+'&s=buyData&authorization='+this.ajaxHead.authorization+'&companyName='+this.dataApi.companyName+'&startTime='+this.dataApi.startTime+'&endTime='+this.dataApi.endTime">导出EXCEl</a>
+      <a class="warning" style="position: absolute;top:10px;right:540px;" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=buyData&authorization='+this.ajaxHead.authorization+'&companyName='+this.dataApi.companyName+'&startTime='+this.dataApi.startTime+'&endTime='+this.dataApi.endTime">导出EXCEl</a>
       <div class="inputs" style="position: absolute;top:0;right:310px;">
         <Input v-model="dataApi.companyName" @on-blur="getData" placeholder="请输入买家公司名称" style="width: 200px;"></Input>
       </div>

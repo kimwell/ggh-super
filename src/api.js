@@ -7,18 +7,19 @@ export let ws = '';
 let commHost = ''
 if (process.env.NODE_ENV == 'development') {
   ws = 'ws://192.168.0.252/websocket';
-  commHost = 'http://192.168.0.134:8080'
+  commHost = 'http://192.168.0.163:8080'
 } else {
   ws = 'ws://' + host + '/websocket';
 }
 
 export const uploadApi = commHost + '/common/fileUpload/images';
 
-export const downloadExcel = commHost + '/export.jsp'
+// export const exportExcel ='http://'+ host + ':8080/export.jsp'
+export const exportExcel = commHost + '/export.jsp'
 
 /*
  * 导出专员EXCEl
- * 
+ * http://192.168.0.252/bg/statistics/countBuyer
  */
 
 export const exportsalesManData = commHost + '/sys/dataStatics/salesManData/export/excel'
