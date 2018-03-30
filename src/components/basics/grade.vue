@@ -27,6 +27,8 @@
             case '500万':
               return 'icon-icon-test'
               break;
+              default:
+              break;
           }
         }
       }

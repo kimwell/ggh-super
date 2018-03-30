@@ -22,9 +22,6 @@
             height: 40px;
             line-height: 40px;
             font-weight: bold;
-            /deep/ .grade{
-                // vertical-align: -3px;
-            } 
             .option {
                 position: absolute;
                 right: 20px;
