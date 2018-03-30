@@ -154,7 +154,21 @@ const router = new Router({
                 }, {
                     name: 'salesMan',
                     path: 'salesMan',
-                    component: resolve => require(['@/views/user/salesMan/index'], resolve)
+                    component: resolve => require(['@/views/user/salesMan/index'], resolve),
+                    redirect: 'salesMan/salesManManagement',
+                    children: [{
+                        path: 'salesManBind',
+                        name: 'salesManBind',
+                        component: resolve => require(['@/views/user/salesMan/bind/index'], resolve)
+                    },{
+                        path: 'salesManManagement',
+                        name: 'salesManManagement',
+                        component: resolve => require(['@/views/user/salesMan/management/index'], resolve)
+                    },{
+                        path: 'salesManBusiness',
+                        name: 'salesManBusiness',
+                        component: resolve => require(['@/views/user/salesMan/business/index'], resolve)
+                    }]
                 }, {
                     name: 'subaccount',
                     path: 'subaccount',

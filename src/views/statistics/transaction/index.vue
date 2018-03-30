@@ -50,6 +50,22 @@
         <p>平均有效报价</p>
         <h3>{{ allData.avgSell }}</h3>
       </div>
+      <div class="item">
+        <p>入驻商户数量</p>
+        <h3>{{allData.inBuserNum}}</h3>
+      </div>
+      <div class="item">
+        <p>客户登录数量</p>
+        <h3>{{allData.signInBuserNum}}</h3>
+      </div>
+      <div class="item">
+        <p>PV</p>
+        <h3>{{allData.pv}}</h3>
+      </div>
+      <div class="item">
+        <p>UV</p>
+        <h3>{{allData.uv}}</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -79,6 +95,10 @@ import screenHead from '../commonTemplate/screenHead.vue'
           checkOrder: 0,
           ptlb: 0,
           avgSell: 0,
+          inBuserNum: 0,
+          signInBuserNum: 0,
+          pv:0,
+          uv: 0
         }
       }
     },
@@ -100,6 +120,10 @@ import screenHead from '../commonTemplate/screenHead.vue'
             this.allData.checkOrder = res.data.checkOrder;
             this.allData.ptlb = res.data.ptlb;
             this.allData.avgSell = res.data.avgSell;
+            this.allData.inBuserNum = res.data.inBuserNum;
+            this.allData.signInBuserNum = res.data.signInBuserNum;
+            this.allData.pv = res.data.pv;
+            this.allData.uv = res.data.uv
           }
         })
       },

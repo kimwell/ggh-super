@@ -5,18 +5,22 @@ export const excelBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com/';
 let host = window.location.host;
 
 export let ws = '';
-let uploadHost = ''
+let commHost = ''
 if (process.env.NODE_ENV == 'development') {
     ws = 'ws://192.168.0.252/websocket';
-    uploadHost = 'http://192.168.0.252'
+    commHost = 'http://192.168.0.252'
     
 } else {
     ws = 'ws://'+host+'/websocket';
-    // ws = 'ws://192.168.0.252/websocket';
-    // ws = 'ws://47.97.191.14/websocket';
 }
 
-export const uploadApi = uploadHost + '/common/fileUpload/images';
+export const uploadApi = commHost + '/common/fileUpload/images';
+
+/*
+ * 导出专员EXCEl
+ * 
+ */
+export const exportsalesManData = commHost +'/sys/dataStatics/salesManData/export/excel'
 /**
  * 登录
  * path: /login/userLogin
@@ -674,6 +678,15 @@ export const getSalemanBind = '/sys/saleman/findSalemanBind'
  * path:/sys/saleman/findSalemanBind
  */
 export const findSalemanInfos = '/sys/saleman/findSalemanInfo'
+
+/*
+ * 专员信息统计
+ * 
+ */
+
+export const salesManData = '/sys/dataStatics/salesManData'
+
+
 
 /*
  * 超管查询绑定管理

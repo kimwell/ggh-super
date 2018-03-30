@@ -92,7 +92,23 @@ export default [{
             name: '平台专员管理',
             router: {
                 name: 'salesMan'
-            }
+            },
+            child:[{
+                name: '专员管理查询',
+                router: {
+                    name: '/user/salesMan/salesManManagement'
+                }
+            },{
+                name: '专员绑定管理',
+                router: {
+                    name: '/user/salesMan/salesManBind'
+                }
+            },{
+                name: '专员负责商户',
+                router: {
+                    name: '/user/salesMan/salesManBusiness'
+                }
+            }]
         }, {
             name: '商家子账号管理',
             router: {
