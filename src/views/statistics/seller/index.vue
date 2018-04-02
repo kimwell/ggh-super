@@ -1,6 +1,6 @@
 <template>
   <div class="seller">
-  <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
+  <commonTemplate :tableHead="columns" ref="comm" :tableBody="filterList" @date-pick="filterData">
     卖家数据分析
     <a class="warning" style="position: absolute;top:10px;right:540px;" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=sellData&authorization='+this.ajaxHead.authorization+'&companyName='+this.dataApi.companyName+'&startTime='+this.dataApi.startTime+'&endTime='+this.dataApi.endTime">导出EXCEl</a>
     <div class="inputs" style="position: absolute;top:0;right:310px;">
@@ -146,6 +146,7 @@
           pageSize: 10,
           companyName: ''
         }
+        this.$refs.comm.$children[0].clearData();
         this.getData();
       }
     },

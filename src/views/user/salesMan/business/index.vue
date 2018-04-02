@@ -15,7 +15,7 @@
           <Button type="warning" @click.native="resetFilter">清除</Button>
         </FormItem>
         <FormItem>
-          <Button type="warning" @click.native="downloadExcel">导出EXCEL</Button>
+          <a class="warning" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=salesManData&authorization='+this.ajaxHead.authorization+'&saleId='+this.filterData.saleId+'&startTime='+this.filterData.startTime+'&endTime='+this.filterData.endTime">导出EXCEL</a>
         </FormItem>
       </Form>
       <div class="panel">
@@ -60,6 +60,9 @@
 </template>
 
 <script>
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
     data() {
       return {
@@ -125,6 +128,12 @@
       },
       todayEnd() {
         return new Date(this.todayEndTime)
+      },
+      ajaxHead(){
+        return {
+          loginId: this.$store.state.loginId,
+          authorization: this.$store.state.authorization
+        }
       }
     },
     watch: {
@@ -164,10 +173,6 @@
           }
         })
       },
-      //  导出excel
-      downloadExcel() {
-        window.location.href = this.api.exportsalesManData
-      },
       getToday() {
         this.filterApi.startTime = this.todayStartTime;
         this.filterApi.endTime = this.todayEndTime;
@@ -187,7 +192,15 @@
   .panel-title {
     font-size: 16px;
   }
-  
+  .warning{
+    display: inline-block;
+    background: #f90;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+  }
   .card {
     position: relative;
     margin-bottom: 20px;

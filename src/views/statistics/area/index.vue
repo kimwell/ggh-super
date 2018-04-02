@@ -1,8 +1,9 @@
 <template>
   <div>
-    <commonTemplate :tableHead="columns" :tableBody="filterList" @date-pick="filterData">
+    <commonTemplate :tableHead="columns" ref="comm" :tableBody="filterList" @date-pick="filterData">
     热门地区分析
      <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=locationData&authorization='+this.ajaxHead.authorization">导出EXCEl</a>
+     <a @click="reset" style="position: absolute;top:0;right:10px;">清除筛选</a>
   </commonTemplate>
   <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="dataApi.currentPage" :page-size="dataApi.pageSize"></Page>
   </div>
@@ -130,6 +131,16 @@
       },
       pageChange(page){
         this.dataApi.currentPage = page;
+        this.getData();
+      },
+      reset(){
+        this.$refs.comm.$children[0].clearData();
+        this.dataApi = {
+          startTime: '',
+          endTime: '',
+          currentPage: 1,
+          pageSize: 10
+        }
         this.getData();
       }
     },

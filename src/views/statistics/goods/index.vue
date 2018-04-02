@@ -1,10 +1,11 @@
 <template>
   <div>
-    <commonTemplate :tableHead="filterColums" :tableBody="filterList" @date-pick="filterData">
+    <commonTemplate ref="comm" :tableHead="filterColums" :tableBody="filterList" @date-pick="filterData">
       <RadioGroup v-model="apiData.type" type="button" @on-change="getData" style="position: relative;top:-5px;">
         <Radio v-for="btn in btns" :key="btn.value" :label="btn.value">{{ btn.name }}</Radio>
       </RadioGroup>
       <a class="warning" style="position: absolute;top:10px;right:320px;" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=typeData&authorization='+this.ajaxHead.authorization+'&type='+this.apiData.type+'&startTime='+this.apiData.startTime+'&endTime='+this.apiData.endTime">导出EXCEl</a>
+      <a @click="reset" style="position: absolute;top:0;right:10px;">清除筛选</a>
     </commonTemplate>
     <Page style="margin-top:10px;float:right" :total="totalCount" @on-change="pageChange" show-total :current="apiData.currentPage" :page-size="apiData.pageSize"></Page>
   </div>
@@ -137,6 +138,18 @@
       },
       pageChange(page){
         this.apiData.currentPage = page;
+        this.getData();
+      },
+      reset(){
+        this.$refs.comm.$children[0].clearData();
+        this.apiData = {
+          type: 1,
+          startTime: '',
+          endTime: '',
+          currentPage: 1,
+          pageSize: 10,
+          sort: 0
+        },
         this.getData();
       }
     },

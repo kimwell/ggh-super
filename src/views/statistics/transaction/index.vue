@@ -1,6 +1,6 @@
 <template>
   <div class="data-container">
-    <screenHead @date-change="filterData">平台数据分析</screenHead>
+    <screenHead @date-change="filterData" ref="comm">平台数据分析<a @click="reset" style="position: absolute;top:0;right:10px;">清除筛选</a></screenHead>
     <div class="allData clearfix">
       <div class="item">
         <p>求购成交率</p>
@@ -130,6 +130,14 @@ import screenHead from '../commonTemplate/screenHead.vue'
       filterData(data){
         this.apiData.startTime = data.startTime;
         this.apiData.endTime = data.endTime;
+        this.getData();
+      },
+      reset(){
+        this.$refs.comm.clearData()
+        this.apiData = {
+          startTime: '',
+          endTime: ''
+        }
         this.getData();
       }
     },

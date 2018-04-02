@@ -20,6 +20,9 @@
                     endTime: val[1] != '' && val[1] != undefined ? new Date(val[1]).getTime() : '',
                 }
                 this.$emit('date-change',data);
+            },
+            clearData(){
+                this.dateValue = ['','']
             }
         }
     }

@@ -143,6 +143,9 @@
                         </Radio>
                     </RadioGroup>
                 </FormItem>
+                <FormItem label="加入联盟时间" v-if="editData.isSellUser == 1">
+                    {{ activeItem.beBuserTime | dateformat}}
+                </FormItem>
                 <!--<FormItem label="担保商家">
                         <i-switch size="large" v-model="editData.isGuaranteeUser">
                             <span slot="open">是</span>
