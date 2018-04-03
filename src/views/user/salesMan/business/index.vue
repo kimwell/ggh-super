@@ -15,7 +15,7 @@
           <Button type="warning" @click.native="resetFilter">清除</Button>
         </FormItem>
         <FormItem>
-          <a class="warning" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=salesManData&authorization='+this.ajaxHead.authorization+'&saleId='+this.filterData.saleId+'&startTime='+this.filterData.startTime+'&endTime='+this.filterData.endTime">导出EXCEL</a>
+          <a class="warning" target="_blank" :href="this.api.exportExcel+'?loginId='+this.ajaxHead.loginId+'&s=salesManData&authorization='+this.ajaxHead.authorization+'&saleId='+this.filterApi.saleId+'&startTime='+this.filterApi.startTime+'&endTime='+this.filterApi.endTime">导出EXCEL</a>
         </FormItem>
       </Form>
       <div class="panel">

@@ -5,46 +5,20 @@ let host = window.location.host;
 
 export let ws = '';
 let commHost = ''
+export let exportExcel = ''
 if (process.env.NODE_ENV == 'development') {
   ws = 'ws://192.168.0.252/websocket';
-  commHost = 'http://192.168.0.163:8080'
+  commHost = 'http://192.168.0.252'
+  exportExcel = 'http://192.168.0.164:8080/export.jsp'
 } else {
   ws = 'ws://' + host + '/websocket';
+  exportExcel = 'http://' + host + ':8080/export.jsp'
 }
 
 export const uploadApi = commHost + '/common/fileUpload/images';
 
 // export const exportExcel ='http://'+ host + ':8080/export.jsp'
-export const exportExcel = commHost + '/export.jsp'
-
-/*
- * 导出专员EXCEl
- * http://192.168.0.252/bg/statistics/countBuyer
- */
-
-export const exportsalesManData = commHost + '/sys/dataStatics/salesManData/export/excel'
-
-/*
- * 买家数据分析导出excel
- * 
- */
-export const exportbuyData = commHost + '/sys/dataStatics/buyData/excel'
-
-/*
- * 卖家数据分析导出excel
- * 
- */
-export const exportsellData = commHost + '/sys/dataStatics/sellData/excel'
-/*
- * 买家数据分析导出excel
- * 
- */
-export const exportlocationData = commHost + '/sys/dataStatics/locationData/excel'
-/*
- * 买家数据分析导出excel
- * 
- */
-export const exporttypeData = commHost + '/sys/dataStatics/typeData/excel'
+// export const exportExcel = commHost + '/export.jsp'
 
 
 /**
@@ -1128,7 +1102,7 @@ export const getBuserInfoByUserId = '/sys/buserInfo/getBuserInfoByUserId'
 export const findSalemanInfo = '/api/bregist/findSalemanInfo'
 
 
-
+export const buserData = '/sys/dataStatics/buserData'
 /**
  * 查询关联规格
  * @params surface ironType

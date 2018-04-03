@@ -26,6 +26,9 @@
                 }, {
                     name: '专员负责商户',
                     pathName: 'salesManBusiness',
+                }, {
+                    name: '商户使用分析',
+                    pathName: 'businessUse',
                 }]
             }
         }

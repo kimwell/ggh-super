@@ -66,6 +66,10 @@
         <p>UV</p>
         <h3>{{allData.uv}}</h3>
       </div>
+      <div class="item">
+        <p>新增诚信用户数量</p>
+        <h3>{{allData.isSellNum}}</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -98,7 +102,8 @@ import screenHead from '../commonTemplate/screenHead.vue'
           inBuserNum: 0,
           signInBuserNum: 0,
           pv:0,
-          uv: 0
+          uv: 0,
+          isSellNum: 0
         }
       }
     },
@@ -123,7 +128,8 @@ import screenHead from '../commonTemplate/screenHead.vue'
             this.allData.inBuserNum = res.data.inBuserNum;
             this.allData.signInBuserNum = res.data.signInBuserNum;
             this.allData.pv = res.data.pv;
-            this.allData.uv = res.data.uv
+            this.allData.uv = res.data.uv;
+            this.allData.isSellNum = res.data.isSellNum
           }
         })
       },

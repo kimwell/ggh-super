@@ -168,6 +168,10 @@ const router = new Router({
                         path: 'salesManBusiness',
                         name: 'salesManBusiness',
                         component: resolve => require(['@/views/user/salesMan/business/index'], resolve)
+                    },{
+                        path: 'businessUse',
+                        name: 'businessUse',
+                        component: resolve => require(['@/views/user/salesMan/use/index'],resolve)
                     }]
                 }, {
                     name: 'subaccount',

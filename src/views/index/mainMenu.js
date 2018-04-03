@@ -108,6 +108,11 @@ export default [{
                 router: {
                     name: '/user/salesMan/salesManBusiness'
                 }
+            },{
+                name: '商户使用分析',
+                router: {
+                    name: '/user/salesMan/businessUse'
+                }
             }]
         }, {
             name: '商家子账号管理',
