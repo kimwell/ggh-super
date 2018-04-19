@@ -7,8 +7,8 @@ export let ws = '';
 let commHost = ''
 export let exportExcel = ''
 if (process.env.NODE_ENV == 'development') {
-  ws = 'ws://192.168.0.252/websocket';
-  commHost = 'http://192.168.0.252'
+  ws = 'ws://192.168.0.251/websocket';
+  commHost = 'http://192.168.0.251:90'
   exportExcel = 'http://192.168.0.164:8080/export.jsp'
 } else {
   ws = 'ws://' + host + '/websocket';
@@ -1035,6 +1035,12 @@ export const findNotSellBuser = '/sys/ironSellSelect/findNotSellBuser'
 
 export const saveIronSellSelect = '/sys/ironSellSelect/saveIronSellSelect'
 
+/**
+ * 超管一键推荐报价
+ * path /sys/ironSellSelect/saveIronSellSelect/auto
+ **/
+
+export const saveIronSellSelectAuto = '/sys/ironSellSelect/saveIronSellSelect/auto'
 
 /**
  * 超管查询已处理订单

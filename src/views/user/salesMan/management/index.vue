@@ -38,7 +38,7 @@
                                 <Col class-name="col" span="24">暂无数据</Col>
                             </Row>
                         </div>
-                        <Page class="page-count" size="small" :total="totalCount" :page-size="filterData.pageSize" @on-change="changePage"></Page>
+                        <Page class="page-count" size="small" show-total :total="totalCount" :page-size="filterData.pageSize" @on-change="changePage"></Page>
                     </div>
                 </Card>
             </div> 

@@ -219,6 +219,9 @@
         height: 40px;
         border-right: 1px solid #d0d0d0;
         border-bottom: 1px solid #d0d0d0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     .page-count {

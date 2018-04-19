@@ -23,6 +23,9 @@
                         <FormItem label="买家公司：" class="magin0">
                             <Input type="text" v-model="detail.companyName" placeholder="请输入..."></Input>
                         </FormItem>
+                        <FormItem label="求购编号" class="magin0">
+                            <Input type="text" v-model="detail.ironBuyId" placeholder="请输入..."></Input>
+                        </FormItem>
                         <FormItem label="求购时间：" class="magin0">
                             <DatePicker type="daterange" :options="dateOption" :clearable="false" v-model="dateValue" placement="bottom-end" placeholder="选择日期"></DatePicker>
                         </FormItem>
@@ -199,7 +202,8 @@ import City from '@/components/basics/adress/citySelect.vue'
                     specificaton:'',
                     tolerance:'',
                     bgStatus:'',
-                    buserHave: ''
+                    buserHave: '',
+                    ironBuyId:''
                 },
                 dateValue: ['', ''],
                 dateOption: {
@@ -262,6 +266,7 @@ import City from '@/components/basics/adress/citySelect.vue'
                 data.tolerance = this.detail.tolerance
                 data.bgStatus = this.detail.bgStatus
                 data.buserHave = this.detail.buserHave
+                data.ironBuyId = this.detail.ironBuyId
                 return data
             },
             placeHolder(){
@@ -288,7 +293,8 @@ import City from '@/components/basics/adress/citySelect.vue'
                     specificaton:'',
                     tolerance:'',
                     bgStatus: '',
-                    buserHave: ''
+                    buserHave: '',
+                    ironBuyId: ''
                 }
                 this.dateValue = ['','']
                 this.$refs.city.clearData()

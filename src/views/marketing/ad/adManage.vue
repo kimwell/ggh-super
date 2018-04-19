@@ -1,7 +1,9 @@
 <template>
     <div class="ad-container">
         <Card v-for="(item,index) in allAdList" :key="item.groupId" style="margin-bottom:10px">
-            <p slot="title">{{ item.groupName }}<Icon class="preview" type="eye" @click.native="imgView(item.previewImg)"></Icon></p>
+            <p slot="title">{{ item.groupName }}
+                <Icon class="preview" type="eye" @click.native="imgView(item.previewImg)"></Icon>
+            </p>
             <div slot="extra" style="margin-top:-4px">
                 <!-- <Button type="info" icon="code-download" style="margin-right:10px" @click="testData(item.groupId)">测试</Button> -->
                 <Button type="error" icon="trash-a" style="margin-right:10px" @click.native="delGroup(index,item.groupId)">删除</Button>
@@ -9,7 +11,8 @@
                 <Button type="primary" icon="android-upload" :loading="false" @click.native="undateGroup(item)">保存</Button>
             </div>
             <div class="content">
-                <AdItem v-for="(subItem,i) in item.adList" :item="{url:subItem.url,goupIndex: index,itemIndex: i,width: item.width,height: item.height, defaultImg: item.defaultImg,id: subItem.id,groupId: item.groupId}" @on-delete="removeAd" @on-remove="removeAdBg" @on-upload="undateItem" :key="subItem.id"></AdItem>
+                <AdItem v-for="(subItem,i) in item.adList" :item="{url:subItem.url,goupIndex: index,itemIndex: i,width: item.width,height: item.height, defaultImg: item.defaultImg,id: subItem.id,groupId: item.groupId}" @on-delete="removeAd" @on-remove="removeAdBg" @on-upload="undateItem"
+                    :key="subItem.id"></AdItem>
                 <div class="add-one-btn" :style="{height:item.height+'px',lineHeight:item.height +'px'}">
                     <div class="cover">
                         <Button type="primary" icon="plus-round" @click.native="addAd(index,item.groupId)">添加广告位</Button>
@@ -41,14 +44,14 @@
                 </FormItem>
                 <FormItem label="默认背景图">
                     <Input v-model="groupApiData.defaultImg" size="small" placeholder="输入图片地址或上传"></Input>
-                    <Upload style="display:inline-block" :action="api.uploadApi" :show-upload-list="false" :format="['jpg','jpeg','png']" :max-size="2048" :on-success="defaultImgSuccess">
+                    <Upload style="display:inline-block" :action="api.uploadApi" :headers="uplaodHeader" :show-upload-list="false" :format="['jpg','jpeg','png']" :max-size="2048" :on-success="defaultImgSuccess">
                         <Button type="ghost" icon="ios-cloud-upload-outline">上传图片</Button>
                     </Upload>
                     <Button type="ghost" v-show="groupApiData.defaultImg!=''" icon="eye" @click="imgView(groupApiData.defaultImg)">预览</Button>
                 </FormItem>
                 <FormItem label="效果对比图">
                     <Input v-model="groupApiData.previewImg" size="small" placeholder="输入图片地址或上传"></Input>
-                    <Upload style="display:inline-block" :action="api.uploadApi" :show-upload-list="false" :format="['jpg','jpeg','png']" :max-size="2048" :on-success="previewImgSuccess">
+                    <Upload style="display:inline-block" :action="api.uploadApi" :headers="uplaodHeader" :show-upload-list="false" :format="['jpg','jpeg','png']" :max-size="2048" :on-success="previewImgSuccess">
                         <Button type="ghost" icon="ios-cloud-upload-outline">上传图片</Button>
                     </Upload>
                     <Button type="ghost" v-show="groupApiData.previewImg!=''" icon="eye" @click="imgView(groupApiData.previewImg)">预览</Button>
@@ -89,6 +92,15 @@
                 mode: false
             }
         },
+        computed: {
+            //  设置文件上传headers
+            uplaodHeader() {
+                return {
+                    authorization: this.$store.state.authorization,
+                    loginId: this.$store.state.loginId
+                }
+            },
+        },
         methods: {
             //获取所有广告
             getAll() {
@@ -120,7 +132,7 @@
                 }
             },
             // 编辑广告位分组信息
-            editGroupApi(data){
+            editGroupApi(data) {
                 let index = data.index;
                 this.$http.post(this.api.editGroup, data).then(res => {
                     if (res.code === 1000) {
@@ -131,7 +143,7 @@
                         this.allAdList[index].previewImg = data.previewImg;
                         this.addShow = false;
                         this.mode = false;
-                        this.$delete(data,'index');
+                        this.$delete(data, 'index');
                         this.resetGroupData();
                         this.$Message.success({
                             content: '修改成功！'
@@ -157,7 +169,7 @@
                     content: '此操作将无法撤销，是否继续？',
                     cancelText: '再考虑下',
                     okText: '确认删除',
-                    onOk:() => {
+                    onOk: () => {
                         this.$http.post(this.api.delAdGroup, {
                             groupId: groupId
                         }).then(res => {
@@ -172,7 +184,7 @@
                 })
             },
             // 编辑广告分组
-            editGroup(item,index) {
+            editGroup(item, index) {
                 this.groupApiData = {
                     groupName: item.groupName,
                     adNums: item.adList.length,
@@ -181,8 +193,8 @@
                     defaultImg: item.defaultImg,
                     previewImg: item.previewImg
                 }
-                this.$set(this.groupApiData,'id',item.groupId);
-                this.$set(this.groupApiData,'index',index);
+                this.$set(this.groupApiData, 'id', item.groupId);
+                this.$set(this.groupApiData, 'index', index);
                 this.mode = true;
                 this.addShow = true;
             },
@@ -224,7 +236,7 @@
                     defaultImg: '',
                     previewImg: ''
                 }
-                this.$delete(this.groupApiData,'id');
+                this.$delete(this.groupApiData, 'id');
             },
             //上传图片后更新item数据
             undateItem(data) {
@@ -246,7 +258,7 @@
                     content: '此操作将无法撤销，是否继续？',
                     cancelText: '再考虑下',
                     okText: '确认删除',
-                    onOk:() => {
+                    onOk: () => {
                         this.$http.post(this.api.removeAd, {
                             id: data.id,
                             groupId: data.groupId
@@ -262,7 +274,7 @@
                 })
             },
             // 删除广告位图片
-            removeAdBg(data){
+            removeAdBg(data) {
                 this.allAdList[data.goupIndex].adList[data.itemIndex].url = '';
             }
         },
@@ -275,7 +287,7 @@
 
 <style lang="less" scoped>
     .ad-container {
-        .preview{
+        .preview {
             margin-left: 20px;
             font-size: 18px;
             cursor: pointer;

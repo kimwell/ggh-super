@@ -2,7 +2,7 @@
     <div class="upload-1" :style="{width:item.width+'px',height:item.height+'px'}">
         <img :src="item.url === '' ? item.defaultImg : item.url">
         <div class="action-cover" :style="{lineHeight:item.height+ 15 +'px'}">
-            <Upload class="btn-grop" :show-upload-list="false" :format="['jpg','jpeg','png','gif']" :max-size="2048" :on-success="uploadSuccess" :action="api.uploadApi">
+            <Upload class="btn-grop" :show-upload-list="false" :headers="uplaodHeader" :format="['jpg','jpeg','png','gif']" :max-size="2048" :on-success="uploadSuccess" :action="api.uploadApi">
                 <Icon :type="item.url === '' ? 'ios-cloud-upload' : 'ios-loop-strong'"></Icon>
             </Upload>
             <Icon type="trash-a" @click.native="removeImg"></Icon>
@@ -28,6 +28,15 @@
                 }
             }
         },
+        computed: {
+            //  设置文件上传headers
+            uplaodHeader() {
+                return {
+                    authorization: this.$store.state.authorization,
+                    loginId: this.$store.state.loginId
+                }
+            },
+        },
         methods: {
             // 上传成功回调
             uploadSuccess(res) {
@@ -41,7 +50,7 @@
                 this.$emit('on-delete', this.item)
             },
             // 清空图片
-            removeImg(){
+            removeImg() {
                 this.$emit('on-remove', this.item)
             }
         }
@@ -70,7 +79,7 @@
             right: 0;
             top: 0;
             background: red;
-            padding:3px;
+            padding: 3px;
             cursor: pointer;
         }
         .action-cover {
@@ -95,7 +104,8 @@
             }
         }
         &:hover {
-            .action-cover,.remove-item {
+            .action-cover,
+            .remove-item {
                 display: block;
             }
         }

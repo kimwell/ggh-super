@@ -41,6 +41,29 @@
             }
         }
     }
+    .previewImg{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        color: #fff;
+        text-align: right;
+        padding-right: 20px;
+        background-color: rgba(0, 0, 0, .6);
+        span{
+            cursor: pointer;
+        }
+    }
+    .prveimg{
+        text-align: center;
+        img{
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
 </style>
 
 <template>
@@ -124,8 +147,17 @@
     
         <Modal title="商家详情编辑" v-model="showEdit" loading :mask-closable="false" @on-ok="edit">
             <Form :label-width="100">
-                <FormItem label="商户名称" v-if="activeItem">
-                    {{ activeItem.companyName }}
+                <FormItem label="商户名称">
+                    <Input v-model="editData.companyName" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="注册资金">
+                    <Input v-model="editData.regMoney" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="联系人">
+                    <Input v-model="editData.contact" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="联系方式">
+                    <Input v-model="editData.contactNum" placeholder="请输入..."></Input>
                 </FormItem>
                 <!-- <FormItem label="诚信商家">
                         <i-switch size="large" v-model="editData.isFaithUser">
@@ -143,8 +175,8 @@
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="加入联盟时间" v-if="editData.isSellUser == 1">
-                    {{ activeItem.beBuserTime | dateformat}}
+                <FormItem label="加入联盟时间" v-if="editData.isSellUser == 1 && activeItem.beUserTime !=''">
+                    {{ activeItem.beUserTime | dateformat}}
                 </FormItem>
                 <!--<FormItem label="担保商家">
                         <i-switch size="large" v-model="editData.isGuaranteeUser">
@@ -169,23 +201,53 @@
                     </FormItem> -->
     
                 <FormItem label="保证金等级">
-                    <Select v-model="editData.marginLevel" style="width:200px">
+                    <Select v-model="editData.marginLevel" placeholder="请选择" :clearable="true" style="width:200px">
                         <Option v-for="item in marginLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
                     </Select>
                 </FormItem>
                 <FormItem label="求购等级">
-                    <Select v-model="editData.purchaseLevel" style="width:200px">
-                        <Option v-for="item in purchaseLevelList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                    <Select v-model="editData.purchaseLevel" placeholder="请选择" :clearable="true" style="width:200px">
+                        <Option v-for="item in purchaseLevelList"  :value="item.name" :key="item.id">{{ item.name }}</Option>
                     </Select>
                 </FormItem>
                 <FormItem label="QQ">
                     <Input v-model="editData.qq" placeholder="请输入qq"></Input>
                 </FormItem>
                 <FormItem label="仓库">
-                    <ajaxSelect class="form-input" :api="api.getStroeHouse" :value="editData.storeHouseId+'-'+editData.storeHouseName" @on-select="asyncStore"></ajaxSelect>
+                    <Select v-model="editData.storeHouseName" placeholder="请选择" :clearable="true" style="width:200px">
+                        <Option v-for="item in houseList" :value="`${item.name}-${item.id}`" :key="item.id">{{ item.name }}</Option>
+                    </Select>
+                    <!-- <ajaxSelect class="form-input" :api="api.getStroeHouse" :value="editData.storeHouseId+'-'+editData.storeHouseName" @on-select="asyncStore"></ajaxSelect> -->
                 </FormItem>
                 <FormItem label="商户优惠信息">
                     <Input type="textarea" :autosize="{minRows: 2,maxRows: 5}" v-model="editData.proInfo" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="店铺详情">
+                    <Input type="textarea" :autosize="{minRows: 2,maxRows: 5}" v-model="editData.sellerProfile" placeholder="请输入..."></Input>
+                </FormItem>
+                <FormItem label="三证合一照" v-if="activeItem.allCer !=''">
+                    <img :src="activeItem.allCer" style="max-width: 100%;">
+                    <div class="previewImg">
+                        <span class="iconfont icon-fangda"  @click="previewImg(activeItem.allCer)"></span>
+                    </div>
+                </FormItem>
+                <FormItem label="营业执照" v-if="activeItem.bussinessLic !=''">
+                    <img :src="activeItem.bussinessLic"  style="max-width: 100%;">
+                    <div class="previewImg">
+                        <span class="iconfont icon-fangda"  @click="previewImg(activeItem.bussinessLic)"></span>
+                    </div>
+                </FormItem>
+                <FormItem label="组织机构代码证" v-if="activeItem.codeLic !=''">
+                    <img :src="activeItem.codeLic"  style="max-width: 100%;">
+                    <div class="previewImg">
+                        <span @click="previewImg(activeItem.codeLic)" class="iconfont icon-fangda"></span>
+                    </div>
+                </FormItem>
+                <FormItem label="税务登记证" v-if="activeItem.financeLic !=''">
+                    <img :src="activeItem.financeLic"  style="max-width: 100%;">
+                    <div class="previewImg">
+                        <span class="iconfont icon-fangda" @click="previewImg(activeItem.financeLic)"></span>
+                    </div>
                 </FormItem>
             </Form>
         </Modal>
@@ -196,7 +258,7 @@
             <union v-if="unionItem" :unionData="unionItem" ref="union"></union>
             <div slot="footer"></div>
         </Modal>
-        <Modal title="修改商家账号" widh="500" v-model="modityShow" :mask-closable="false" @on-cancel="resetmodi">
+        <Modal title="修改商家账号" width="500" v-model="modityShow" :mask-closable="false" @on-cancel="resetmodi">
             <Form :label-width="100" :ref="ref" :model="modityApi" :rules="rules">
                 <FormItem label="旧账号">
                     <Input v-model="modityApi.originalMobile" placeholder="请输入..."></Input>
@@ -217,6 +279,14 @@
                 <Button type="primary" @click="saveAccount" :loading="loading">修改</Button>
             </div>
         </Modal>
+        <Modal title="查看大图" width="800" v-model="showImg" :mask-closable="false" >
+            <div class="prveimg" v-if="showImgUrl !=''">
+                <img :src="showImgUrl">
+            </div>
+            <div slot="footer">
+                <Button @click="showImg = false">关闭</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -234,6 +304,8 @@
         },
         data() {
             return {
+                showImg: false,
+                showImgUrl: '',
                 ref: 'form' + new Date().getTime(),
                 showEdit: false,
                 showRange: false,
@@ -259,6 +331,8 @@
                 marginLevelList: [],
                 purchaseLevelList: [],
                 editData: {
+                    companyName: '',
+                    regMoney: '',
                     companyId: '',
                     isFaithUser: false,
                     isGuaranteeUser: false,
@@ -270,7 +344,10 @@
                     proInfo: '',
                     marginLevel: '',
                     purchaseLevel: '',
-                    isSellUser: '0'
+                    isSellUser: '0',
+                    sellerProfile: '',
+                    contactNum: '',
+                    contactNum: '',
                 },
                 dateOption: {
                     shortcuts: [{
@@ -361,6 +438,10 @@
             }
         },
         methods: {
+            previewImg(data){
+                this.showImgUrl = data;
+                this.showImg = true;
+            },
             // 商户列表
             getBusinesses() {
                 this.$http.post(this.api.getBusiness, this.pipApi).then(res => {
@@ -395,7 +476,7 @@
             showInfo(i) {
                 // this.getAllMarginLevel();
                 this.getAllPurchaseLevel();
-                // this.getStroeHouse();
+                this.getStroeHouse();
                 this.activeIndex = i;
                 let data = _.cloneDeep(this.activeItem);
                 this.editData.companyId = data.id;
@@ -404,11 +485,16 @@
                 this.editData.isHaveShop = data.isHaveShop == 1;
                 this.editData.proInfo = data.proInfo;
                 this.editData.storeHouseId = data.storeHouseId;
-                this.editData.storeHouseName = data.storeHouseName;
+                this.editData.storeHouseName = this.activeItem.storeHouseName !=''? data.storeHouseName +'-'+data.storeHouseId:'';
                 this.editData.marginLevel = data.marginLevel;
                 this.editData.purchaseLevel = data.purchaseLevel;
                 this.editData.isSellUser = data.isSellUser;
+                this.editData.sellerProfile = data.sellerProfile;
                 this.editData.qq = data.qq;
+                this.editData.companyName = data.companyName,
+                this.editData.regMoney = data.regMoney,
+                this.editData.contact = data.contact,
+                this.editData.contactNum = data.contactNum,
                 this.showEdit = true;
             },
             showRangeInfo(index) {
@@ -424,6 +510,14 @@
                 params.isFaithUser = params.isFaithUser ? 1 : 0;
                 params.isGuaranteeUser = params.isGuaranteeUser ? 1 : 0;
                 params.isHaveShop = params.isHaveShop ? 1 : 0;
+                if(this.editData.storeHouseName != ''){
+                    let stores = this.editData.storeHouseName.split('-');
+                    params.storeHouseName = stores[0]
+                    params.storeHouseId = stores[1]
+                }else{
+                    params.storeHouseName = ''
+                    params.storeHouseId = ''
+                }
                 this.$http.post(this.api.eidtBusiness, params).then(res => {
                     if (res.code === 1000) {
                         this.$Message.success('修改成功！');

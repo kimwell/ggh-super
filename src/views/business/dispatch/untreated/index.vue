@@ -5,7 +5,7 @@
     <div class="data-list">
       <div class="list-card" v-for="(item,i) in list" :key="i">
         <div class="card-head">
-          <span>商户名称：{{item.companyName}}</span>
+          <span>商户名称：{{item.companyName}}</span><span style="margin-left:20px;">求购编号：{{item.ironBuyId}}</span>
           <div class="action"><a @click="detailAction(item)">查看报价</a><a @click="offerAction(item)">查看剩余可报价量</a></div>
         </div>
         <div class="card-body clearfix">

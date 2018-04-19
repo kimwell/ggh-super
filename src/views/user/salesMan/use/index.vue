@@ -65,7 +65,7 @@
                             <Col class-name="col" span="24">暂无数据</Col>
                         </Row>
                     </div>
-                    <Page class="page-count" size="small" :total="totalCount" :page-size="filterData.pageSize" @on-change="changePage"></Page>
+                    <Page class="page-count" size="small" :total="totalCount" show-total :page-size="filterData.pageSize" @on-change="changePage"></Page>
                 </div>
             </Card>
           </div> 
@@ -245,6 +245,9 @@
         height: 40px;
         border-right: 1px solid #d0d0d0;
         border-bottom: 1px solid #d0d0d0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     .page-count {
