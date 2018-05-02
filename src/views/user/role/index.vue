@@ -104,7 +104,7 @@
           </tr>
         </tbody>
       </table>
-      <Page class="page-count" size="small" :current="filterData.currentPage" :page-size="filterData.pageSize" :total="totalCount" @on-change="setPage"></Page>
+      <Page class="page-count" size="small" :current="filterData.currentPage" show-total :page-size="filterData.pageSize" :total="totalCount" @on-change="setPage"></Page>
     </div>
   
     <!-- 添加、修改用户 -->
@@ -230,8 +230,10 @@
       // 获取用户列表
       getAllList() {
         this.$http.post(this.api.userList, this.filterData).then(res => {
-          this.listData = res.data.list;
-          this.totalCount = res.data.totalCount;
+          if(res.code === 1000){
+            this.listData = res.data.list;
+            this.totalCount = res.data.totalCount;
+          }
         })
       },
       // 分页
