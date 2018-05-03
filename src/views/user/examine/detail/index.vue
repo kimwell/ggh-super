@@ -44,7 +44,7 @@
       <Row>
         <Col class-name="col" span="2" class="col-title">店铺封面：</Col>
         <Col class-name="col" span="22">
-          <div class="preview" style="width:200px;">
+          <div class="preview" style="width:200px;" v-if="item.cover !=''"> 
             <img :src="item.cover" style="max-width: 100%;" />
             <span class="pre-bottom"><i class="iconfont icon-fangda" @click="showPreview(item.cover)"></i></span>
           </div>
