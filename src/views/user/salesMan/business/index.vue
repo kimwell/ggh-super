@@ -25,7 +25,8 @@
               <Row class-name="head">
                 <Col class-name="col" span="3">平台专员</Col>
                 <Col class-name="col" span="3">专员账号</Col>
-                <Col class-name="col" span="2">新绑商户数</Col>
+                <Col class-name="col" span="2">总绑定用户数</Col>
+                <Col class-name="col" span="2">注册商户数</Col>
                 <Col class-name="col" span="2">有效登录数</Col>
                 <Col class-name="col" span="2">求购数</Col>
                 <Col class-name="col" span="2">求购成交数</Col>
@@ -33,11 +34,11 @@
                 <Col class-name="col" span="2">订单数量</Col>
                 <Col class-name="col" span="2">订单完成数</Col>
                 <Col class-name="col" span="2">订单完成率</Col>
-                <Col class-name="col" span="2">总绑定用户数</Col>
               </Row>
               <Row v-for="(item,index) in listData" :key="item.id">
                 <Col class-name="col" span="3">{{item.userName}}</Col>
                 <Col class-name="col" span="3">{{item.userMobile}}</Col>
+                <Col class-name="col" span="2">{{item.totalBindUserNum}}</Col>
                 <Col class-name="col" span="2">{{item.newBindBuserNum}}</Col>
                 <Col class-name="col" span="2">{{item.buserLoginCount}}</Col>
                 <Col class-name="col" span="2">{{item.ironBuyNum}}</Col>
@@ -46,12 +47,12 @@
                 <Col class-name="col" span="2">{{item.storeOrderNum}}</Col>
                 <Col class-name="col" span="2">{{item.storeOrderFinishNum}}</Col>
                 <Col class-name="col" span="2">{{item.storeOrderPercent}}%</Col>
-                <Col class-name="col" span="2">{{item.totalBindUserNum}}</Col>
               </Row>
               <Row v-if="listData.length == 0">
                 <Col class-name="col" span="24">暂无数据</Col>
               </Row>
             </div>
+            <div style="text-align:right;padding-top:20px;"><span style="display:inline-block;margin-right:20px;">共{{totalCount}}专员</span>新注册商户总数:{{totalNum}}</div>
           </div>
         </Card>
       </div>
@@ -74,6 +75,7 @@
           startTime: '',
           endTime: '',
         },
+        totalNum: 0,
         dataValue: ['', ''],
         dateOption: {
           shortcuts: [{
@@ -165,7 +167,9 @@
       getList() {
         this.$http.post(this.api.salesManData, this.filterApi).then(res => {
           if (res.code === 1000) {
-            this.listData = res.data;
+            this.listData = res.data.data;
+            this.totalNum = res.data.totalNewBuserNum;
+            this.totalCount = res.data.totalCount
             this.listData.forEach(el => {
               el.storeOrderPercent = Number(el.storeOrderPercent).toFixed(2);
               el.ironBuyPercent = Number(el.ironBuyPercent).toFixed(2)

@@ -36,7 +36,7 @@
       <Row>
         <Col class-name="col" span="2" class="col-title">我的专员：</Col>
         <Col class-name="col" span="22">
-          <Select v-model="sale" placeholder="请选择" :disabled="this.getStatus == 3 ? true: false" size="small" style="width:200px">
+          <Select v-model="sale" placeholder="请选择" disabled size="small" style="width:200px">
             <Option v-for="item in saleman" :value="item.saleName + '-'+item.saleId + '-'+ item.saleMobile" :key="item.saleId" >{{ item.saleName }}  {{ item.saleMobile }}</Option>
           </Select>
         </Col>
@@ -300,7 +300,7 @@ export default {
     line-height: 30px;
     text-align: right;
     padding-right: 10px;
-    background: rgba(255,255,255,.7);
+    background: rgba(0,0,0,.7);
     color: #fff;
     .iconfont{
       cursor: pointer;

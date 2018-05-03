@@ -56,7 +56,7 @@
                 <Col class-name="col" span="4">{{ item.saleName }}</Col>
                 <Col class-name="col" span="2">{{ item.saleTel }}</Col>
                 <Col class-name="col" span="2">{{ item.updateUser }}</Col>
-                <Col class-name="col" span="2">{{ item.saleFrom == 1 ?'平台绑定':'专员绑定' }}</Col>
+                <Col class-name="col" span="2">{{ item.saleFrom == 1 ?'平台绑定':' ' }}</Col>
               </Row>
             </CheckboxGroup>
             <Row v-if="roleList.length == 0">
