@@ -56,7 +56,11 @@
                 <Col class-name="col" span="4">{{ item.saleName }}</Col>
                 <Col class-name="col" span="2">{{ item.saleTel }}</Col>
                 <Col class-name="col" span="2">{{ item.updateUser }}</Col>
-                <Col class-name="col" span="2">{{ item.saleFrom == 1 ?'平台绑定':' ' }}</Col>
+                <Col class-name="col" span="2">
+                  <span v-if="item.saleFrom == 1">平台绑定</span>
+                  <span v-else-if="item.saleFrom == 0">专员绑定</span>
+                  <span v-else="item.saleFrom =''">-</span>
+                </Col>
               </Row>
             </CheckboxGroup>
             <Row v-if="roleList.length == 0">
