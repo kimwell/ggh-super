@@ -63,7 +63,7 @@
               <Col class-name="col" span="2">{{item.sellIng.offerPerPrice}}元/{{item.sellIng.baseUnit}}</Col>
               <Col class-name="col" span="2">{{item.sellIng.tolerance}}</Col>
               <Col class-name="col" span="2">{{item.sellIng.offerPlaces}}</Col>
-              <Col class-name="col" span="3">{{item.sellIng.deliveryTime}}</Col>
+              <Col class-name="col" span="3">{{item.sellIng.deliveryTime | dateformatZ}}</Col>
               <Col class-name="col" span="3">{{item.sellIng.offerRemark !='' ? item.sellIng.offerRemark: '暂无'}}</Col>
             </Row>
           </div>
