@@ -145,7 +145,7 @@
         <Page :total="totalCount" @on-change="pageChange" show-total :current="apiData.currentPage" :page-size="apiData.pageSize"></Page>
     
     
-        <Modal title="商家详情编辑" v-model="showEdit" loading :mask-closable="false" @on-ok="edit">
+        <Modal title="商家详情编辑" v-model="showEdit" loading :mask-closable="false" @on-ok="edit" v-if="activeItem">
             <Form :label-width="100">
                 <FormItem label="商户名称">
                     <Input v-model="editData.companyName" placeholder="请输入..."></Input>
@@ -431,7 +431,7 @@
                 }
             },
             activeItem() {
-                return this.list.length > 0 ? this.list[this.activeIndex] : {}
+                return this.list.length != 0 ? this.list[this.activeIndex] : {}
             },
             checkPsd() {
                 return this.modityApi.passwordOne == this.modityApi.passwordTwo
