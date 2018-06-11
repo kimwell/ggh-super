@@ -479,3 +479,8 @@ export const emptyHlod = (value, payload = '—') => {
         return payload
     }
 }
+
+//多余部分省略号
+export const intercept = (value, le = 30) => {
+    return value.length <= le ? value : value.substring(0, le) + '...';
+}

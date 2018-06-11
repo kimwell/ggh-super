@@ -12,7 +12,7 @@ import * as filters from '@/utils/filters' //过滤器
 import clickoutside from './directives/clickoutside'
 import tools from '@/utils/tools' //全局方法
 import _ from 'lodash'
-// import clickoutside from './directives/clickoutside'
+import loadingIcon from './components/basics/loadingIcon.vue'
 
 
 Object.keys(filters).forEach(key => {
@@ -23,6 +23,8 @@ Vue.directive('clickoutside', clickoutside);
 Vue.use(tools);
 
 Vue.use(iView)
+
+Vue.component('loading-icon', loadingIcon);
 Vue.prototype.$clearData = (data) => {
     return JSON.parse(JSON.stringify(data))
 }

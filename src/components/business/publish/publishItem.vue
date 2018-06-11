@@ -32,8 +32,10 @@
             <unitInput v-show="!isSave" v-model="numerical" :unit="[units.weightUnitCName,units.numUnitCName]"></unitInput>
         </td>
         <td style="width:86px">
-            <span v-if="isSave">{{ proPlaces.name }}</span>
-            <ajaxPicker v-show="!isSave" position="right" size="small" v-model="proPlaces" :apiUrl="api.queryPlaces" placeholder="产地"></ajaxPicker>
+            <Tooltip  v-if="isSave" :content="proPlacesStrs" placement="top">
+                <span>{{ proPlacesStrs | intercept(3) }}</span>
+            </Tooltip>
+            <ajaxPicker v-show="!isSave" multi position="right" size="small" v-model="proPlaces" :apiUrl="api.queryPlaces" placeholder="产地"></ajaxPicker>
         </td>
         <td style="width:110px">
             <span class="rk" v-if="isSave">{{ remark }}</span>
@@ -64,7 +66,7 @@
 <script>
     import checkBox from '@/components/basics/checkBox.vue'
     import cityPicker from '@/components/basics/cityPicker.vue'
-    import ajaxPicker from '@/components/basics/ajaxPicker.vue'
+    import ajaxPicker from '@/components/basics/ajaxPicker_v2.vue'
     import Input from '@/components/basics/Input.vue'
     import specInput from '@/components/business/specInput.vue'
     import unitInput from '@/components/business/unitInput.vue'
@@ -107,10 +109,7 @@
                     id: '',
                     name: ''
                 },
-                proPlaces: {
-                    id: '',
-                    name: ''
-                },
+                proPlaces: [],
                 surface: {
                     id: '',
                     name: ''
@@ -177,8 +176,7 @@
                         materialName: this.material.id,
                         surfaceId: this.surface.id,
                         surfaceName: this.surface.name,
-                        proPlacesId: this.proPlaces.id,
-                        proPlacesName: this.proPlaces.name,
+                        proPlacesId: JSON.stringify(this.proPlaces),
                         locationId: this.location.length > 0 ? this.location[this.location.length - 1].id : '',
                         locationName: this.location.length > 0 ? this.location[this.location.length - 1].name : '',
                         remark: this.remark,
@@ -201,6 +199,15 @@
                 })
     
                 return params
+            },
+            //产地名
+            proPlacesStrs() {
+                let strs = '';
+                let len = this.proPlaces.length - 1;
+                this.proPlaces.forEach((item, i) => {
+                    strs += i < len ? item.name + ',' : item.name
+                })
+                return strs
             }
         },
         methods: {
@@ -217,7 +224,7 @@
             checkOk() {
                 let ok = true;
                 let pr = this.$clearData(this.clectionParams);
-                ['numbers', 'weights'].forEach(key => {
+                ['remark', 'numbers', 'weights','proPlacesId'].forEach(key => {
                     delete pr[key]
                 })
                 for (let key of Object.keys(pr)) {
@@ -227,7 +234,7 @@
                     }
                 }
                 let unitOk = this.clectionParams.numbers != '' || this.clectionParams.weights != '';
-                return ok && unitOk
+                return ok && unitOk && this.proPlaces.length > 0
             },
             // 整理抛出参数
             paramsClecot() {
@@ -242,8 +249,7 @@
                         materialName: this.material.name,
                         surfaceId: this.surface.id,
                         surfaceName: this.surface.name,
-                        proPlacesId: this.proPlaces.id,
-                        proPlacesName: this.proPlaces.name,
+                        proPlacesId: this.proPlaces,
                         locationId: this.location.length > 0 ? this.location[this.location.length - 1].id : '',
                         locationName: this.location.length > 0 ? this.location[this.location.length - 1].name : '',
                         remark: this.remark,
@@ -287,10 +293,7 @@
                     id: this.data.ironTypeId,
                     name: this.data.ironTypeName
                 };
-                this.proPlaces = {
-                    id: this.data.proPlacesId,
-                    name: this.data.proPlacesName
-                };
+                this.proPlaces = this.data.proPlacesId;
                 this.surface = {
                     id: this.data.surfaceId,
                     name: this.data.surfaceName
