@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == 'development') {
   commHost = 'http://192.168.0.251:90'
   exportExcel = 'http://192.168.0.164:8080/export.jsp'
 } else {
-  ws = 'ws://' + host + '/websocket';
+  ws = 'wss://' + host + '/websocket';
   exportExcel = 'http://' + host + ':8080/export.jsp'
 }
 
