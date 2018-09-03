@@ -3,7 +3,7 @@
         <Row type="flex">
             <Col span="4" class="layout-menu-left">
             <Menu ref="menu" :active-name="activeIndex" theme="dark" width="auto" @on-select="openSubpage" :open-names="openArr" style="overflow: hidden;">
-                <div class="layout-logo-left">钢刚好超管后台管理系统</div>
+                <div class="layout-logo-left">后台管理系统</div>
                 <Submenu :name="index" v-for="(item,index) in menu" :key="index">
                     <template slot="title">
                             <span class="iconfont menuicon" :class="item.icon"></span>{{ item.name }}
